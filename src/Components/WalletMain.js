@@ -159,7 +159,7 @@ const WalletMain = ({ children }) => {
                 position: "sticky",
                 top: 0,
                 zIndex: 1000,
-                backgroundColor: "rgb(42,50,112)",
+                background: "linear-gradient(to right,#ff9903, #e77404)",
                 padding: "8px 16px",
                 color: "white",
               }}
@@ -183,7 +183,7 @@ const WalletMain = ({ children }) => {
             <Grid
               container
               spacing={2}
-              sx={{ backgroundColor: "rgb(42,50,112)", height: "230px" }}
+              sx={{ background: "linear-gradient(to right,#ff9903, #e77404)", height: "230px" }}
             >
               <Grid item xs={12}>
                 <img
@@ -228,7 +228,7 @@ const WalletMain = ({ children }) => {
                 marginLeft: "auto",
                 marginRight: "auto",
                 maxWidth: "95%",
-                backgroundColor: "rgb(42,50,112)",
+                backgroundColor: "#ffffff",
                 borderRadius: "20px",
               }}
             >
@@ -239,13 +239,13 @@ const WalletMain = ({ children }) => {
                     variant="determinate"
                     value={100}
                     size={80}
-                    sx={{ color: "#D8D8D8" }}
+                    sx={{ color: "black" }}
                   />
                   <CircularProgress
                     variant="determinate"
                     value={100}
                     size={80}
-                    sx={{ color: "rgb(55,72,146)", position: "absolute" }}
+                    sx={{ color: "#ec8a1f", position: "absolute" }}
                   />
                   <Box
                     top={0}
@@ -260,16 +260,16 @@ const WalletMain = ({ children }) => {
                     <Typography
                       variant="caption"
                       component="div"
-                      sx={{ color: "white" }}
+                      sx={{ color: "black" }}
                     >
                       {`${Math.round(progressMainWallet)}%`}
                     </Typography>
                   </Box>
                 </Box>
-                <Typography variant="body1" sx={{ color: "white" }}>
+                <Typography variant="body1" sx={{ color: "black" }}>
                   Main Wallet
                 </Typography>
-                <Typography variant="h6" sx={{ color: "white" }}>{`\u20B9${
+                <Typography variant="h6" sx={{ color: "black" }}>{`\u20B9${
                   user ? user.walletAmount : " Loading"
                 }`}</Typography>
               </Grid>
@@ -285,7 +285,7 @@ const WalletMain = ({ children }) => {
                     variant="determinate"
                     value={progressThirdPartyWallet}
                     size={80}
-                    sx={{ color: "rgb(10,24,70)", position: "absolute" }}
+                    sx={{ color: "#ec8a1f", position: "absolute" }}
                   />
                   <Box
                     top={0}
@@ -300,18 +300,18 @@ const WalletMain = ({ children }) => {
                     <Typography
                       variant="caption"
                       component="div"
-                      sx={{ color: "white" }}
+                      sx={{ color: "black" }}
                     >
                       {`${Math.round(progressThirdPartyWallet)}%`}
                     </Typography>
                   </Box>
                 </Box>
-                <Typography variant="body1" sx={{ color: "white" }}>
+                <Typography variant="body1" sx={{ color: "black" }}>
                   3rd Party Wallet
                 </Typography>
                 <Typography
                   variant="h6"
-                  sx={{ color: "white" }}
+                  sx={{ color: "black" }}
                 >{`₹${thirdPartyWalletBalance}`}</Typography>
               </Grid>
               {/* Second Grid */}
@@ -319,70 +319,60 @@ const WalletMain = ({ children }) => {
               <Button
               variant="contained"
               sx={{
-                backgroundColor: "rgb(40,164,242)",
+                background: "linear-gradient(to right,#ff9903, #e77404)",
                 borderRadius: "20px",
                 width: "80%",
+                fontWeight: "bold"
               }}
               fullWidth
               onClick={handleTransfer}
             >
-              Transfer to Main Wallet
-            </Button>
-                {/* <Button
-                  variant="contained"
-                  sx={{
-                    backgroundColor: "rgb(40,164,242)",
-                    borderRadius: "20px",
-                    width: "80%",
-                  }}
-                  fullWidth
-                >
                   Main wallet transfer
-                </Button> */}
+                  </Button>
               </Grid>
               {/* Third Grid */}
               <Grid container item xs={12} spacing={2} mt={2}>
                 <Grid item xs={3} onClick={() => navigate("/recharge")}>
                   <img
-                    src="assets/images/download (14).png"
+                    src="assets/images/rechargeIcon.png"
                     alt="1"
-                    width={50}
-                    height={50}
+                    width={55}
+                    height={55}
                   />
-                  <Typography variant="subtitle2" sx={{ color: "white" }}>
+                  <Typography variant="subtitle2" sx={{ color: "#768096" }}>
                     Deposit{" "}
                   </Typography>
                 </Grid>
                 <Grid item xs={3} onClick={() => navigate("/withdraw")}>
                   <img
-                    src="assets/images/download (15).png"
+                    src="assets/images/widthdrawBlue.png"
                     alt="2"
-                    width={50}
-                    height={50}
+                    width={55}
+                    height={55}
                   />
-                  <Typography variant="subtitle2" sx={{ color: "white" }}>
+                  <Typography variant="subtitle2" sx={{ color: "#768096" }}>
                     Withdraw
                   </Typography>
                 </Grid>
                 <Grid item xs={3} onClick={() => navigate("/deposit-history")}>
                   <img
-                    src="assets/images/rechargeHistory-195824c7.png"
+                    src="assets/images/rechargeHistory.png"
                     alt=" 3"
-                    width={50}
-                    height={50}
+                    width={55}
+                    height={55}
                   />
-                  <Typography variant="subtitle2" sx={{ color: "white" }}>
+                  <Typography variant="subtitle2" sx={{ color: "#768096" }}>
                     Deposit history
                   </Typography>
                 </Grid>
                 <Grid item xs={3} onClick={() => navigate("/withdraw-history")}>
                   <img
-                    src="assets/images/withdrawHistory2-840eb5de.png"
+                    src="assets/images/withdrawHistory.png"
                     alt="4"
-                    width={50}
-                    height={50}
+                    width={55}
+                    height={55}
                   />
-                  <Typography variant="subtitle2" sx={{ color: "white" }}>
+                  <Typography variant="subtitle2" sx={{ color: "#768096" }}>
                     Withdraw History
                   </Typography>
                 </Grid>
@@ -394,7 +384,7 @@ const WalletMain = ({ children }) => {
                 {data.map((item, index) => (
                   <Grid item xs={4} key={index}>
                     <Box
-                      sx={{ bgcolor: "rgb(42,50,112)", p: 1, borderRadius: 1 }}
+                      sx={{ background: "linear-gradient(to right,#ff9903, #e77404)", p: 1, borderRadius: 1 }}
                     >
                       <Typography variant="body1" sx={{ color: "white" }}>
                         {item.label}

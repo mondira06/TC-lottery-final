@@ -250,7 +250,7 @@ const Register = () => {
   return (
     <div>
       <Mobile>
-        <Grid
+       <Grid
           container
           alignItems="center"
           justifyContent="space-between"
@@ -258,26 +258,19 @@ const Register = () => {
             position: "sticky",
             top: 0,
             zIndex: 1000,
-            backgroundColor: "rgb(42,50,112)",
+            background: "linear-gradient(to right,#ff9903, #e77404)",
             padding: "8px 16px",
 
-            color: "white",
+            color: "#ffffff",
           }}
         >
           <div id="recaptcha-container"></div>
-          <Grid item xs={4} textAlign="left">
-            <IconButton sx={{ marginLeft: "-8px" }} color="inherit">
+          <Grid item xs={6} textAlign="left">
+            <IconButton sx={{ marginLeft: "2px" }} color="inherit">
               <ArrowBackIcon />
             </IconButton>
-          </Grid>
-          <Grid item xs={4} textAlign="center">
-            <img
-              src="assets/images/banner3.png"
-              alt="logo"
-              style={{ width: "100px", height: "30px" }}
-            />
-          </Grid>
-          <Grid item xs={4} textAlign="right">
+          </Grid> 
+          <Grid item xs={6} textAlign="right">
             <IconButton onClick={() => setOpenDrawer(true)} color="inherit">
               <TranslateIcon />
               {selectedLanguage && (
@@ -301,34 +294,19 @@ const Register = () => {
               )}
             </IconButton>
           </Grid>
-        </Grid>
+        </Grid> 
         <Drawer
           anchor="bottom"
           open={openDrawer}
           onClose={() => setOpenDrawer(false)}
         >
-          <Grid
-            container
-            justifyContent="space-around"
-            alignItems="center"
-            sx={{ padding: "16px" }}
-          >
-            <Button onClick={() => handleLanguageSelect("EN")}>
-              <ReactCountryFlag countryCode="US" svg />
-              EN
-            </Button>
-            <Button onClick={() => handleLanguageSelect("HN")}>
-              <ReactCountryFlag countryCode="IN" svg />
-              HN
-            </Button>
-          </Grid>
         </Drawer>
         <Grid
           container
           justifyContent="flex-start"
           alignItems="flex-start"
           sx={{
-            backgroundColor: "rgb(42,50,112)",
+            background: "linear-gradient(to right,#ff9903, #e77404)",
             padding: "16px",
             color: "white",
             minHeight: "fit-content",
@@ -345,7 +323,7 @@ const Register = () => {
           justifyContent="flex-start"
           alignItems="flex-start"
           sx={{
-            backgroundColor: "#F7F8FF",
+            backgroundColor: "#f7f8ff",
             padding: "16px",
             color: "white",
             minHeight: "fit-content",
@@ -370,12 +348,12 @@ const Register = () => {
                   icon={
                     <EmailIcon
                       style={{
-                        color: tabValue === 0 ? "rgb(42,50,112)" : "grey",
+                        color: tabValue === 0 ? "#ec8a1f" : "grey",
                       }}
                     />
                   }
                   label="Register With Mobile"
-                  style={{ color: tabValue === 0 ? "#FF7172" : "grey" }}
+                  style={{ color: tabValue === 0 ? "#ec8a1f" : "grey" }}
                 />
                 {/* <Tab
                   icon={<PhoneIcon style={{ color: tabValue === 1 ? 'rgb(42,50,112)' : 'grey' }} />}
@@ -385,42 +363,91 @@ const Register = () => {
               </Tabs>
               <TabPanel value={tabValue} index={0}>
                 <Box display="flex" alignItems="center" mt={2}>
-                  <EmailIcon sx={{ color: "rgb(42,50,112)" }} />
-                  <FormLabel>Mobile No</FormLabel>
+                  <EmailIcon sx={{ color: "#ec8a1f" }} />
+                  <FormLabel sx={{ color: "black" }}>Mobile No</FormLabel>
                 </Box>
                 <TextField
-                  label="Mobile No"
+                  label="Mobile Number"
                   fullWidth
-                  value={mobile}
-                  onChange={(e) => setEmail(e.target.value)}
                   variant="outlined"
                   margin="normal"
-                  sx={{ backgroundColor: "#FFFFFF" }}
+                  value={mobile}
+                  onChange={(e) => setEmail(e.target.value)}
+                  required
+                  sx={{
+                    backgroundColor: "#ffffff",
+                    borderRadius: "10px",
+                    "& .MuiOutlinedInput-root": {
+                      "& fieldset": {
+                        borderColor: "#ec8a1f !important", // Initial border color
+                      },
+                      "&:hover fieldset": {
+                        borderColor: "#ec8a1f !important", // Border color on hover
+                      },
+                      "&.Mui-focused fieldset": {
+                        borderColor: "#ec8a1f !important", // Border color when focused
+                      },
+                    },
+                    "& .MuiInputBase-input": {
+                      color: "black", // Text color
+                    },
+                    "& .MuiInputLabel-root": {
+                      color: "black", // Label color
+                    },
+                  }}
                   InputProps={{
-                    style: { borderRadius: "10px" },
+                    style: { borderRadius: "10px", color: "black" },
+                  }}
+                  InputLabelProps={{
+                    style: { color: "black" },
                   }}
                 />
               </TabPanel>
               <TabPanel value={tabValue} index={1}>
                 <Box display="flex" alignItems="center" mt={2}>
-                  <EmailIcon sx={{ color: "rgb(42,50,112)" }} />
-                  <FormLabel>Mobile No</FormLabel>
+                  <EmailIcon sx={{ color: "rgb(58,58,58)" }} />
+                  <FormLabel sx={{ color: "black" }}>Mobile No</FormLabel>
                 </Box>
                 <TextField
-                  label="Mobile No"
+                  label="Mobile Number"
                   fullWidth
-                  value={mobile}
-                  onChange={(e) => setEmail(e.target.value)}
                   variant="outlined"
                   margin="normal"
-                  sx={{ backgroundColor: "#FFFFFF" }}
+                  value={mobile}
+                  onChange={(e) => mobile(e.target.value)}
+                  required
+                  sx={{
+                    backgroundColor: "#ffffff",
+                    borderRadius: "10px",
+                    "& .MuiOutlinedInput-root": {
+                      "& fieldset": {
+                        borderColor: "#ec8a1f !important", // Initial border color
+                      },
+                      "&:hover fieldset": {
+                        borderColor: "#ec8a1f !important", // Border color on hover
+                      },
+                      "&.Mui-focused fieldset": {
+                        borderColor: "#ec8a1f !important", // Border color when focused
+                      },
+                    },
+                    "& .MuiInputBase-input": {
+                      color: "black", // Text color
+                    },
+                    "& .MuiInputLabel-root": {
+                      color: "black", // Label color
+                    },
+                  }}
                   InputProps={{
-                    style: { borderRadius: "10px" },
+                    style: { borderRadius: "10px", color: "black" },
+                  }}
+                  InputLabelProps={{
+                    style: { color: "black" },
                   }}
                 />
+
                 <Box display="flex" alignItems="center" mt={2}>
-                  <PhoneIcon sx={{ color: "rgb(42,50,112)" }} />
-                  <FormLabel>Phone Number</FormLabel>
+                  <PhoneIcon sx={{ color: "rgb(58,58,58)" }} />
+                  <FormLabel sx={{ color: "black" }}>Phone Number</FormLabel>
                 </Box>
                 <TextField
                   label="Phone"
@@ -429,11 +456,38 @@ const Register = () => {
                   onChange={(e) => setPhone(e.target.value)}
                   variant="outlined"
                   margin="normal"
-                  sx={{ backgroundColor: "#FFFFFF" }}
+                  sx={{
+                    backgroundColor: "#ffffff",
+                    borderRadius: "10px",
+                    "& .MuiOutlinedInput-root": {
+                      "& fieldset": {
+                        borderColor: "#ec8a1f !important", // Initial border color with increased specificity
+                      },
+                      "&:hover fieldset": {
+                        borderColor: "#ec8a1f !important", // Border color on hover with increased specificity
+                      },
+                      "&.Mui-focused fieldset": {
+                        borderColor: "#ec8a1f !important", // Border color when focused with increased specificity
+                      },
+                    },
+                    "& .MuiInputBase-input": {
+                      color: "black", // Text color
+                    },
+                    "& .MuiInputLabel-root": {
+                      color: "black", // Label color
+                    },
+                  }}
+                  InputProps={{
+                    style: { borderRadius: "10px", color: "black" },
+                  }}
+                  InputLabelProps={{
+                    style: { color: "black" },
+                  }}
                 />
+
                 <Box display="flex" alignItems="center" mt={2}>
                   <LockIcon sx={{ color: "rgb(42,50,112)" }} />
-                  <FormLabel>Enter OTP</FormLabel>
+                  <FormLabel sx={{ color: "black" }}>Enter OTP</FormLabel>
                 </Box>
                 <TextField
                   label="OTP"
@@ -442,11 +496,35 @@ const Register = () => {
                   onChange={(e) => setOtp(e.target.value)}
                   variant="outlined"
                   margin="normal"
-                  sx={{ backgroundColor: "#FFFFFF" }}
+                  sx={{
+                    backgroundColor: "#ffffff",
+                    borderRadius: "10px",
+                    "& .MuiOutlinedInput-root": {
+                      "& fieldset": {
+                        borderColor: "#ec8a1f !important", // Initial border color with increased specificity
+                      },
+                      "&:hover fieldset": {
+                        borderColor: "#ec8a1f !important", // Border color on hover with increased specificity
+                      },
+                      "&.Mui-focused fieldset": {
+                        borderColor: "#ec8a1f !important", // Border color when focused with increased specificity
+                      },
+                    },
+                    "& .MuiInputBase-input": {
+                      color: "black", // Text color
+                    },
+                    "& .MuiInputLabel-root": {
+                      color: "black", // Label color
+                    },
+                  }}
                   InputProps={{
-                    style: { borderRadius: "10px" },
+                    style: { borderRadius: "10px", color: "black" },
+                  }}
+                  InputLabelProps={{
+                    style: { color: "black" },
                   }}
                 />
+
                 <Button
                   variant="contained"
                   color="primary"
@@ -463,9 +541,10 @@ const Register = () => {
                   Verify OTP
                 </Button>
               </TabPanel>
+
               <Box display="flex" alignItems="center" mt={2}>
-                <LockIcon sx={{ color: "rgb(42,50,112)" }} />
-                <FormLabel>Set Password</FormLabel>
+                <LockIcon sx={{ color: "#ec8a1f" }} />
+                <FormLabel sx={{ color: "black" }}>Set Password</FormLabel>
               </Box>
               <TextField
                 label="Set Password"
@@ -475,20 +554,47 @@ const Register = () => {
                 onChange={(e) => setPassword(e.target.value)}
                 variant="outlined"
                 margin="normal"
-                sx={{ backgroundColor: "#FFFFFF" }}
+                sx={{
+                  backgroundColor: "#ffffff",
+                  borderRadius: "10px",
+                  "& .MuiOutlinedInput-root": {
+                    "& fieldset": {
+                      borderColor: "#ec8a1f", // Initial border color
+                    },
+                    "&:hover fieldset": {
+                      borderColor: "#ec8a1f", // Border color on hover
+                    },
+                    "&.Mui-focused fieldset": {
+                      borderColor: "#ec8a1f", // Border color when focused
+                    },
+                  },
+                  "& .MuiInputBase-input": {
+                    color: "black", // Text color
+                  },
+                  "& .MuiInputLabel-root": {
+                    color: "black", // Label color
+                  },
+                }}
                 InputProps={{
-                  style: { borderRadius: "10px" },
+                  style: { borderRadius: "10px", color: "black" },
                   endAdornment: (
-                    <IconButton onClick={handleShowPassword} edge="end">
+                    <IconButton
+                      onClick={handleShowPassword}
+                      edge="end"
+                      sx={{ color: "black" }}
+                    >
                       {showPassword ? <VisibilityOff /> : <Visibility />}
                     </IconButton>
                   ),
                 }}
+                InputLabelProps={{
+                  style: { color: "black" },
+                }}
               />
 
               <Box display="flex" alignItems="center" mt={2}>
-                <LockIcon sx={{ color: "rgb(42,50,112)" }} />
-                <FormLabel>Confirm Password</FormLabel>
+                <LockIcon sx={{ color: "#ec8a1f" }} />
+                <FormLabel sx={{ color: "black" }}>Confirm Password</FormLabel>
               </Box>
               <TextField
                 label="Confirm Password"
@@ -498,19 +604,47 @@ const Register = () => {
                 fullWidth
                 variant="outlined"
                 margin="normal"
-                sx={{ backgroundColor: "#FFFFFF" }}
+                sx={{
+                  backgroundColor: "#ffffff",
+                  borderRadius: "10px",
+                  "& .MuiOutlinedInput-root": {
+                    "& fieldset": {
+                      borderColor: "#ec8a1f", // Initial border color
+                    },
+                    "&:hover fieldset": {
+                      borderColor: "#ec8a1f", // Border color on hover
+                    },
+                    "&.Mui-focused fieldset": {
+                      borderColor: "#ec8a1f", // Border color when focused
+                    },
+                  },
+                  "& .MuiInputBase-input": {
+                    color: "black", // Text color
+                  },
+                  "& .MuiInputLabel-root": {
+                    color: "black", // Label color
+                  },
+                }}
                 InputProps={{
-                  style: { borderRadius: "10px" },
+                  style: { borderRadius: "10px", color: "black" },
                   endAdornment: (
-                    <IconButton onClick={handleShowPassword} edge="end">
+                    <IconButton
+                      onClick={handleShowPassword}
+                      edge="end"
+                      sx={{ color: "black" }}
+                    >
                       {showPassword ? <VisibilityOff /> : <Visibility />}
                     </IconButton>
                   ),
                 }}
+                InputLabelProps={{
+                  style: { color: "black" },
+                }}
               />
+
               <Box display="flex" alignItems="center" mt={2}>
-                <MoveToInboxIcon sx={{ color: "rgb(42,50,112)" }} />
-                <FormLabel>Invite Code</FormLabel>
+                <MoveToInboxIcon sx={{ color: "#ec8a1f" }} />
+                <FormLabel sx={{ color: "black" }}>Invite Code</FormLabel>
               </Box>
               <TextField
                 label="Invite Code"
@@ -520,10 +654,34 @@ const Register = () => {
                 variant="outlined"
                 margin="normal"
                 InputProps={{
-                  style: { borderRadius: "10px" },
+                  style: { borderRadius: "10px", color: "black" },
                 }}
-                sx={{ backgroundColor: "#FFFFFF" }}
+                InputLabelProps={{
+                  style: { color: "black" },
+                }}
+                sx={{
+                  backgroundColor: "#ffffff",
+                  borderRadius: "10px",
+                  "& .MuiOutlinedInput-root": {
+                    "& fieldset": {
+                      borderColor: "#ec8a1f !important", // Initial border color
+                    },
+                    "&:hover fieldset": {
+                      borderColor: "#ec8a1f !important", // Border color on hover
+                    },
+                    "&.Mui-focused fieldset": {
+                      borderColor: "#ec8a1f !important", // Border color when focused
+                    },
+                  },
+                  "& .MuiInputBase-input": {
+                    color: "black", // Text color
+                  },
+                  "& .MuiInputLabel-root": {
+                    color: "black", // Label color
+                  },
+                }}
               />
+
               <Box
                 sx={{
                   display: "flex",
@@ -534,10 +692,10 @@ const Register = () => {
                 <RadioGroup row>
                   <FormControlLabel
                     value="remember"
-                    control={<Radio />}
+                    control={<Radio style={{ color: "#ec8a1f" }} />}
                     label="I have read and agree "
                     labelPlacement="end"
-                    style={{ color: "black" }}
+                    sx={{ color: "#768096" }}
                   />
                 </RadioGroup>
               </Box>
@@ -547,8 +705,13 @@ const Register = () => {
                 fullWidth
                 style={{
                   marginBottom: "8px",
-                  backgroundColor: "rgb(42,50,112)",
-                  borderRadius: "300px",
+                  backgroundColor: "#ec8a1f",
+                  borderRadius: "360px",
+                }}
+                sx={{
+                  fontWeight: "bold",
+                  color: "#ffffff",
+                  fontSize: "18px", // Replace with the desired royal gold color if different
                 }}
               >
                 Register
@@ -560,16 +723,16 @@ const Register = () => {
                 fullWidth
                 style={{
                   borderRadius: "300px",
-                  borderColor: "RGB(54,142,255)",
+                  borderColor: "#ec8a1f",
                   marginBottom: "150px",
                 }}
               >
-                <span style={{ color: "black", fontWeight: "bold" }}>
+                <span style={{ color: "#768096", fontWeight: "bold" }}>
                   I have an account{" "}
                 </span>
                 <span
                   style={{
-                    color: "rgb(42,50,112)",
+                    color: "#ec8a1f",
                     marginLeft: "3px",
                     fontWeight: "bold",
                   }}

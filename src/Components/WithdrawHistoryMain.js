@@ -86,26 +86,16 @@ useEffect(() => {
                 position: 'sticky',
                 top: 0,
                 zIndex: 1000,
-                backgroundColor: 'rgb(42,50,112)',
+                backgroundColor: '#ffffff',
                 padding: '8px 16px',
-                color: 'white'
+                color: 'black'
                 
               }}
             >
               <Grid item xs={6} textAlign="left">
                 <span style={{ fontWeight: "bold" }}>Withdraw History</span>
               </Grid>
-              <Grid item xs={6} textAlign="right">
-                <IconButton color="inherit">
-                  <SmsIcon />
-                </IconButton>
-                <IconButton color="inherit">
-                  <DownloadIcon />
-                </IconButton>
-              </Grid>
             </Grid>
-
-
 
             <input
               type="date"
@@ -127,10 +117,10 @@ useEffect(() => {
 
   <Grid container item xs={12}  key={request._id}>
     <Card style={{ width: 'calc(100% - 20px)', marginBottom: '10px', boxShadow: '0px 4px 8px rgba(0, 0, 0, 0.1)',  marginLeft: '15px', marginRight: '10px', marginTop:"20px" }}>
-      <CardContent style={{ backgroundColor: 'RGB(247,248,255)' }}>
+      <CardContent style={{ backgroundColor: 'rgb(51,51,50)' }}>
         <Grid container >
           <Grid item xs={6} align="left">
-            <Button variant="contained" sx={{backgroundColor:"rgb(54,142,255)",width:"80px",height:"25px",fontSize:"12px"}} >Withdraw</Button>
+            <Button variant="contained" sx={{background:"linear-gradient(to right,#f9e39e, #c49440)",width:"80px",height:"25px",fontSize:"12px", color: "#8f5205"}} >Withdraw</Button>
           </Grid>
           <Grid item xs={6}>
           <Typography 
@@ -154,33 +144,33 @@ useEffect(() => {
   <Divider style={{ margin: '10px 0' }} />
 </Grid>
 <Grid item xs={6}>
-            <Typography variant="subtitle1" align="left" sx={{color:"#888"}}>Balance</Typography>
+            <Typography variant="subtitle1" align="left" sx={{color:"#fff"}}>Balance</Typography>
           </Grid>
           <Grid item xs={6}>
-            <Typography variant="body1" align="right" sx={{color:"#666",fontWeight:"bold"}}>{request.balance}</Typography>
+            <Typography variant="body1" align="right" sx={{color:"#9195a3",fontWeight:"bold"}}>{request.balance}</Typography>
           </Grid>
           <Grid item xs={6}>
-            <Typography variant="subtitle1" align="left" sx={{color:"#888"}}>Type</Typography>
+            <Typography variant="subtitle1" align="left" sx={{color:"#fff"}}>Type</Typography>
           </Grid>
           <Grid item xs={6}>
-            <Typography variant="body1" align="right" sx={{color:"#666",fontWeight:"bold"}}>{request.withdrawMethod
+            <Typography variant="body1" align="right" sx={{color:"#9195a3",fontWeight:"bold"}}>{request.withdrawMethod
 }</Typography>
           </Grid>
           <Grid item xs={6}>
-            <Typography variant="subtitle1" align="left" sx={{color:"#888"}}> Time</Typography>
+            <Typography variant="subtitle1" align="left" sx={{color:"#fff"}}> Time</Typography>
           </Grid>
           <Grid item xs={6}>
-  <Typography variant="body1" align="right" sx={{color:"#666",fontWeight:"bold"}}>
+  <Typography variant="body1" align="right" sx={{color:"#9195a3",fontWeight:"bold"}}>
     {request.createdAt
       ? `${new Date(request.createdAt).toLocaleDateString()} ${new Date(request.createdAt).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}`
       : 'N/A'}
   </Typography>
 </Grid>
           <Grid item xs={6}>
-            <Typography variant="subtitle1" align="left" sx={{color:"#888"}}>Order Number</Typography>
+            <Typography variant="subtitle1" align="left" sx={{color:"#fff"}}>Order Number</Typography>
           </Grid>
           <Grid item xs={6}>
-            <Typography variant="body1" align="right" sx={{color:"#666",fontWeight:"bold"}}>{request._id}</Typography>
+            <Typography variant="body1" align="right" sx={{color:"#9195a3",fontWeight:"bold"}}>{request._id}</Typography>
           </Grid>
         </Grid>
       </CardContent>

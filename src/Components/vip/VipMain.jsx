@@ -26,7 +26,7 @@ function VipMain() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get('https://dragonclubs.online/user', {
+        const response = await axios.get('http://localhost:4000/user', {
           withCredentials: true,
         });
 
@@ -76,11 +76,11 @@ function VipMain() {
       <div className="bottom-box">
         <div className="exp-box">
           <div className="exp">
-            <div style={{ color: 'cyan', marginBottom: '5px' }}>{userData.totalBets} My Total Bets</div>
+            <div style={{ color: '#d9ac4e', marginBottom: '5px' }}>{userData.totalBets} My Total Bets</div>
           </div>
           <div className="exp">
             
-            <div style={{ color: 'white' }}>Payout time</div>
+            <div style={{ color: '#768096' }}>Payout time</div>
           </div>
           <div className="progress-bar">
             <div

@@ -1,6 +1,6 @@
 import React from 'react'
 import './CoinBox.css'
-import coinimg from '../../assets/coin.png'
+import coin from "../../assets/coinBonus.png"
 import axios from 'axios';
 import {domain} from '../config'
 
@@ -33,11 +33,11 @@ function CoinBox(props) {
 
   return (
     <div className='coinbox-container' onClick={handleCoinBoxClick}>
-        <div className='coinbox-amount' style={{color:"white"}}>{props.coinboxAmount}</div>
+        <div className='coinbox-amount' style={{color:"#1e2637"}}>{props.coinboxAmount}</div>
         <div className="coinbox-image">
-            <img src={coinimg} alt="" />
+            <img src={coin} alt="" />
         </div>
-        <div className="coinbox-day" style={{color:"white"}}>{props.coinboxDay}</div>
+        <div className="coinbox-day" style={{color:"#768096"}}>{props.coinboxDay}</div>
     </div>
   )
 }

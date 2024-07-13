@@ -45,33 +45,25 @@ const AttendanceMain= ({ children }) => {
           height="calc(var(--vh, 1vh) * 100)"
           position="relative"
         >
-          <Box flexGrow={1} sx={{backgroundColor: 'rgb(34,39,91)'}}>
+          <Box flexGrow={1} sx={{backgroundColor: 'rgb(245,70,69)'}}>
 
 
             <Grid
               container
               alignItems="center"
-              justifyContent="space-between"
+              justifyContent="center"
               sx={{
                 position: 'sticky',
                 top: 0,
                 zIndex: 1000,
-                backgroundColor: 'Rgb(55,72,146)',
+                backgroundColor: '#ffffff',
                 padding: '8px 16px',
-                color: 'white'
+                color: 'black'
                 
               }}
             >
-              <Grid item xs={6} textAlign="left">
-                <span style={{ fontWeight: "bold" }}>Attendance Bonus</span>
-              </Grid>
-              <Grid item xs={6} textAlign="right">
-              <IconButton color="inherit" onClick={() => navigate('/messages')}>
-  <SmsIcon />
-</IconButton>
-<IconButton style={{color:"white"}} onClick={handleDownload}>
-        <DownloadIcon />
-      </IconButton>
+              <Grid >
+                <span style={{ fontSize: "1.2rem" }}>Attendance Bonus</span>
               </Grid>
             </Grid>
 

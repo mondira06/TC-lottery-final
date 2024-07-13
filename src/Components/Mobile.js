@@ -26,7 +26,7 @@ const Mobile = ({ children }) => {
         maxWidth={isSmallScreen ? false : 'xs'}
         sx={{
           height: '100vh',
-          overflow: 'hidden', // Hide scrollbar in the main container
+          overflow: 'hidden', 
           position: 'relative',
           padding: 0, // Remove default padding
           margin: 0, // Remove default margin
@@ -35,7 +35,7 @@ const Mobile = ({ children }) => {
         }}
       >
        <Box
-  bgcolor="rgb(34,39,91)"
+  bgcolor="#f7f8ff"
   textAlign="center"
   minHeight="100%"
   maxHeight="100vh"

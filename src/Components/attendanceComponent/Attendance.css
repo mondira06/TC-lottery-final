@@ -9,9 +9,10 @@
     flex-direction: column;
     justify-content: flex-end;
     width: 100%;
+    background-color: #ffffff;
     height: max-content;
     padding: 0 0.4rem 0.26667rem;
-    background: url(https://tirangagame.in/assets/png/headerBg-7db2c6f3.png)  no-repeat center / cover;
+    background: url("/public/assets/images/headerRed.png") no-repeat center / cover;
 }
 
 .content{
@@ -44,11 +45,11 @@
     height: 35px;
     margin-bottom: 0.21333rem;
     padding: 0.61333rem 0.41333rem 0.61333rem 0.14667rem;
-    color: white;
+    color: #f54645;
     font-size: 1rem;
     font-weight: 600;
     line-height: .32rem;
-    background: rgb(117,159,222);
+    background: #ffffff;
     clip-path: polygon(100% 0, 90% 50%, 100% 100%, 0 100%, 0 0);
     word-break: break-all;
 }
@@ -73,7 +74,7 @@
 }
 
 .attendanceButton {
-    color: rgba(255, 196, 0, 0.87);
+    color: #ffffff;
 }
 .cardbox{
     width: 98.5%;
@@ -81,7 +82,7 @@
     display: flex;
     justify-content: space-around;
     flex-wrap: wrap;
-    background: rgb(34,39,91);
+    background: #f7f8ff;
     row-gap: 20px;
 }
 
@@ -92,11 +93,10 @@
     height: 100px;
     justify-content: space-around;
     gap: 10px;
-    background: rgb(55,72,146);
+    background: #ffffff;
     border-radius: 10px;
     padding: 1em;
     color: rgb(22, 22, 22);
-    border: 1px solid rgb(55,72,146);
 }
 #coinbox-content{
     display: flex;

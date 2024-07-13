@@ -44,14 +44,26 @@ const PromotionMain = ({ children }) => {
   const [amount, setAmount] = useState("");
   const [walletAmount, setWalletAmount] = useState(0);
   const [imageUrl, setImageUrl] = useState("");
+  const initialState = {
+    500: false,
+    5000: false,
+    10000: false,
+    20000: false,
+    50000: false,
+    100000: false,
+  };
+  const [clickedButtons, setClickedButtons] = useState(initialState);
 
   const handleButtonClick = (value) => {
-    setAmount(value);
+    setClickedButtons({ ...clickedButtons, [value]: true });
   };
 
   const handleInputChange = (event) => {
     setAmount(event.target.value);
   };
+
+  const buttonValues1 = [500, 5000, 10000];
+  const buttonValues2 = [20000, 50000, 100000];
 
   const [walletData, setWalletData] = useState(0);
   const [openDepositDialog, setOpenDepositDialog] = useState(false);
@@ -189,7 +201,7 @@ const PromotionMain = ({ children }) => {
         const response = await axios.get(`${domain}/user`, {
           withCredentials: true,
         });
-        console.log("coming data is --->",response.data)
+        console.log("coming data is --->", response.data);
         setUser(response.data.user);
         setWalletAmount(response.data.user.walletAmount); // Assuming response.data contains user details including walletAmount
       } catch (err) {
@@ -207,6 +219,7 @@ const PromotionMain = ({ children }) => {
       axios
         .get(`${domain}/Getid`, { withCredentials: true })
         .then((res) => {
+          console.log("res-->", res.data);
           setGet1(res.data.Upi);
           setGet2(res.data.Trx);
           setImageUrl(`${domain}${res.data.imageUrl}`);
@@ -237,13 +250,13 @@ const PromotionMain = ({ children }) => {
                 position: "sticky",
                 top: 0,
                 zIndex: 1000,
-                backgroundColor: "rgb(42,50,112)",
+                backgroundColor: "rgb(255,255,255)",
                 padding: "8px 16px",
-                color: "white",
+                color: "black",
               }}
             >
               <Grid item xs={6} textAlign="left">
-                <span style={{ fontWeight: "bold" }}>Deposit</span>
+                <span style={{ fontSize: "1.2rem" }}>Deposit</span>
               </Grid>
               <Grid item xs={6} textAlign="right">
                 <IconButton color="inherit">
@@ -259,7 +272,7 @@ const PromotionMain = ({ children }) => {
               container
               mt={2}
               style={{
-                backgroundImage: `url('assets/images/TotalAssetsBg-a7cff097.png')`,
+                backgroundImage: `url('assets/OrangePlate.png')`,
                 borderRadius: 8,
                 padding: 16,
                 backgroundSize: "cover",
@@ -274,13 +287,13 @@ const PromotionMain = ({ children }) => {
                   <img
                     src="assets/images/download (16).png"
                     alt="Your Image"
-                    style={{ maxWidth: "20%" }}
+                    style={{ maxWidth: "30%" }}
                   />
                 </Grid>
                 <Grid item xs={9}>
                   <Typography
-                    variant="body1"
-                    sx={{ color: "white" }}
+                    fontSize="20px"
+                    sx={{ color: "#ffffff" }}
                     align="left"
                   >
                     Balance
@@ -290,8 +303,8 @@ const PromotionMain = ({ children }) => {
               <Grid container item alignItems="center">
                 <Grid item xs={4}>
                   <Typography
-                    variant="body1"
-                    sx={{ color: "white" }}
+                    fontSize="20px"
+                    sx={{ color: "#ffffff" }}
                     align="center"
                   >
                     {`\u20B9${user ? user.walletAmount : "Loading..."}`}
@@ -299,7 +312,7 @@ const PromotionMain = ({ children }) => {
                 </Grid>
                 <Grid item xs={8} style={{ textAlign: "left" }}>
                   <IconButton>
-                    <RefreshIcon style={{ color: "white" }} />
+                    <RefreshIcon style={{ color: "#ffffff" }} />
                   </IconButton>
                 </Grid>
               </Grid>
@@ -313,7 +326,7 @@ const PromotionMain = ({ children }) => {
                 <Grid item xs={9}>
                   <Typography
                     variant="body1"
-                    sx={{ color: "white" }}
+                    sx={{ color: "#9e9c9b" }}
                     align="right"
                   ></Typography>
                 </Grid>
@@ -330,16 +343,16 @@ const PromotionMain = ({ children }) => {
                 marginRight: "auto",
               }}
             >
-              {["USDT","UPIxPAYTM", "UPI x QR"].map((mode) => (
+              {["USDT", "UPIxPAYTM", "UPI x QR"].map((mode) => (
                 <Grid item xs={4} key={mode}>
                   <div
                     style={{
-                      backgroundColor:
+                      background:
                         paymentMode === mode
-                          ? "rgb(40,164,242)"
-                          : "rgb(55,72,146)",
+                          ? "linear-gradient(to right,#ff9902, #e77401)"
+                          : "#ffffff",
                       borderRadius: 8,
-                      color: "white",
+                      color: paymentMode === mode ? "#ffffff" : "#9e9c9b",
                       padding: 16,
                       boxShadow: "0px 4px 8px rgba(0, 0, 0, 0.1)",
                     }}
@@ -376,11 +389,11 @@ const PromotionMain = ({ children }) => {
                 marginLeft: "auto",
                 marginRight: "auto",
                 boxShadow: "0px 4px 8px rgba(0, 0, 0, 0.1)",
-                backgroundColor: "rgb(42,50,112)",
+                backgroundColor: "#ffffff",
                 borderRadius: "10px",
               }}
             >
-              <Grid container item alignItems="center">
+              <Grid container item alignItems="center" sx={{ padding: "10px" }}>
                 <Grid item xs={4}>
                   <img
                     src="assets/images/download (5).png"
@@ -389,46 +402,52 @@ const PromotionMain = ({ children }) => {
                   />
                 </Grid>
                 <Grid item xs={8}>
-                  <Typography variant="h6" align="left" sx={{ color: "white" }}>
+                  <Typography variant="h6" align="left" sx={{ color: "black" }}>
                     Deposit Amount
                   </Typography>
                 </Grid>
               </Grid>
-              <Grid container item spacing={2}>
-                {[500, 5000, 10000].map((value) => (
-                  <Grid item xs={4} key={value}>
+              <Grid container spacing={1} sx={{ padding: "0 10px" }}>
+                {buttonValues1.map((value) => (
+                  <Grid item xs={4} key={value} sx={{ padding: "0 5px" }}>
                     <Button
-                      variant="contained"
                       onClick={() => handleButtonClick(value)}
+                      variant="contained"
+                      fullWidth
                       style={{
-                        width: "100%",
-                        backgroundColor: "rgb(48,162,243)",
-                        color: "white",
+                        background: clickedButtons[value]
+                          ? "linear-gradient(to right,#ff9902, #e77401)"
+                          : "white",
+                        color: clickedButtons[value] ? "white" : "black",
+                        borderRadius: "5px",
+                        padding: "5px",
                       }}
                     >
-                      ₹{value.toLocaleString()}
+                      {value}
+                    </Button>
+                  </Grid>
+                ))}
+                {buttonValues2.map((value) => (
+                  <Grid item xs={4} key={value} sx={{ padding: "0 5px" }}>
+                    <Button
+                      onClick={() => handleButtonClick(value)}
+                      variant="contained"
+                      fullWidth
+                      style={{
+                        background: clickedButtons[value]
+                          ? "linear-gradient(to right,#ff9902, #e77401)"
+                          : "white",
+                        color: clickedButtons[value] ? "white" : "black",
+                        borderRadius: "5px",
+                        padding: "5px",
+                      }}
+                    >
+                      {value}
                     </Button>
                   </Grid>
                 ))}
               </Grid>
-              <Grid container item spacing={2}>
-                {[20000, 50000, 100000].map((value) => (
-                  <Grid item xs={4} key={value}>
-                    <Button
-                      variant="contained"
-                      onClick={() => handleButtonClick(value)}
-                      style={{
-                        width: "100%",
-                        backgroundColor: "rgb(48,162,243)",
-                        color: "white",
-                      }}
-                    >
-                      ₹{value.toLocaleString()}
-                    </Button>
-                  </Grid>
-                ))}
-              </Grid>
-              <Grid container item alignItems="center">
+              <Grid container item alignItems="center" sx={{ padding: "10px" }}>
                 <Grid item xs={12}>
                   <TextField
                     label="Enter Amount"
@@ -438,11 +457,11 @@ const PromotionMain = ({ children }) => {
                     onChange={handleInputChange}
                     style={{ marginTop: "5px" }}
                     InputProps={{
-                      style: { color: "white" },
+                      style: { color: "black" },
                       inputProps: { "aria-label": "description" },
                     }}
                     InputLabelProps={{
-                      style: { color: "white" },
+                      style: { color: "black" },
                     }}
                   />
 
@@ -452,7 +471,7 @@ const PromotionMain = ({ children }) => {
                       marginTop: "5px",
                       marginBottom: "5px",
                       borderRadius: "10px",
-                      backgroundColor: "rgb(48,162,243)",
+                      background: "linear-gradient(to right,#ff9902, #e77401)",
                       color: "white",
                     }}
                     fullWidth
@@ -474,6 +493,7 @@ const PromotionMain = ({ children }) => {
                 </Grid>
               </Grid>
             </Grid>
+
             <div>
               {" "}
               {paymentUrl && <a href={paymentUrl}>Proceed to Payment</a>}
@@ -482,39 +502,50 @@ const PromotionMain = ({ children }) => {
             <Box
               sx={{
                 p: 2,
-                backgroundColor: "rgb(34,39,91)",
+                backgroundColor: "#ffffff",
                 borderRadius: "4px",
-                color: "#FFFFFF",
               }}
               mt={2}
             >
-              <Typography variant="h6" gutterBottom>
+              <Typography variant="h6" gutterBottom sx={{ color: "#1e2637" }}>
                 Recharge Instructions
               </Typography>
               <List>
                 <ListItem>
                   <ListItemIcon>
-                    <CheckCircleIcon sx={{ color: "#FFFFFF" }} />
+                    <CheckCircleIcon sx={{ color: "rgb(167,164,156)" }} />
                   </ListItemIcon>
-                  <ListItemText primary="If the transfer time is up, please fill out the deposit form again." />
+                  <ListItemText
+                    sx={{ color: "#a7a49c" }}
+                    primary="If the transfer time is up, please fill out the deposit form again."
+                  />
                 </ListItem>
                 <ListItem>
                   <ListItemIcon>
-                    <CheckCircleIcon sx={{ color: "#FFFFFF" }} />
+                    <CheckCircleIcon sx={{ color: "#a7a49c" }} />
                   </ListItemIcon>
-                  <ListItemText primary="The transfer amount must match the order you created, otherwise the money cannot be credited successfully." />
+                  <ListItemText
+                    sx={{ color: "#a7a49c" }}
+                    primary="The transfer amount must match the order you created, otherwise the money cannot be credited successfully."
+                  />
                 </ListItem>
                 <ListItem>
                   <ListItemIcon>
-                    <ErrorIcon sx={{ color: "#FFFFFF" }} />
+                    <ErrorIcon sx={{ color: "#a7a49c" }} />
                   </ListItemIcon>
-                  <ListItemText primary="If you transfer the wrong amount, our company will not be responsible for the lost amount!" />
+                  <ListItemText
+                    sx={{ color: "#a7a49c" }}
+                    primary="If you transfer the wrong amount, our company will not be responsible for the lost amount!"
+                  />
                 </ListItem>
                 <ListItem>
                   <ListItemIcon>
-                    <ErrorIcon sx={{ color: "#FFFFFF" }} />
+                    <ErrorIcon sx={{ color: "#a7a49c" }} />
                   </ListItemIcon>
-                  <ListItemText primary="Note: do not cancel the deposit order after the money has been transferred." />
+                  <ListItemText
+                    sx={{ color: "#a7a49c" }}
+                    primary="Note: do not cancel the deposit order after the money has been transferred."
+                  />
                 </ListItem>
               </List>
             </Box>
