@@ -55,25 +55,25 @@ const images = [
   {
     id: 1,
     src: "games/assets/time-5d4e96a3.png",
-    altSrc: "games/assets/time_a-afd768a9.png",
+    altSrc: "games/assets/time_a-afd768a99.png",
     subtitle: "1Min",
   },
   {
     id: 2,
     src: "games/assets/time-5d4e96a3.png",
-    altSrc: "games/assets/time_a-afd768a9.png",
+    altSrc: "games/assets/time_a-afd768a99.png",
     subtitle: "3Min",
   },
   {
     id: 3,
     src: "games/assets/time-5d4e96a3.png",
-    altSrc: "games/assets/time_a-afd768a9.png",
+    altSrc: "games/assets/time_a-afd768a99.png",
     subtitle: "5Min",
   },
   {
     id: 4,
     src: "games/assets/time-5d4e96a3.png",
-    altSrc: "games/assets/time_a-afd768a9.png",
+    altSrc: "games/assets/time_a-afd768a99.png",
     subtitle: "10Min",
   },
 ];
@@ -96,19 +96,19 @@ const StyledButtonGroup = styled(ButtonGroup)(({ theme }) => ({
 }));
 
 const StyledButton = styled(Button)(({ theme, active }) => ({
-  backgroundColor: active ? "#1976d2" : "rgb(34,39,91)",
+  backgroundColor: active ? "#ff9903" : "rgb(232,117,3)",
   color: "white",
   fontSize: "0.875rem",
   padding: "3px 8px", // Reduced padding
   "&:hover": {
-    backgroundColor: active ? "#1565c0" : "rgb(34,39,91)",
+    backgroundColor: active ? "#1565c0" : "rgb(232,117,3)",
   },
   "&.random": {
-    backgroundColor: "rgb(34,39,91)",
+    backgroundColor: "rgb(232,117,3)",
     paddingLeft: "10px",
     paddingRight: "10px",
     "&:hover": {
-      backgroundColor: "rgb(34,39,91)",
+      backgroundColor: "rgb(232,117,3)",
     },
   },
 }));
@@ -607,7 +607,7 @@ const LotteryAppt = () => {
             position: "sticky",
             top: 0,
             zIndex: 1000,
-            backgroundColor: "rgb(34,39,91)",
+            backgroundColor: "rgb(232,117,3)",
             padding: "8px 16px",
             color: "white",
           }}
@@ -635,14 +635,14 @@ const LotteryAppt = () => {
           direction="column"
           sx={{
             height: "300px",
-            backgroundColor: "#2b3270",
+            background: "linear-gradient(to right,#ff9903, #e77404)",
             borderRadius: "0 0 70px 70px",
             textAlign: "center",
           }}
         >
           <Grid
             sx={{
-              backgroundColor: "#384992",
+              backgroundColor: "#ffffff",
               margin: "0 20px 20px 20px",
               borderRadius: "30px",
               padding: "10px",
@@ -660,11 +660,11 @@ const LotteryAppt = () => {
             >
               <Typography
                 variant="h6"
-                sx={{ fontWeight: "bold", color: "#f0f1f5" }}
+                sx={{ fontWeight: "bold", color: "black" }}
               >
                 {user ? user.walletAmount : " Loading"}
               </Typography>
-              <IconButton sx={{ color: "#f0f1f5" }}>
+              <IconButton sx={{ color: "grey" }}>
                 <Refresh />
               </IconButton>
             </Grid>
@@ -679,9 +679,9 @@ const LotteryAppt = () => {
               }}
             >
               <AccountBalanceWallet
-                sx={{ marginRight: "10px", color: "RGB(71,129,255)" }}
+                sx={{ marginRight: "10px", color: "rgb(255,60,82)" }}
               />
-              <Typography variant="subtitle2" sx={{ color: "white" }}>
+              <Typography variant="subtitle2" sx={{ color: "black" }}>
                 Wallet Balance
               </Typography>
             </Grid>
@@ -725,7 +725,7 @@ const LotteryAppt = () => {
           <Grid
             item
             sx={{
-              backgroundColor: "#2b3270",
+              backgroundColor: "#fffbe8",
               margin: "0 20px 20px 20px",
               borderRadius: "3px",
               padding: "10px",
@@ -735,7 +735,7 @@ const LotteryAppt = () => {
             }}
           >
             <IconButton>
-              <VolumeUp sx={{ color: "RGB(71,129,255)" }} />
+              <VolumeUp sx={{ color: "rgb(238,138,31)" }} />
             </IconButton>
             <CSSTransition
               in={inProp}
@@ -743,7 +743,7 @@ const LotteryAppt = () => {
               classNames="message"
               unmountOnExit
             >
-              <Typography variant="caption" sx={{ color: "#dfe1eb" }}>
+              <Typography variant="caption" sx={{ color: "#e77402" }}>
                 {textArray[index]}
               </Typography>
             </CSSTransition>
@@ -751,12 +751,12 @@ const LotteryAppt = () => {
               variant="contained"
               size="small"
               sx={{
-                backgroundImage: "linear-gradient(to right,#2ba7f3, #2a7cf2)",
+                backgroundColor: "rgb(235,138,31)",
                 paddingRight: "12px",
                 width: "90px",
+                borderRadius: "20px",
                 minWidth: "90px",
               }}
-              startIcon={<WhatshotIcon />}
             >
               Details
             </Button>
@@ -772,7 +772,7 @@ const LotteryAppt = () => {
             maxWidth: "95%",
             boxShadow: "0px 4px 8px rgba(0, 0, 0, 0.1)",
             marginTop: "-50px",
-            backgroundColor: "#4469cb",
+            backgroundColor: "#ffffff",
             borderRadius: "30px",
           }}
         >
@@ -786,10 +786,10 @@ const LotteryAppt = () => {
                 cursor: "pointer",
                 border:
                   activeId === image.id
-                    ? '1px solid  "linear-gradient(to right,#2ba7f3, #2a7cf2)"'
+                    ? '1px solid  "linear-gradient(to top,#ff9903, #e77404)"'
                     : "#e8edf5",
-                backgroundColor:
-                  activeId === image.id ? "RGB(168,223,247)" : "transparent",
+                background:
+                  activeId === image.id ? "linear-gradient(to bottom,#ff9903, #e77404)" : "transparent",
                 borderRadius: "10px",
                 display: "flex",
                 flexDirection: "column",
@@ -802,7 +802,7 @@ const LotteryAppt = () => {
                 alt={image.subtitle}
                 style={{ width: "80%" }}
               />
-              <Typography variant="caption" sx={{ color: "#ffffff" }}>
+              <Typography variant="caption" sx={{ color: activeId === image.id ? "white" : "grey", }}>
                 {image.subtitle}
               </Typography>
             </Grid>
@@ -820,7 +820,7 @@ const LotteryAppt = () => {
             marginLeft: "auto",
             marginRight: "auto",
             maxWidth: "95%",
-            backgroundImage: 'url("games/assets/trxbg-c22.png")',
+            backgroundImage: 'url("games/assets/trxbg-21e5d8112.png")',
             backgroundSize: "100% 100%", // Force image to fit container's size
             backgroundPosition: "center",
             backgroundRepeat: "no-repeat",
@@ -1053,7 +1053,7 @@ const LotteryAppt = () => {
           mt={2}
           spacing={2}
           sx={{
-            backgroundColor: "#2b3270",
+            backgroundColor: "#ffffff",
             boxShadow: "0px 4px 8px rgba(0, 0, 0, 0.1)",
             marginLeft: "auto",
             marginRight: "auto",
@@ -1111,7 +1111,7 @@ const LotteryAppt = () => {
             container
             mt={2}
             sx={{
-              backgroundColor: "#22275b",
+              backgroundColor: "#f7f8ff",
               marginLeft: "auto",
               marginRight: "auto",
               maxWidth: "95%",
@@ -1594,20 +1594,13 @@ const LotteryAppt = () => {
                 textAlign: "center",
                 fontSize: "120px",
                 fontWeight: "bold",
-                color: " RGB(71,129,255)",
+                color: "rgb(233,119,1)",
               }}
             >
               {remainingTime ? remainingTime.split(":")[1] : ""}
             </DialogContentText>
           </DialogContent>
         </Dialog>
-
-
-
-
-
-
-
 
         <Grid mt={2} sx={{ marginBottom: "100px" }}>
           <Tabs
@@ -1624,11 +1617,11 @@ const LotteryAppt = () => {
                 value === 0
                   ? {
                       backgroundImage:
-                        "linear-gradient(to right,#2ba7f3, #2a7cf2)",
+                        "linear-gradient(to right,#ff9903, #e77404)",
                       color: "white",
                       borderRadius: "20px",
                     }
-                  : { color: "#D9D9D9" }
+                  : { color: "grey" }
               }
             />
             <Tab
@@ -1637,11 +1630,11 @@ const LotteryAppt = () => {
                 value === 1
                   ? {
                       backgroundImage:
-                        "linear-gradient(to right,#2ba7f3, #2a7cf2)",
+                        "linear-gradient(to right,#ff9903, #e77404)",
                       color: "white",
                       borderRadius: "20px",
                     }
-                  : { color: "#D9D9D9" }
+                  : { color: "grey" }
               }
             />
             <Tab
@@ -1650,11 +1643,11 @@ const LotteryAppt = () => {
                 value === 2
                   ? {
                       backgroundImage:
-                        "linear-gradient(to right,#2ba7f3, #2a7cf2)",
+                        "linear-gradient(to right,#ff9903, #e77404)",
                       color: "white",
                       borderRadius: "20px",
                     }
-                  : { color: "#D9D9D9" }
+                  : { color: "grey" }
               }
             />
           </Tabs>
@@ -1674,7 +1667,7 @@ const LotteryAppt = () => {
                     : 0
                 )
                 .map((bet, index) => (
-                  <Accordion sx={{ backgroundColor: "rgb(42,50,112)" }}>
+                  <Accordion sx={{ backgroundColor: "rgb(232,117,3)" }}>
                     <AccordionSummary
                       aria-controls="panel1a-content"
                       id="panel1a-header"
@@ -1682,7 +1675,7 @@ const LotteryAppt = () => {
                       <Grid
                         container
                         style={{
-                          backgroundColor: "rgb(34,39,91)",
+                          backgroundColor: "rgb(232,117,3)",
                           marginTop: "10px",
                           padding: "18px",
                           width: "350px",

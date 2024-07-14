@@ -12,20 +12,21 @@ const Popup = ({ isOpen, onClose }) => {
         transform: "translate(-50%, -50%)",
         width: "300px",
         padding: "0",
-        backgroundColor: "#211d2b",
+        backgroundColor: "#ffffff",
         boxShadow: "0px 0px 10px rgba(0, 0, 0, 0.1)",
         borderRadius: "10px",
-        color: "white",
+        color: "black",
         zIndex: 1000,
       }}
     >
       <div
         style={{
-          backgroundImage: "linear-gradient(to right,#2ba7f3, #2a7cf2)",
+          background: "linear-gradient(to right,#ff9903, #e77404)",
           borderTopLeftRadius: "10px",
           borderTopRightRadius: "10px",
           padding: "15px",
           textAlign: "center",
+          color: "#ffffff"
         }}
       >
         <h2 style={{ margin: 0 }}>How to play</h2>
@@ -153,7 +154,7 @@ const Popup = ({ isOpen, onClose }) => {
 
       <div
         style={{
-          backgroundColor: "#2b3270",
+          backgroundColor: "#ffffff",
           borderBottomLeftRadius: "10px",
           borderBottomRightRadius: "10px",
           padding: "20px",
@@ -162,11 +163,12 @@ const Popup = ({ isOpen, onClose }) => {
       >
         <div
           style={{
-            backgroundImage: "linear-gradient(to right,#2ba7f3, #2a7cf2)",
+            backgroundImage: "linear-gradient(to right,#ff9903, #e77404)",
             padding: "10px 20px",
             width: "fit-content",
             margin: "0 auto",
             textAlign: "center",
+            color: "#ffffff",
             cursor: "pointer",
             borderRadius: "5px", // Make it look more like a button
           }}
