@@ -89,7 +89,7 @@ const App = () => {
                       />
                       <Button
                         variant="contained"
-                        color="primary"
+                        sx={{backgroundColor:"#f78d02",color:"white"}}
                         onClick={() => handleReply(ticket._id)}
                       >
                         Reply
