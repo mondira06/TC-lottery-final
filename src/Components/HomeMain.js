@@ -403,7 +403,7 @@ useEffect(() => {
             <Box mx={0} mt={1}>
   
             <Box
-      sx={{borderRadius: '3%', border: '0.5px solid white', }}>
+      sx={{borderRadius: '3%' }}>
         <div style={{ display: 'flex', flexWrap: 'wrap' }}>
           {menuItems.map((item, index) => (
            <div
@@ -431,18 +431,14 @@ useEffect(() => {
   <img src='/assets/lottery-7b8f3f55.png' alt='no' width='30px' height='30px'/>
   <h3>Lottery</h3>
 </Box>
-<Box flexGrow={1} padding={1
-
-
-
-}>
+<Box flexGrow={1} padding={1}>
       {lotteryItems.map((item, index) => (
         <Box key={index} position="relative" width="100%">
 
           <img 
             src={item.bgImage}
             alt="" 
-            style={{ width: '100%', height: '120px' }} 
+            style={{ width: '100%'}} 
             onClick={() => navigate(item.path)} 
           />
           <img 
