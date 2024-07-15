@@ -1136,7 +1136,7 @@ const LotteryAppk = ({ timerKey }) => {
             <Typography variant="body1" color="white" align="left">
               {item.label}
             </Typography>
-            
+           
             <Grid container spacing={1} justifyContent="center">
               {item.values.map((value, valueIndex) => (
                 <Grid item key={valueIndex}>
@@ -1491,7 +1491,7 @@ const LotteryAppk = ({ timerKey }) => {
           >
             <Grid
               sx={{
-                
+               
                 backgroundSize: "cover",
                 backgroundColor: "#F7F7F7",
                 backgroundPosition: "center",
@@ -1638,7 +1638,7 @@ const LotteryAppk = ({ timerKey }) => {
 
                 backgroundColor: activeId === image.id ? '#EE7F02' : '#FFFFFF',
 
-                background: activeId === image.id ? 
+                background: activeId === image.id ?
                 "linear-gradient(to right,#ff9903, #e77404)" : '#FFFFFF',
 
                 borderRadius: '10px',
@@ -1850,7 +1850,7 @@ const LotteryAppk = ({ timerKey }) => {
 
                     backgroundColor: values === 1 ? "#ED8A1F" : "#F6F6F6",
 
-                    background: values === 1 ? 
+                    background: values === 1 ?
                     "linear-gradient(to right,#ff9903, #e77404)" : "#F6F6F6",
 
                   color: values === 1 ? "#F6F6F6" : "#889CA1",
@@ -1880,7 +1880,7 @@ const LotteryAppk = ({ timerKey }) => {
 
                     backgroundColor: values === 3 ? "#ED8A1F" : "#F6F6F6",
 
-                    background: values === 3 ? 
+                    background: values === 3 ?
                     "linear-gradient(to right,#ff9903, #e77404)" : "#F6F6F6",
 
                     color: values === 3 ? "#F6F6F6" : "#889CA1",
@@ -1947,7 +1947,7 @@ const LotteryAppk = ({ timerKey }) => {
                                 : "3 Same"}:  {`${totalSum} is selected`}</Typography>
                
               </div>
-        
+       
             </Grid>
 
             <Grid item xs={12}>
@@ -2035,7 +2035,7 @@ const LotteryAppk = ({ timerKey }) => {
                       style={{
                         borderRadius: 15,
                         height: 50,
-                        
+                       
                         color:"#1E2637"
                       }}
                       InputProps={{
