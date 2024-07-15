@@ -2615,7 +2615,7 @@ const LotteryAppk = ({ timerKey }) => {
                     maxHeight: "400px",
                     overflowY: "auto",
                     textAlign: "left ",
-                    color: "#black",
+                    color: "black",
                   }}
                 >
                   <p>
