@@ -13,7 +13,7 @@ import {
   Accordion,
   AccordionSummary,
   AccordionDetails,
-  TableContainer,
+  TableContainer
 } from "@mui/material";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import { styled } from "@mui/system";
@@ -25,6 +25,7 @@ import { Button } from "@mui/material";
 import { Snackbar } from "@mui/material";
 import MuiAlert from "@mui/material/Alert";
 import { Refresh, AccountBalanceWallet, VolumeUp } from "@mui/icons-material";
+import MusicOffIcon from "@material-ui/icons/MusicOff";
 import WhatshotIcon from "@mui/icons-material/Whatshot";
 import {
   Tabs,
@@ -56,27 +57,27 @@ countdownSound.loop = true;
 const images = [
   {
     id: 1,
-    src: "games/assets/time-5d4e96a3.png",
-    altSrc: "games/assets/time_a-afd768a9.png",
-    subtitle: "K3 Lottery 1Min",
+    src: "../../games/assets/time-5d4e96a3.png",
+    altSrc: "../../games/assets/time_a-afd768a99.png",
+    subtitle: "1Min",
   },
   {
     id: 2,
-    src: "games/assets/time-5d4e96a3.png",
-    altSrc: "games/assets/time_a-afd768a9.png",
-    subtitle: "K3 Lottery 3Min",
+    src: "../../games/assets/time-5d4e96a3.png",
+    altSrc: "../../games/assets/time_a-afd768a99.png",
+    subtitle: "3Min",
   },
   {
     id: 3,
-    src: "games/assets/time-5d4e96a3.png",
-    altSrc: "games/assets/time_a-afd768a9.png",
-    subtitle: "K3 Lottery 5Min",
+    src: "../../games/assets/time-5d4e96a3.png",
+    altSrc: "../../games/assets/time_a-afd768a99.png",
+    subtitle: "5Min",
   },
   {
     id: 4,
-    src: "games/assets/time-5d4e96a3.png",
-    altSrc: "games/assets/time_a-afd768a9.png",
-    subtitle: "K3 Lottery 10Min",
+    src: "../../games/assets/time-5d4e96a3.png",
+    altSrc: "../../games/assets/time_a-afd768a99.png",
+    subtitle: "10Min",
   },
 ];
 
@@ -93,52 +94,21 @@ const TabPanel = ({ children, value, index }) => {
     </div>
   );
 };
-const StyledDialog = styled(Dialog)(({ theme }) => ({
-  "& .MuiDialog-paper": {
-    backgroundColor: "#201D2B",
-    maxWidth: "320px", // Adjust the maxWidth as needed
-    width: "100%",
-    maxHeight: "450px", // Adjust the maxHeight as needed
-    height: "auto",
-    color: "white",
-    display: "flex",
-    flexDirection: "column",
 
-    textAlign: "center",
-    overflowY: "auto",
-    borderRadius: "5%", // Enable vertical scrollbar if needed
-  },
-}));
-
-const StyledDialogTitle = styled(DialogTitle)(({ theme }) => ({
-  justifyContent: "center",
-  alignItems: "center",
-  padding: "15px",
-  backgroundColor: "#2AA1F3",
-  color: "white",
-}));
-
-const StyledDialogActions = styled(DialogActions)(({ theme }) => ({
-  padding: "18px",
-  justifyContent: "center",
-  alignItems: "center",
-  backgroundColor: "#2B3270",
-  color: "white",
-}));
 const CustomPagination = styled(Pagination)({
   "& .MuiPaginationItem-root": {
-    color: "white",
+    color: "grey",
   },
   "& .MuiPaginationItem-page.Mui-selected": {
-    color: "white",
+    color: "grey",
   },
   "& .MuiPaginationItem-ellipsis": {
-    color: "white",
-    backgroundColor: "skyblue",
+    color: "#D9AC4F",
+    backgroundColor: "#ED8A1F",
   },
   "& .MuiPaginationItem-previousNext": {
-    backgroundColor: "skyblue",
-    color: "white",
+    backgroundColor: "#ED8A1F",
+    color: "#ffffff",
     padding: "3px",
     width: "auto", // Ensure it doesn't stretch
     height: "auto", // Ensure it doesn't stretch
@@ -151,7 +121,6 @@ const CustomPagination = styled(Pagination)({
     height: "40px", // Adjust the size to make it square
   },
 });
-
 const CustomTable = ({ data }) => {
   const pageSize = 10;
   const [page, setPage] = useState(0);
@@ -167,7 +136,6 @@ const CustomTable = ({ data }) => {
       container
       direction="column"
       justifyContent="space-evenly"
-      backgroundColor="#2B3270"
       borderRadius="25px"
       color="white"
     >
@@ -176,7 +144,7 @@ const CustomTable = ({ data }) => {
         item
         direction="row"
         justifyContent="space-evenly"
-        backgroundColor="#143287"
+        backgroundColor="#ED8A1F"
       >
         {columns.map((column) => (
           <Grid
@@ -199,59 +167,67 @@ const CustomTable = ({ data }) => {
         ))}
       </Grid>
       <Divider />
-      {paginatedData.map((row) => (
-        <Grid
-          container
-          item
-          direction="row"
-          alignItems="center"
-          justifyContent="center"
-          key={row.id}
-          marginBlock={1}
-        >
-          <Grid item xs={2}>
-            {"**" + row.periodId.slice(-7, -2)}
-          </Grid>
-          <Grid item xs={2}>
-            {row.totalSum}
-          </Grid>
-          <Grid item xs={2}>
-            {row.size}
-          </Grid>
-          <Grid item xs={2}>
-            {row.parity}
-          </Grid>
-          <Grid item xs={4}>
-            <Grid
-              container
-              direction="row"
-              alignItems="center"
-              justifyContent="center"
-            >
-              {row.diceOutcome.map((outcome, index) => {
-                const src = `games/assets/num${outcome}.png`;
-                // console.log(src);
-                return (
-                  <img
-                    key={index}
-                    src={src}
-                    alt={`Dice ${outcome}`}
-                    width="20"
-                    height="20"
-                    style={{ margin: "3px" }}
-                  />
-                );
-              })}
+      <Grid
+        container
+        direction="row"
+        justifyContent="space-evenly"
+        backgroundColor="#FFFFFF"
+        color="black"
+      >
+        {paginatedData.map((row) => (
+          <Grid
+            container
+            item
+            direction="row"
+            alignItems="center"
+            justifyContent="center"
+            key={row.id}
+            borderBottom="1px solid #ccc"
+            padding="8px"
+          >
+            <Grid item xs={2}>
+              {"**" + row.periodId.slice(-7, -2)}
+            </Grid>
+            <Grid item xs={2}>
+              {row.totalSum}
+            </Grid>
+            <Grid item xs={2}>
+              {row.size}
+            </Grid>
+            <Grid item xs={2}>
+              {row.parity}
+            </Grid>
+            <Grid item xs={4}>
+              <Grid
+                container
+                direction="row"
+                alignItems="center"
+                justifyContent="center"
+              >
+                {row.diceOutcome.map((outcome, index) => {
+                  const src = `../../games/assets/num${outcome}.png`;
+                  // console.log(src);
+                  return (
+                    <img
+                      key={index}
+                      src={src}
+                      alt={`Dice ${outcome}`}
+                      width="20"
+                      height="20"
+                      style={{ margin: "3px" }}
+                    />
+                  );
+                })}
+              </Grid>
             </Grid>
           </Grid>
-        </Grid>
-      ))}
-
+        ))}
+      </Grid>
       <Grid
         item
         xs={12}
         sx={{
-          backgroundColor: "#143287",
+          backgroundColor: "#ffffff",
           color: "grey",
           display: "flex",
           flexDirection: "column",
@@ -346,19 +322,19 @@ const CustomTable = ({ data }) => {
 //   );
 // };
 const CustomPage = styled(Pagination)({
-  "& .MuiPaginationItem-root": {
-    color: "white",
+ "& .MuiPaginationItem-root": {
+    color: "grey",
   },
   "& .MuiPaginationItem-page.Mui-selected": {
-    color: "white",
+    color: "grey",
   },
   "& .MuiPaginationItem-ellipsis": {
-    color: "white",
-    backgroundColor: "skyblue",
+    color: "#D9AC4F",
+    backgroundColor: "#ED8A1F",
   },
   "& .MuiPaginationItem-previousNext": {
-    backgroundColor: "skyblue",
-    color: "white",
+    backgroundColor: "#ED8A1F",
+    color: "#ffffff",
     padding: "3px",
     width: "auto", // Ensure it doesn't stretch
     height: "auto", // Ensure it doesn't stretch
@@ -407,7 +383,7 @@ const RowVisualization = ({ data }) => {
   return (
     <div
       style={{
-        backgroundColor: "#2B3270",
+        backgroundColor: "#ffffff",
         borderRadius: "10px",
         color: "white",
         padding: "10px",
@@ -419,7 +395,7 @@ const RowVisualization = ({ data }) => {
           display: "flex",
           flexDirection: "row",
           fontWeight: "bold",
-          backgroundColor: "#143287",
+          backgroundColor: "#ED8A1F",
           color: "white",
           height: "40px",
           alignItems: "center",
@@ -438,6 +414,7 @@ const RowVisualization = ({ data }) => {
             display: "flex",
             flexDirection: "row",
             margin: "20px 0",
+            color:"black",
             alignItems: "center",
             padding: "0 10px",
           }}
@@ -447,7 +424,7 @@ const RowVisualization = ({ data }) => {
           </div>
           <div style={{ width: "200px", fontSize: "14px" }}>
             {row.diceOutcome.map((outcome, index) => {
-              const src = `games/assets/num${outcome}.png`;
+              const src = `../../games/assets/num${outcome}.png`;
               return (
                 <img
                   key={index}
@@ -470,7 +447,7 @@ const RowVisualization = ({ data }) => {
         item
         xs={12}
         sx={{
-          backgroundColor: "#143287",
+          backgroundColor: "#ffffff",
           color: "grey",
           display: "flex",
           flexDirection: "column",
@@ -487,8 +464,7 @@ const RowVisualization = ({ data }) => {
     </div>
   );
 };
-
-const LotteryAppk = () => {
+const LotteryAppk = ({ timerKey }) => {
   const [activeId, setActiveId] = useState(images[0].id);
   const [selectedTimer, setSelectedTimer] = useState("1Min");
   const [selectedItem, setselectedItem] = useState(0);
@@ -503,6 +479,9 @@ const LotteryAppk = () => {
   const [wallet, setWallet] = useState([]);
   const [isSmall, setIsSmall] = useState(false);
   const [isBig, setIsBig] = useState(true);
+  const navigate = useNavigate();
+
+
 
   useEffect(() => {
     const handleResize = () => {
@@ -514,9 +493,9 @@ const LotteryAppk = () => {
         setIsBig(true);
       }
     };
-    window.addEventListener('resize', handleResize);
+    window.addEventListener("resize", handleResize);
     handleResize(); // Set the initial state
-    return () => window.removeEventListener('resize', handleResize);
+    return () => window.removeEventListener("resize", handleResize);
   }, []);
 
   const handleDialog = () => {
@@ -554,23 +533,24 @@ const LotteryAppk = () => {
 
     return () => socket.close(); // Cleanup WebSocket connection
   }, [selectedTimer]);
+
   const handleClick = (id) => {
     let timerKey;
     switch (id) {
       case 1:
-        timerKey = "1min";
+        timerKey = '1min';
         break;
       case 2:
-        timerKey = "3min";
+        timerKey = '3min';
         break;
       case 3:
-        timerKey = "5min";
+        timerKey = '5min';
         break;
       case 4:
-        timerKey = "10min";
+        timerKey = '10min';
         break;
       default:
-        timerKey = "1min";
+        timerKey = '1min';
     }
 
     setSelectedTimer(timerKey);
@@ -735,7 +715,7 @@ const LotteryAppk = () => {
         const response = await axios.get(`${domain}/user`, {
           withCredentials: true,
         });
-        setUser(response.data);
+        setUser(response.data.user);
       } catch (err) {
         console.error(err);
       }
@@ -805,7 +785,7 @@ const LotteryAppk = () => {
   const [isSoundOn, setIsSoundOn] = useState(false);
 
   useEffect(() => {
-    if (["00:05","00:04","00:03", "00:02", "00:01"].includes(remainingTime)) {
+    if (["00:05", "00:04", "00:03", "00:02", "00:01"].includes(remainingTime)) {
       setOpenDialog(true);
       if (isSoundOn && remainingTime !== lastPlayedTime) {
         countdownSound.play();
@@ -838,7 +818,7 @@ const LotteryAppk = () => {
         let latestBet = response.data[response.data.length - 1];
 
         // console.log(betPlaced);
-        if (latestBet.periodId == lastAlertedPeriodId){
+        if (latestBet.periodId == lastAlertedPeriodId) {
           if (latestBet.status === "Failed") {
             console.log("Latest bet status is FAIL");
             setOpen(true);
@@ -896,20 +876,17 @@ const LotteryAppk = () => {
     // ... your existing code ...
 
     switch (event) {
-      case "violet":
-        setSelectedColor("RGB(182,89,254)");
+      case "Total":
+        setSelectedColor("#67D99C"); // Half green, half red
         break;
-      case "green":
-        setSelectedColor("RGB(64,173,114)");
+      case "2 same":
+        setSelectedColor("#633DA6");
         break;
-      case "red":
-        setSelectedColor("RGB(253,86,92)");
+      case "3 same":
+        setSelectedColor("#7E3554");
         break;
-      case "yellow":
-        setSelectedColor(" RGB(71,129,255)");
-        break;
-      case "blue":
-        setSelectedColor("RGB(253,86,92)");
+      case "Different":
+        setSelectedColor(" #9B48DB");
         break;
       default:
         setSelectedColor(" RGB(71,129,255)");
@@ -932,7 +909,6 @@ const LotteryAppk = () => {
   const handleChanges = (event, newValue) => {
     setValues(newValue);
   };
-  const navigate = useNavigate();
 
   const navigateToPage = () => {
     navigate("/"); // Replace '/path-to-page' with the actual path
@@ -947,8 +923,8 @@ const LotteryAppk = () => {
   };
 
   const renderTab1Content = () => {
-    const redImage = "games/assets/redBall-fd34b99e.png";
-    const greenImage = "games/assets/greenBall-b7685130.png";
+    const redImage = "../../games/assets/redBall-fd34b99e.png";
+    const greenImage = "../../games/assets/greenBall-b7685130.png";
     const images = [
       { src: greenImage, label: "3", factor: "207.36X", color: "green" },
       { src: redImage, label: "4", factor: "69.12X", color: "red" },
@@ -987,7 +963,7 @@ const LotteryAppk = () => {
               }}
               onClick={() => {
                 handleOpenDrawer(image.label);
-                handleEventSelection("green");
+                handleEventSelection("Total");
                 setselectedItem("totalSum");
               }}
             >
@@ -1023,7 +999,7 @@ const LotteryAppk = () => {
             item
             onClick={() => {
               handleOpenDrawer("Big");
-              handleEventSelection("green");
+              handleEventSelection("Total");
               setselectedItem("size");
             }}
             style={{
@@ -1050,7 +1026,7 @@ const LotteryAppk = () => {
             item
             onClick={() => {
               handleOpenDrawer("Small");
-              handleEventSelection("green");
+              handleEventSelection("Total");
               setselectedItem("size");
             }}
             style={{
@@ -1076,7 +1052,7 @@ const LotteryAppk = () => {
             item
             onClick={() => {
               handleOpenDrawer("Odd");
-              handleEventSelection("green");
+              handleEventSelection("Total");
               setselectedItem("size");
             }}
             style={{
@@ -1102,7 +1078,7 @@ const LotteryAppk = () => {
             item
             onClick={() => {
               handleOpenDrawer("Even");
-              handleEventSelection("green");
+              handleEventSelection("Total");
               setselectedItem("size");
             }}
             style={{
@@ -1160,6 +1136,7 @@ const LotteryAppk = () => {
             <Typography variant="body1" color="white" align="left">
               {item.label}
             </Typography>
+            
             <Grid container spacing={1} justifyContent="center">
               {item.values.map((value, valueIndex) => (
                 <Grid item key={valueIndex}>
@@ -1182,8 +1159,9 @@ const LotteryAppk = () => {
                       marginTop: "5px",
                     }}
                     onClick={() => {
+                   
                       handleOpenDrawer(value);
-                      handleEventSelection("green");
+                      handleEventSelection("2 same");
                       setselectedItem("twoSameOneDifferent");
                     }}
                   >
@@ -1246,7 +1224,7 @@ const LotteryAppk = () => {
                       }}
                       onClick={() => {
                         handleOpenDrawer(value);
-                        handleEventSelection("white");
+                        handleEventSelection("3 same");
                         setselectedItem("threeSame");
                       }}
                     >
@@ -1269,7 +1247,7 @@ const LotteryAppk = () => {
                 }}
                 onClick={() => {
                   handleOpenDrawer(item.value);
-                  handleEventSelection("white");
+                  handleEventSelection("3 same");
                   setselectedItem("threeSame");
                 }}
               >
@@ -1339,7 +1317,7 @@ const LotteryAppk = () => {
             }}
             onClick={() => {
               handleOpenDrawer("3 continuous numbers");
-              handleEventSelection("green");
+              handleEventSelection("Different");
               setselectedItem("threeDifferentNumbers");
             }}
           >
@@ -1388,12 +1366,12 @@ const LotteryAppk = () => {
     );
   };
 
-  const diceOne = "games/assets/num1.png";
-  const diceTwo = "games/assets/num2.png";
-  const diceThree = "games/assets/num3.png";
-  const diceFour = "games/assets/num4.png";
-  const diceFive = "games/assets/num5.png";
-  const diceSix = "games/assets/num6.png";
+  const diceOne = "../../games/assets/num1.png";
+  const diceTwo = "../../games/assets/num2.png";
+  const diceThree = "../../games/assets/num3.png";
+  const diceFour = "../../games/assets/num4.png";
+  const diceFive = "../../games/assets/num5.png";
+  const diceSix = "../../games/assets/num6.png";
 
   // Array of dice face images
   const diceImages = [diceOne, diceTwo, diceThree, diceFour, diceFive, diceSix];
@@ -1448,7 +1426,7 @@ const LotteryAppk = () => {
       setSelectedNumbers1([...selectedNumbers1, value]);
     } else {
       handleOpenDrawer(selectedNumbers1.join(""));
-      handleEventSelection("green");
+      handleEventSelection("Different");
       setselectedItem("threeDifferentNumbers");
       setSelectedNumbers1([]);
     }
@@ -1459,7 +1437,7 @@ const LotteryAppk = () => {
       setSelectedNumbers2([...selectedNumbers2, value]);
     } else {
       handleOpenDrawer(selectedNumbers2.join(""));
-      handleEventSelection("green");
+      handleEventSelection("Different");
       setselectedItem("threeDifferentNumbers");
       setSelectedNumbers2([]);
     }
@@ -1468,181 +1446,186 @@ const LotteryAppk = () => {
   return (
     <div>
       <Mobile>
-        <Grid
-          container
-          alignItems="center"
-          justifyContent="space-between"
-          sx={{
-            position: "sticky",
-            top: 0,
-            zIndex: 1000,
-            backgroundColor: " RGB(71,129,255)",
-            padding: "8px 16px",
-            color: "white",
-          }}
-        >
-          <Grid item xs={6} textAlign="left">
-            <IconButton color="inherit" onClick={navigateToPage}>
-              <ArrowBackIcon />
-            </IconButton>
-          </Grid>
-          <Grid item xs={6} textAlign="right">
-            <IconButton color="inherit">
-              <SupportAgentIcon />
-            </IconButton>
-            <IconButton color="inherit">
-              <MusicNoteIcon />
-            </IconButton>
-          </Grid>
-        </Grid>
-
-        <Grid
-          container
-          direction="column"
-          sx={{
-            height: "300px",
-            backgroundColor: " #2B3270",
-            borderRadius: "0 0 70px 70px",
-            textAlign: "center",
-          }}
-        >
+        <div style={{ backgroundColor: "#F7F8FF" }}>
           <Grid
+            container
+            alignItems="center"
+            justifyContent="space-between"
             sx={{
-              backgroundColor: "#374992",
-              margin: "0 20px 20px 20px",
-              borderRadius: "30px",
-              padding: "10px",
-              marginTop: "10px",
+              position: "sticky",
+              top: 0,
+              zIndex: 1000,
+              backgroundColor: "#F89002",
+              padding: "8px 16px",
+              color: "white",
             }}
           >
-            <Grid
-              sm={12}
-              item
-              sx={{
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                color: "white",
-              }}
-            >
-              <Typography variant="h6" sx={{ fontWeight: "bold" }}>
-                {wallet ? wallet : " Loading"}
-              </Typography>
-              <IconButton>
-                <Refresh />
+            <Grid item xs={6} textAlign="left">
+              <IconButton color="inherit" onClick={navigateToPage}>
+                <ArrowBackIcon />
               </IconButton>
             </Grid>
+            <Grid item xs={6} textAlign="right">
+              <IconButton color="inherit">
+                <SupportAgentIcon />
+              </IconButton>
 
-            <Grid
-              sm={12}
-              item
-              sx={{
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                color: "white",
-              }}
-            >
-              <AccountBalanceWallet
-                sx={{ marginRight: "10px", color: " RGB(71,129,255)" }}
-              />
-              <Typography variant="subtitle2">Wallet Balance</Typography>
-            </Grid>
-            <Grid
-              sm={12}
-              mt={3}
-              item
-              sx={{
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-              }}
-            >
-              <Button
-                variant="contained"
-                onClick={navigateToPage2}
-                fullWidth
-                sx={{
-                  marginLeft: "10px",
-                  color: "white",
-                  backgroundColor: "#D23838",
-                  borderRadius: "50px",
-                }}
+              <IconButton
+                color="inherit"
+                onClick={() => setIsSoundOn(!isSoundOn)}
               >
-                Withdraw
-              </Button>
-              <Button
-                variant="contained"
-                onClick={navigateToPage1}
-                fullWidth
-                sx={{
-                  marginLeft: "10px",
-                  color: "white",
-                  backgroundColor: "#17B15E",
-                  borderRadius: "50px",
-                }}
-              >
-                Deposit
-              </Button>
+                {isSoundOn ? <MusicNoteIcon /> : <MusicOffIcon />}
+              </IconButton>
             </Grid>
           </Grid>
 
           <Grid
-            item
+            container
+            direction="column"
             sx={{
-              backgroundColor: "#2B3270",
-              margin: "0 20px 20px 20px",
-              borderRadius: "3px",
-              padding: "10px",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "space-between",
+              height: "300px",
+              backgroundColor: "#FF9902",
+              borderRadius: "0 0 70px 70px",
+              textAlign: "center",
             }}
           >
-            <IconButton>
-              <VolumeUp sx={{ color: "RGB(71,129,255)" }} />
-            </IconButton>
-            <CSSTransition
-              in={inProp}
-              timeout={500}
-              classNames="message"
-              unmountOnExit
-            >
-              <Typography variant="caption" sx={{ color: "white" }}>
-                {textArray[index]}
-              </Typography>
-            </CSSTransition>
-
-            <Button
-              variant="contained"
-              size="small"
+            <Grid
               sx={{
-                backgroundColor: "RGB(71,129,255)",
-                borderRadius: "50px",
-                fontSize: "9px",
-                paddingLeft: "12px",
-                paddingRight: "12px",
+                
+                backgroundSize: "cover",
+                backgroundColor: "#F7F7F7",
+                backgroundPosition: "center",
+                margin: "0 20px 20px 20px",
+                borderRadius: "30px",
+                padding: "10px",
+                marginTop: "10px",
               }}
-              startIcon={<WhatshotIcon />}
             >
-              Details
-            </Button>
-          </Grid>
-        </Grid>
+              <Grid
+                sm={12}
+                item
+                sx={{
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  color: "black",
+                }}
+              >
+                <Typography variant="h6" sx={{ fontWeight: "bold" }}>
+                  {user ? user.walletAmount : " Loading"}
+                </Typography>
+                <IconButton sx={{ color: "black" }}>
+                  <Refresh />
+                </IconButton>
+              </Grid>
 
-        <Grid
-          container
-          spacing={1}
-          sx={{
-            marginLeft: "auto",
-            marginRight: "auto",
-            maxWidth: "95%",
-            boxShadow: "0px 4px 8px rgba(0, 0, 0, 0.1)",
-            marginTop: "-50px",
-            backgroundColor: "#374992",
-            borderRadius: "30px",
-          }}
-        >
+              <Grid
+                sm={12}
+                item
+                sx={{
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  color: "black",
+                }}
+              >
+                <AccountBalanceWallet
+                  sx={{ marginRight: "10px", color: '#FF3B52' }}
+                />
+                <Typography variant="subtitle2">Wallet Balance</Typography>
+              </Grid>
+              <Grid
+                sm={12}
+                mt={3}
+                item
+                sx={{
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                }}
+              >
+                <Button
+                  variant="outlined"
+                  onClick={navigateToPage2}
+                  fullWidth
+                  sx={{
+                    marginLeft: "10px",
+                    color: "white",
+                    backgroundColor: "#FF3B52",
+                    borderColor: "#FF3B52",
+                    borderRadius: "50px",
+                  }}
+                >
+                  Withdraw
+                </Button>
+                <Button
+                  variant="contained"
+                  onClick={navigateToPage1}
+                  fullWidth
+                  sx={{
+                    marginLeft: "10px",
+                    backgroundColor: "#17B15E",
+                    borderRadius: "50px",
+                  }}
+                >
+                  Deposit
+                </Button>
+              </Grid>
+            </Grid>
+
+            <Grid
+              item
+              sx={{
+                backgroundColor: "#FFFBE8",
+                margin: "0 20px 20px 20px",
+                borderRadius: "3px",
+                padding: "10px",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "space-between",
+              }}
+            >
+              <IconButton>
+                <VolumeUp sx={{ color: "#FF3B52" }} />
+              </IconButton>
+              <CSSTransition
+                in={inProp}
+                timeout={500}
+                classNames="message"
+                unmountOnExit
+              >
+                <Typography variant="caption" sx={{ color: "#F88F02" }}>
+                  {textArray[index]}
+                </Typography>
+              </CSSTransition>
+
+              <Button
+                variant="contained"
+                size="small"
+                sx={{
+                  backgroundColor: "#EE7F02",
+                  borderRadius: "50px",
+                  fontSize: "9px",
+                  paddingLeft: "12px",
+                  paddingRight: "12px",
+                  color: "white",
+                }}
+               
+              >
+                Details
+              </Button>
+            </Grid>
+          </Grid>
+
+          <Grid container spacing={1} sx={{
+          marginLeft: 'auto',
+          marginRight: 'auto',
+          maxWidth: '95%',
+          boxShadow: '0px 4px 8px rgba(0, 0, 0, 0.1)',
+          marginTop: '-50px',
+          backgroundColor: '#FFFFFF',
+          borderRadius: '30px'
+        }}>
           {images.map((image) => (
             <Grid
               item
@@ -1650,262 +1633,271 @@ const LotteryAppk = () => {
               key={image.id}
               onClick={() => handleClick(image.id)}
               style={{
-                cursor: "pointer",
-                border:
-                  activeId === image.id ? "1px solid RGB(71,129,255)" : "none",
-                backgroundColor:
-                  activeId === image.id ? "RGB(156,215,249)" : "#374992",
-                borderRadius: "10px",
-                color: activeId === image.id ? "white" : "#A1AFC2",
-                display: "flex",
-                flexDirection: "column",
-                alignItems: "center", // Align items horizontally
-                justifyContent: "center", // Align items vertically
+                cursor: 'pointer',
+                border: activeId === image.id ? '1px solid #FE9902' : 'none',
+                backgroundColor: activeId === image.id ? '#EE7F02' : '#FFFFFF',
+                borderRadius: '10px',
+                color:activeId === image.id ? "white":'#A1AFC2',
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center', // Align items horizontally
+                justifyContent: 'center', // Align items vertically
               }}
             >
-              <img
-                src={activeId === image.id ? image.altSrc : image.src}
-                alt={image.subtitle}
-                style={{ width: "80%" }}
-              />
+              <img src={activeId === image.id ? image.altSrc : image.src} alt={image.subtitle} style={{ width: '80%' }} />
               <Typography variant="caption">{image.subtitle}</Typography>
             </Grid>
           ))}
         </Grid>
 
-        <Box
-          mt={2}
-          sx={{
-            marginLeft: "auto",
-            marginRight: "auto",
-            maxWidth: "90%",
-            boxShadow: "0px 4px 8px rgba(0, 0, 0, 0.1)",
-            p: 2,
-            backgroundColor: "#2B3270",
-            borderRadius: "30px",
-          }}
-        >
-          <Grid container spacing={0} alignItems="center">
-            <Grid item xs={2}>
-              <Typography variant="body1" color="#A1AFC2">
-                Period
-              </Typography>
-            </Grid>
-            <Grid item xs={6}>
-              <Button
-                variant="outlined"
-                sx={{
-                  border: "1px solid #5A99EC",
-                  borderRadius: "10px",
-                  padding: "4px 8px",
-                  display: "inline-block",
-                  color: "#5A99EC",
-                }}
-                startIcon={<NoteIcon />}
-                onClick={handleDialog}
-              >
-                How to play
-              </Button>
-            </Grid>
-            <Grid item xs={4}>
-              <Typography variant="body5" color="#A1AFC2">
-                Time Remaining
-              </Typography>
-            </Grid>
-          </Grid>
-          <Grid container spacing={1} alignItems="center">
-            <Grid item xs={8}>
-              <Typography
-                variant="h5"
-                sx={{ fontWeight: "bold", color: "#A1AFC2", textAlign: "left" }}
-              >
-                {periodId ? periodId.slice(0, -2) : ""}
-              </Typography>
-            </Grid>
-            <Grid item xs={4}>
-              <Typography
-                variant="h6"
-                sx={{ display: "flex", alignItems: "center" }}
-              >
-                <Box
-                  sx={{
-                    display: "inline-block",
-                    width: "16px",
-                    height: "22px",
-                    marginTop: "8px",
-                    backgroundColor: "#374992",
-                    color: "#61A9FF",
-                    textAlign: "center",
-                    lineHeight: "20px",
-                    margin: "0 2px",
-                    borderRadius: "4px",
-                    border: "1px solid #374992",
-                  }}
-                >
-                  {minutes[0]}
-                </Box>
-                <Box
-                  sx={{
-                    display: "inline-block",
-                    width: "16px",
-                    height: "22px",
-                    marginTop: "8px",
-                    backgroundColor: "#374992",
-                    color: "#61A9FF",
-                    textAlign: "center",
-                    lineHeight: "20px",
-                    margin: "0 2px",
-                    borderRadius: "4px",
-                    border: "1px solid #374992",
-                  }}
-                >
-                  {minutes[1]}
-                </Box>
-                <Box
-                  sx={{
-                    display: "inline-block",
-                    width: "16px",
-                    height: "22px",
-                    backgroundColor: "#374992",
-                    marginTop: "8px",
-                    color: "#61A9FF",
-                    textAlign: "center",
-                    lineHeight: "20px",
-                    margin: "0 2px",
-                    borderRadius: "4px",
-                    border: "1px solid #374992",
-                  }}
-                >
-                  :
-                </Box>
-                <Box
-                  sx={{
-                    display: "inline-block",
-                    width: "16px",
-                    height: "22px",
-                    backgroundColor: "#374992",
-                    marginTop: "8px",
-                    color: "#61A9FF",
-                    textAlign: "center",
-                    lineHeight: "20px",
-                    margin: "0 2px",
-                    borderRadius: "4px",
-                    border: "1px solid #374992",
-                  }}
-                >
-                  {seconds[0]}
-                </Box>
-                <Box
-                  sx={{
-                    display: "inline-block",
-                    width: "16px",
-                    height: "22px",
-                    backgroundColor: "#374992",
-                    color: "#61A9FF",
-                    marginTop: "8px",
-                    textAlign: "center",
-                    lineHeight: "20px",
-                    margin: "0 2px",
-                    borderRadius: "4px",
-                    border: "1px solid #374992",
-                  }}
-                >
-                  {seconds[1]}
-                </Box>
-              </Typography>
-            </Grid>
-          </Grid>
 
-          <>
-            <div className="fullbox">
-              <div id="leftbox"></div>
-              <div className="outerbox">
-                <div className="diebox">
-                  <div className="dice-container">
-                    {diceFaces.map((face, index) => (
-                      <div key={index} className="dice-wrapper">
-                        <img
-                          src={diceImages[face - 1]}
-                          alt={`Dice ${index + 1}`}
-                          className={`dice-image ${rolling ? "rolling" : ""}`}
-                        />
-                      </div>
-                    ))}
+          <Box
+            mt={2}
+            sx={{
+              marginLeft: "auto",
+              marginRight: "auto",
+              maxWidth: "90%",
+              boxShadow: "0px 4px 8px rgba(0, 0, 0, 0.1)",
+              p: 2,
+              backgroundColor: "#FFFFFF",
+              borderRadius: "30px",
+            }}
+          >
+            <Grid container spacing={0} alignItems="center">
+              <Grid item xs={2}>
+                <Typography variant="body1" color="#9DA5A1">
+                  Period
+                </Typography>
+              </Grid>
+              <Grid item xs={6}>
+                <Button
+                  variant="outlined"
+                  sx={{
+                    border: "1px solid #EE7F02",
+                    borderRadius: "10px",
+                    padding: "4px 8px",
+                    display: "inline-block",
+                    color: "#EE7F02",
+                  }}
+                  startIcon={<NoteIcon />}
+                  onClick={handleDialog}
+                >
+                  How to play
+                </Button>
+              </Grid>
+              <Grid item xs={4}>
+                <Typography variant="body5" color="#9DA5A1">
+                  Time Remaining
+                </Typography>
+              </Grid>
+            </Grid>
+            <Grid container spacing={1} alignItems="center">
+              <Grid item xs={8}>
+                <Typography
+                  variant="h5"
+                  sx={{ fontWeight: "bold", color: "black", textAlign: "left" }}
+                >
+                  {periodId ? periodId.slice(0, -2) : ""}
+                </Typography>
+              </Grid>
+              <Grid item xs={4}>
+                <Typography
+                  variant="h6"
+                  sx={{ display: "flex", alignItems: "center" }}
+                >
+                  <Box
+                    sx={{
+                      display: "inline-block",
+                      width: "16px",
+                      height: "22px",
+                      marginTop: "8px",
+                      backgroundColor: "white",
+                      color: "#EF8102",
+                      textAlign: "center",
+                      lineHeight: "20px",
+                      margin: "0 2px",
+                      borderRadius: "4px",
+                      border: "1px solid white",
+                    }}
+                  >
+                    {minutes[0]}
+                  </Box>
+                  <Box
+                    sx={{
+                      display: "inline-block",
+                      width: "16px",
+                      height: "22px",
+                      marginTop: "8px",
+                      backgroundColor: "#FFFFFF",
+                      color: "#EF8102",
+                      textAlign: "center",
+                      lineHeight: "20px",
+                      margin: "0 2px",
+                      borderRadius: "4px",
+                      border: "1px solid white",
+                    }}
+                  >
+                    {minutes[1]}
+                  </Box>
+                  <Box
+                    sx={{
+                      display: "inline-block",
+                      width: "16px",
+                      height: "22px",
+                      backgroundColor: "#FFFFFF",
+                      color: "#EF8102",
+                      marginTop: "8px",
+
+                      textAlign: "center",
+                      lineHeight: "20px",
+                      margin: "0 2px",
+                      borderRadius: "4px",
+                      border: "1px solid #FFFFFF",
+                    }}
+                  >
+                    :
+                  </Box>
+                  <Box
+                    sx={{
+                      display: "inline-block",
+                      width: "16px",
+                      height: "22px",
+                      backgroundColor: "#ffffff",
+                      color: "#EF8102",
+                      marginTop: "8px",
+
+                      textAlign: "center",
+                      lineHeight: "20px",
+                      margin: "0 2px",
+                      borderRadius: "4px",
+                      border: "1px solid #ffffff",
+                    }}
+                  >
+                    {seconds[0]}
+                  </Box>
+                  <Box
+                    sx={{
+                      display: "inline-block",
+                      width: "16px",
+                      height: "22px",
+                      backgroundColor: "#ffffff",
+                      color: "#EF8102",
+                      marginTop: "8px",
+                      textAlign: "center",
+                      lineHeight: "20px",
+                      margin: "0 2px",
+                      borderRadius: "4px",
+                      border: "1px solid #ffffff",
+                    }}
+                  >
+                    {seconds[1]}
+                  </Box>
+                </Typography>
+              </Grid>
+            </Grid>
+
+            <>
+              <div className="fullbox">
+                <div id="leftbox"></div>
+                <div className="outerbox">
+                  <div className="diebox">
+                    <div className="dice-container">
+                      {diceFaces.map((face, index) => (
+                        <div key={index} className="dice-wrapper">
+                          <img
+                            src={diceImages[face - 1]}
+                            alt={`Dice ${index + 1}`}
+                            className={`dice-image ${rolling ? "rolling" : ""}`}
+                          />
+                        </div>
+                      ))}
+                    </div>
                   </div>
                 </div>
+                <div id="rightbox"></div>
               </div>
-              <div id="rightbox"></div>
-            </div>
-          </>
-          <Box mt={2}>
-            <Tabs
-              value={values}
-              onChange={handleChanges}
-              TabIndicatorProps={{ style: { display: "none" } }}
-              variant="fullWidth"
-            >
-              <Tab
-                label="Total"
-                style={{
-                  backgroundColor: values === 0 ? "RGB(71,129,255)" : "#374992",
-                  color: values === 0 ? "white" : "#ACAFC2",
-                  borderBottom: values === 0 ? "none" : "",
-                  borderRadius: values === 0 ? "10px" : "",
-                  minWidth: "auto",
-                }}
-              />
-              <Tab
-                label="2 same"
-                style={{
-                  backgroundColor: values === 1 ? "RGB(71,129,255)" : "#374992",
-                  color: values === 1 ? "white" : "#ACAFC2",
-                  borderBottom: values === 1 ? "none" : "",
-                  borderRadius: values === 1 ? "10px" : "",
-                  minWidth: "auto",
-                }}
-              />
-              <Tab
-                label="3 same"
-                style={{
-                  backgroundColor: values === 2 ? "RGB(71,129,255)" : "#374992",
-                  color: values === 2 ? "white" : "#ACAFC2",
-                  borderBottom: values === 2 ? "none" : "",
-                  borderRadius: values === 2 ? "10px" : "",
-                  minWidth: "auto",
-                }}
-              />
-              <Tab
-                label="Different"
-                style={{
-                  backgroundColor: values === 3 ? "RGB(71,129,255)" : "#374992",
-                  color: values === 3 ? "white" : "#ACAFC2",
-                  borderBottom: values === 3 ? "none" : "",
-                  borderRadius: values === 3 ? "10px" : "",
-                  minWidth: "auto",
-                }}
-              />
-            </Tabs>
+            </>
+            <Box mt={2}>
+              <Tabs
+                value={values}
+                onChange={handleChanges}
+                TabIndicatorProps={{ style: { display: "none" } }}
+                variant="fullWidth"
+              >
+                <Tab
+                  label="Total"
+                  style={{
+                    backgroundColor: values === 0 ? "#ED8A1F" : "#F6F6F6",
+                    color: values === 0 ? "#F6F6F6" : "#889CA1",
+                    borderBottom: values === 0 ? "none" : "",
+                    borderRadius: values === 0 ? "10px" : "",
+                    minWidth: "auto",
+                  }}
+                />
+                <Tab
+                  label="2 same"
+                  style={{
+                    backgroundColor: values === 1 ? "#ED8A1F" : "#F6F6F6",
+                    color: values === 1 ? "#F6F6F6" : "#889CA1",
+                    borderBottom: values === 1 ? "none" : "",
+                    borderRadius: values === 1 ? "10px" : "",
+                    minWidth: "auto",
+                  }}
+                />
+                <Tab
+                  label="3 same"
+                  style={{
+                    backgroundColor: values === 2 ? "#ED8A1F" : "#F6F6F6",
+                    color: values === 2 ? "#F6F6F6" : "#889CA1",
+                    borderBottom: values === 2 ? "none" : "",
+                    borderRadius: values === 2 ? "10px" : "",
+                    minWidth: "auto",
+                  }}
+                />
+                <Tab
+                  label="Different"
+                  style={{
+                    backgroundColor: values === 3 ? "#ED8A1F" : "#F6F6F6",
+                    color: values === 3 ? "#F6F6F6" : "#889CA1",
+                    borderBottom: values === 3 ? "none" : "",
+                    borderRadius: values === 3 ? "10px" : "",
+                    minWidth: "auto",
+                  }}
+                />
+              </Tabs>
+            </Box>
+            <Box sx={{ mt: 2 }}>
+              {values === 0 && renderTab1Content()}
+              {values === 1 && renderTab2Content()}
+              {values === 2 && renderTab3Content()}
+              {values === 3 && renderTab4Content()}
+            </Box>
           </Box>
-          <Box sx={{ mt: 2 }}>
-            {values === 0 && renderTab1Content()}
-            {values === 1 && renderTab2Content()}
-            {values === 2 && renderTab3Content()}
-            {values === 3 && renderTab4Content()}
-          </Box>
-        </Box>
 
-        <Drawer anchor="bottom" open={drawerOpen} onClose={handleCloseDrawer}>
-          <Grid container alignItems="center">
+          <Drawer anchor="bottom" open={drawerOpen} onClose={handleCloseDrawer}  PaperProps={{
+          style: {
+            margin: "auto",
+            maxWidth: "400px", // Set this to the desired size of your square
+          // Adjust height as needed
+          },
+        }} >
+          <Grid container alignItems="center"  style={{
+                position: "relative",
+                color: "#858EA1",
+                backgroundColor: "#white",
+
+              }}>
             <Grid
               item
               xs={12}
               align="center"
               style={{
                 position: "relative",
-                marginBottom: "20px",
-                height: "100px",
+                marginBottom: "-5px",
+                height: "90px",
                 color: "white",
-                backgroundColor: "transparent",
+                backgroundColor: "white",
+
               }}
             >
               <div
@@ -1914,31 +1906,35 @@ const LotteryAppk = () => {
                   top: 0,
                   left: 0,
                   width: "100%",
-                  height: "100%",
+                  height: "80%",
                   background: selectedColor,
                   clipPath: "polygon(0 0, 100% 0, 100% 75%, 50% 100%, 0 75%)",
                 }}
               ></div>
               <div style={{ position: "relative" }}>
                 <Typography variant="h6">{`K3 ${selectedTimer}`}</Typography>
-                <Typography variant="h6">{`${selectedItem}`}</Typography>
-                <Typography variant="body1">{`${totalSum} is selected`}</Typography>
+                <Typography variant="h6">{selectedItem === "totalSum"
+                                ? "Total"
+                                : selectedItem === "threeDifferentNumbers"
+                                ? "Different"
+                                : selectedItem === "twoSameOneDifferent"
+                                ? "2 Same"
+                                : "3 Same"}:  {`${totalSum} is selected`}</Typography>
+               
               </div>
+        
             </Grid>
 
             <Grid item xs={12}>
-              <Grid
-                container
-                justifyContent="space-between"
-                alignItems="center"
-              >
-                <Typography variant="h6">Balance</Typography>
+              <Grid container justifyContent="space-between">
+                <Typography variant="h6" sx={{color:"#1E2637"}}>Balance</Typography>
                 <Button
                   variant="contained"
                   style={{
-                    borderRadius: 15,
+                    borderRadius: 50,
                     backgroundColor:
-                      activeBetAmount === 1 ? selectedColor : undefined,
+                      activeBetAmount === 1 ? "#ED8A1F" : '#F6F6F6',
+                      color: activeBetAmount === 1 ?"white":"#858EA1"
                   }}
                   onClick={() => {
                     handleBetAmount(1);
@@ -1950,9 +1946,10 @@ const LotteryAppk = () => {
                 <Button
                   variant="contained"
                   style={{
-                    borderRadius: 15,
+                    borderRadius: 50,
                     backgroundColor:
-                      activeBetAmount === 10 ? selectedColor : undefined,
+                      activeBetAmount === 10 ? '#ED8A1F' : '#F6F6F6',
+                      color: activeBetAmount === 10 ?"white":"#858EA1"
                   }}
                   onClick={() => {
                     handleBetAmount(10);
@@ -1964,9 +1961,10 @@ const LotteryAppk = () => {
                 <Button
                   variant="contained"
                   style={{
-                    borderRadius: 15,
+                    borderRadius: 50,
                     backgroundColor:
-                      activeBetAmount === 100 ? selectedColor : undefined,
+                      activeBetAmount === 100 ? '#ED8A1F' : '#F6F6F6',
+                      color: activeBetAmount === 100 ?"white":"#858EA1"
                   }}
                   onClick={() => {
                     handleBetAmount(100);
@@ -1978,9 +1976,10 @@ const LotteryAppk = () => {
                 <Button
                   variant="contained"
                   style={{
-                    borderRadius: 15,
+                    borderRadius: 50,
                     backgroundColor:
-                      activeBetAmount === 1000 ? selectedColor : undefined,
+                      activeBetAmount === 1000 ? '#ED8A1F' : '#F6F6F6',
+                      color: activeBetAmount === 1000 ?"white":"#858EA1"
                   }}
                   onClick={() => {
                     handleBetAmount(1000);
@@ -1989,37 +1988,6 @@ const LotteryAppk = () => {
                 >
                   {"\u20B9" + "1000"}
                 </Button>
-              </Grid>
-            </Grid>
-            <Grid item xs={12} mt={2}>
-              <Grid
-                container
-                alignItems="center"
-                justifyContent="space-between"
-              >
-                <Typography variant="h6">Add your money</Typography>
-                <Grid justifyContent="flex-end">
-                  <TextField
-                    label="Add Custom Amount"
-                    variant="outlined"
-                    value={customBetAmount}
-                    onChange={handleCustomBetChange}
-                    style={{
-                      borderRadius: 15,
-                      height: 50,
-                    }}
-                    InputProps={{
-                      style: {
-                        color: "black",
-                        borderRadius: 15,
-                        height: 50,
-                      },
-                    }}
-                    InputLabelProps={{
-                      style: { color: "#1876D2" },
-                    }}
-                  />
-                </Grid>
               </Grid>
             </Grid>
             <Grid item xs={12} mt={2}>
@@ -2032,25 +2000,52 @@ const LotteryAppk = () => {
                   align="center"
                   alignItems="center"
                 >
-                  <Typography variant="h6">Quantity</Typography>
+                   <Typography variant="h6" style={{color:"#1E2637"}}>Add your money</Typography>
+                  <Grid justifyContent="flex-end">
+                    <TextField
+                      label="Add Custom Amount"
+                      variant="outlined"
+                      value={customBetAmount}
+                      onChange={handleCustomBetChange}
+                      style={{
+                        borderRadius: 15,
+                        height: 50,
+                        
+                        color:"#1E2637"
+                      }}
+                      InputProps={{
+                        style: {
+                          color: "black",
+                          borderRadius: 15,
+                          height: 50,
+                        },
+                      }}
+                      InputLabelProps={{
+                        style: { color: "black" },
+                      }}
+                    />
+                    </Grid>
+                  <Typography variant="h6" style={{color:"#1E2637"}}>Quantity</Typography>
                   <div
                     className="button1"
                     onClick={() =>
                       setMultiplier(multiplier > 1 ? multiplier - 1 : 1)
                     }
+                    style={{backgroundColor:'#ED8A1F',color:"white"}}
                   >
                     -
                   </div>
 
                   <Typography
                     variant="body1"
-                    style={{ border: "1px solid black", width: "50px" }}
+                    style={{ border: "1px solid #F6F6F6", width: "50px",backgroundColor:"#F6F6F6" }}
                   >
                     {multiplier}
                   </Typography>
                   <div
                     className="button1"
                     onClick={() => setMultiplier(multiplier + 1)}
+                    style={{backgroundColor:'#ED8A1F',color:"white"}}
                   >
                     +
                   </div>
@@ -2066,7 +2061,7 @@ const LotteryAppk = () => {
                     setActiveButton(1);
                   }}
                   style={
-                    activeButton === 1 ? { backgroundColor: selectedColor } : {}
+                    activeButton === 1 ? { backgroundColor: '#ED8A1F',color:"white" } : { backgroundColor:'#F6F6F6',color:"#858EA1"}
                   }
                 >
                   X1
@@ -2078,7 +2073,7 @@ const LotteryAppk = () => {
                     setActiveButton(5);
                   }}
                   style={
-                    activeButton === 5 ? { backgroundColor: selectedColor } : {}
+                    activeButton === 5 ? { backgroundColor: '#ED8A1F',color:"white" } : { backgroundColor:'#F6F6F6',color:"#858EA1"}
                   }
                 >
                   X5
@@ -2091,8 +2086,8 @@ const LotteryAppk = () => {
                   }}
                   style={
                     activeButton === 10
-                      ? { backgroundColor: selectedColor }
-                      : {}
+                      ? { backgroundColor: '#ED8A1F',color:"white" }
+                      : { backgroundColor:'#F6F6F6',color:"#858EA1"}
                   }
                 >
                   X10
@@ -2105,8 +2100,8 @@ const LotteryAppk = () => {
                   }}
                   style={
                     activeButton === 20
-                      ? { backgroundColor: selectedColor }
-                      : {}
+                      ? { backgroundColor: '#ED8A1F',color:"white" }
+                      : { backgroundColor:'#F6F6F6',color:"#858EA1"}
                   }
                 >
                   X20
@@ -2119,8 +2114,8 @@ const LotteryAppk = () => {
                   }}
                   style={
                     activeButton === 50
-                      ? { backgroundColor: selectedColor }
-                      : {}
+                      ? { backgroundColor: '#ED8A1F',color:"white" }
+                      : { backgroundColor:'#F6F6F6',color:"#858EA1"}
                   }
                 >
                   X50
@@ -2133,8 +2128,8 @@ const LotteryAppk = () => {
                   }}
                   style={
                     activeButton === 100
-                      ? { backgroundColor: selectedColor }
-                      : {}
+                      ? { backgroundColor: '#ED8A1F',color:"white" }
+                      : { backgroundColor:'#F6F6F6',color:"#858EA1"}
                   }
                 >
                   X100
@@ -2148,7 +2143,7 @@ const LotteryAppk = () => {
                   <Button
                     onClick={handleCancelBet}
                     fullWidth
-                    style={{ backgroundColor: "black" }}
+                    style={{ backgroundColor: "white",color:"#817F7C" }}
                     variant="contained"
                   >
                     Cancel
@@ -2158,7 +2153,7 @@ const LotteryAppk = () => {
                   <Button
                     onClick={handlePlaceBet}
                     fullWidth
-                    style={{ background: selectedColor }}
+                    style={{ background: '#ED8A1F',color:"white" }}
                     variant="contained"
                   >{`Total Bet: ${betAmount * multiplier}`}</Button>
                 </Grid>
@@ -2166,337 +2161,318 @@ const LotteryAppk = () => {
             </Grid>
           </Grid>
         </Drawer>
-        <Snackbar
-          open={openSnackbar}
-          autoHideDuration={1000}
-          onClose={handleCloseSnackbar}
-          style={{
-            position: "fixed",
-            top: "50%",
-            left: "50%",
-            transform: "translate(-50%, -50%)",
-          }}
-        >
-          <MuiAlert
+          <Snackbar
+            open={openSnackbar}
+            autoHideDuration={1000}
             onClose={handleCloseSnackbar}
-            severity="success"
-            style={{ backgroundColor: "rgba(0, 0, 0, 0.7)", color: "white" }}
-          >
-            Bet placed successfully!
-          </MuiAlert>
-        </Snackbar>
-
-        <Dialog
-          open={openDialog}
-          aria-labelledby="alert-dialog-title"
-          aria-describedby="alert-dialog-description"
-          PaperProps={{
-            style: {
-              width: "350px", // Set this to the desired size of your square
-              height: "250px", // Set this to the same value as width
-              backgroundColor: "rgba(0, 0, 0, 0.5)", // This sets the opacity of the dialog box background
-              overflow: "hidden",
-              borderRadius:"40px" // This removes the scrollbars
-            },
-          }}
-        >
-          <DialogContent>
-            <DialogContentText
-              id="alert-dialog-description"
-              style={{
-                textAlign: "center",
-                fontSize: "120px",
-                fontWeight: "bold",
-                color: " RGB(71,129,255)",
-              }}
-            >
-              {remainingTime ? remainingTime.split(":")[1] : ""}
-            </DialogContentText>
-          </DialogContent>
-        </Dialog>
-
-
-
-
-
-
-
-
-        <Grid mt={2} sx={{ marginBottom: "10px" }}>
-          <Tabs
-            value={value}
-            onChange={handleChange}
-            indicatorColor="transparent"
             style={{
-              marginLeft: "20px",
-              marginBottom: "10px",
-              paddingTop: "20px",
+              position: "fixed",
+              top: "50%",
+              left: "50%",
+              transform: "translate(-50%, -50%)",
             }}
           >
-            <Tab
-              label="Game History"
-              style={
-                value === 0
-                  ? {
-                      backgroundColor: "RGB(71,129,255)",
-                      color: "white",
-                      borderRadius: "20px",
-                    }
-                  : { color: "#D9D9D9" }
-              }
-            />
-            <Tab
-              label="Chart"
-              style={
-                value === 1
-                  ? {
-                      backgroundColor: "RGB(71,129,255)",
-                      color: "white",
-                      borderRadius: "20px",
-                    }
-                  : { color: "#D9D9D9" }
-              }
-            />
-            <Tab
-              label="My History"
-              style={
-                value === 2
-                  ? {
-                      backgroundColor: "RGB(71,129,255)",
-                      color: "white",
-                      borderRadius: "20px",
-                    }
-                  : { color: "#D9D9D9" }
-              }
-            />
-          </Tabs>
-          <TabPanel value={value} index={0}>
-            <CustomTable data={filteredData} />
-          </TabPanel>
-          <TabPanel value={value} index={1}>
-            <RowVisualization data={filteredData1} />
-          </TabPanel>
-          <TabPanel value={value} index={2}>
-            <Grid container style={{ marginLeft: "-15px" }}>
-              {bets
-                .slice()
-                .sort((a, b) =>
-                  b.timestamp && a.timestamp
-                    ? -1
-                    : b.timestamp.seconds - a.timestamp.seconds
-                )
-                .map((bet, index) => (
-                  <Accordion sx={{ backgroundColor: "rgb(42,50,112)" }}>
-                    <AccordionSummary
-                      aria-controls="panel1a-content"
-                      id="panel1a-header"
-                    >
-                      <Grid
-                        container
-                        style={{
-                          backgroundColor: "rgb(34,39,91)",
-                          marginTop: "10px",
-                          padding: "18px",
-                          marginLeft: "15px",
-                          width: "350px",
-                        }}
-                      >
-                        <Grid item xs={3} sm={3}>
-                          <Box
-                            border={1}
-                            borderRadius={2}
-                            style={{
-                              background:
-                                bet.selectedItem.toLowerCase() === "size"
-                                  ? "RGB(182,89,254)"
-                                  : "rgb(71,129,255)",
-                              color: "white",
-                              height: "40px",
-                              width: "100px",
-                              display: "flex",
-                              border: "none",
+            <MuiAlert
+              onClose={handleCloseSnackbar}
+              severity="success"
+              style={{ backgroundColor: "rgba(0, 0, 0, 0.7)", color: "white" }}
+            >
+              Bet placed successfully!
+            </MuiAlert>
+          </Snackbar>
 
-                              justifyContent: "center",
-                              alignItems: "center",
-                            }}
+          <Dialog
+            open={openDialog}
+            aria-labelledby="alert-dialog-title"
+            aria-describedby="alert-dialog-description"
+            PaperProps={{
+              style: {
+                width: "350px", // Set this to the desired size of your square
+                height: "250px", // Set this to the same value as width
+                backgroundColor: "white", // This sets the opacity of the dialog box background
+                overflow: "hidden",
+                borderRadius: "40px", // This removes the scrollbars
+              },
+            }}
+          >
+            <DialogContent>
+              <DialogContentText
+                id="alert-dialog-description"
+                style={{
+                  textAlign: "center",
+                  fontSize: "120px",
+                  fontWeight: "bold",
+                  color: "#EE7F02",
+                }}
+              >
+                {remainingTime ? remainingTime.split(":")[1] : ""}
+              </DialogContentText>
+            </DialogContent>
+          </Dialog>
+          <Grid mt={2} sx={{ marginBottom: "10px" }}>
+            <Tabs
+              value={value}
+              onChange={handleChange}
+              indicatorColor="transparent"
+              style={{
+                marginLeft: "20px",
+                marginBottom: "10px",
+                paddingTop: "20px",
+              }}
+            >
+              <Tab
+                label="Game History"
+                style={
+                  value === 0
+                    ? {
+                        backgroundColor: "#ED8A1F",
+                        color:  "#F6F6F6",  
+                        borderRadius: "20px",
+                      }
+                    : { color: "#A8A5A1" }
+                }
+              />
+              <Tab
+                label="Chart"
+                style={
+                  value === 1
+                    ? {
+                        backgroundColor: "#ED8A1F",
+                        color: "#F6F6F6",
+                        borderRadius: "20px",
+                      }
+                    : { color: "#A8A5A1" }
+                }
+              />
+              <Tab
+                label="My History"
+                style={
+                  value === 2
+                    ? {
+                        backgroundColor: "#ED8A1F",
+                        color: "#F6F6F6",
+                        borderRadius: "20px",
+                      }
+                    : { color: "#A8A5A1" }
+                }
+              />
+            </Tabs>
+            <TabPanel value={value} index={0}>
+              <CustomTable data={filteredData} />
+            </TabPanel>
+            <TabPanel value={value} index={1}>
+              <RowVisualization data={filteredData1} />
+            </TabPanel>
+            <TabPanel value={value} index={2}>
+              <Grid container style={{ marginLeft: "0px" }}>
+                {bets
+                  .slice()
+                  .sort((a, b) =>
+                    b.timestamp && a.timestamp
+                      ? -1
+                      : b.timestamp.seconds - a.timestamp.seconds
+                  )
+                  .map((bet, index) => (
+                    <Accordion sx={{ backgroundColor: "#F7F8FF" }}>
+                      <AccordionSummary
+                        aria-controls="panel1a-content"
+                        id="panel1a-header"
+                      >
+                        <Grid
+                          container
+                          style={{
+                            backgroundColor: "#ffffff",
+                            color:"black",
+                            marginTop: "10px",
+                            padding: "18px",
+                            width: "350px",
+                          }}
+                        >
+                          <Grid item xs={3} sm={3}>
+                            <Box
+                              border={1}
+                              borderRadius={2}
+                              style={{
+                                background: "#FE9902",
+                                color: "black",
+                                height: "40px",
+                                width: "100px",
+                                display: "flex",
+
+                                border: "none",
+
+                                justifyContent: "center",
+                                alignItems: "center",
+                              }}
+                            >
+                              <Typography
+                                variant="body5"
+                                sx={{ fontSize: "14px" }}
+                              >
+                                {bet.selectedItem === "totalSum"
+                                  ? "TOTAL"
+                                  : bet.selectedItem === "threeDifferentNumbers"
+                                  ? "DIFFERENT"
+                                  : bet.selectedItem === "twoSameOneDifferent"
+                                  ? "2 SAME"
+                                  : "3 SAME"}
+                              </Typography>
+                            </Box>
+                          </Grid>
+                          <Grid
+                            item
+                            xs={7}
+                            sm={7}
+                            style={{ textAlign: "center" }}
                           >
                             <Typography
-                              variant="body5"
-                              sx={{ fontSize: "14px" }}
+                              variant="body1"
+                              style={{
+                                fontSize: "12px",
+                                fontWeight: "bold",
+                                color:"black",
+                              }}
                             >
-                              {bet.selectedItem === "totalSum"
-                                ? "TOTAL"
-                                : bet.selectedItem === "threeDifferentNumbers"
-                                ? "DIFFERENT"
-                                : bet.selectedItem === "twoSameOneDifferent"
-                                ? "2 SAME"
-                                : "3 SAME"}
+                              {String(bet.periodId).slice(0, -2)}
                             </Typography>
-                          </Box>
-                        </Grid>
-                        <Grid
-                          item
-                          xs={7}
-                          sm={7}
-                          style={{ textAlign: "center" }}
-                        >
-                          <Typography
-                            variant="body1"
-                            style={{
-                              fontSize: "12px",
-                              fontWeight: "bold",
-                              color: "white",
-                            }}
-                          >
-                            {String(bet.periodId).slice(0, -2)}
-                          </Typography>
-                          <Typography
-                            variant="body1"
-                            style={{ fontSize: "12px", color: "white" }}
-                          >
-                            {bet.timestamp
-                              ? `${new Date(bet.timestamp).toLocaleDateString(
-                                  "en-GB"
-                                )}
+                            <Typography
+                              variant="body1"
+                              style={{ fontSize: "12px", color:"black", }}
+                            >
+                              {bet.timestamp
+                                ? `${new Date(bet.timestamp).toLocaleDateString(
+                                    "en-GB"
+                                  )}
                  ${new Date(bet.timestamp).toLocaleTimeString("en-GB")}`
-                              : "N/A"}
-                          </Typography>
-                        </Grid>
-                        <Grid item xs={2} sm={2}>
-                          <Box
-                            border={1}
-                            borderRadius={1}
-                            borderColor={bet.winLoss > 0 ? "green" : "red"}
-                            sx={{
-                              height: "20px",
-                              width: "65px",
-                              display: "flex",
-                              justifyContent: "center",
-                              alignItems: "center",
-                            }}
-                          >
+                                : "N/A"}
+                            </Typography>
+                          </Grid>
+                          <Grid item xs={2} sm={2}>
+                            <Box
+                              border={1}
+                              borderRadius={1}
+                              borderColor={bet.winLoss > 0 ? "green" : "red"}
+                              sx={{
+                                height: "20px",
+                                width: "65px",
+                                display: "flex",
+                                justifyContent: "center",
+                                alignItems: "center",
+                              }}
+                            >
+                              <Typography
+                                variant="body1"
+                                style={{
+                                  color: bet.winLoss > 0 ? "green" : "red",
+                                }}
+                              >
+                                {bet.status}
+                              </Typography>
+                            </Box>
                             <Typography
                               variant="body1"
                               style={{
                                 color: bet.winLoss > 0 ? "green" : "red",
                               }}
                             >
-                              {bet.status}
+                              {bet.winLoss > 0
+                                ? `+₹${bet.winLoss}`
+                                : `₹${bet.winLoss}`}
                             </Typography>
-                          </Box>
-                          <Typography
-                            variant="body1"
-                            style={{ color: bet.winLoss > 0 ? "green" : "red" }}
-                          >
-                            {bet.winLoss > 0
-                              ? `+₹${bet.winLoss}`
-                              : `₹${bet.winLoss}`}
-                          </Typography>
+                          </Grid>
                         </Grid>
-                      </Grid>
-                    </AccordionSummary>
-                    <AccordionDetails>
-                      <TableContainer>
-                        <Table>
-                          <TableBody>
-                            <TableRow>
-                              <TableCell
-                                style={{ fontWeight: "bold", color: "white" }}
-                              >
-                                Bet Amount
-                              </TableCell>
-                              <TableCell
-                                style={{ fontWeight: "bold", color: "white" }}
-                              >
-                                {bet.betAmount}
-                              </TableCell>
-                            </TableRow>
-                            <TableRow>
-                              <TableCell
-                                style={{ fontWeight: "bold", color: "white" }}
-                              >
-                                Multiplier
-                              </TableCell>
-                              <TableCell
-                                style={{ fontWeight: "bold", color: "white" }}
-                              >
-                                {bet.multiplier}
-                              </TableCell>
-                            </TableRow>
-                            <TableRow>
-                              <TableCell
-                                style={{ fontWeight: "bold", color: "white" }}
-                              >
-                                Total Bet
-                              </TableCell>
-                              <TableCell
-                                style={{ fontWeight: "bold", color: "green" }}
-                              >
-                                {bet.totalBet}
-                              </TableCell>
-                            </TableRow>
-                            <TableRow>
-                              <TableCell
-                                style={{ fontWeight: "bold", color: "white" }}
-                              >
-                                Tax
-                              </TableCell>
-                              <TableCell
-                                style={{ fontWeight: "bold", color: "white" }}
-                              >
-                                {bet.tax}
-                              </TableCell>
-                            </TableRow>
-                            <TableRow>
-                              <TableCell
-                                style={{ fontWeight: "bold", color: "white" }}
-                              >
-                                Fee
-                              </TableCell>
-                              <TableCell
-                                style={{
-                                  fontWeight: "bold",
-                                  color: "red",
-                                  color: "white",
-                                }}
-                              >
-                                {bet.fee}
-                              </TableCell>
-                            </TableRow>
-                            <TableRow>
-                              <TableCell
-                                style={{ fontWeight: "bold", color: "white" }}
-                              >
-                                Selected Timer
-                              </TableCell>
-                              <TableCell
-                                style={{ fontWeight: "bold", color: "white" }}
-                              >
-                                {bet.selectedTimer}
-                              </TableCell>
-                            </TableRow>{" "}
-                            <TableRow>
-                              <TableCell
-                                style={{ fontWeight: "bold", color: "white" }}
-                              >
-                                Your Selected Items:
-                              </TableCell>
-                              <TableCell
-                                style={{ fontWeight: "bold", color: "white" }}
-                              >
-                                {Array.isArray(
-                                  bet.selectedItem === "totalSum"
-                                    ? bet.totalSum
-                                    : bet.selectedItem ===
-                                      "threeDifferentNumbers"
-                                    ? bet.threeDifferentNumbers
-                                    : bet.selectedItem === "twoSameOneDifferent"
-                                    ? bet.twoSameOneDifferent
-                                    : bet.selectedItem === "threeSame"
-                                    ? bet.threeSame
-                                    : []
-                                )
-                                  ? (bet.selectedItem === "totalSum"
+                      </AccordionSummary>
+                      <AccordionDetails>
+                        <TableContainer>
+                          <Table>
+                            <TableBody>
+                              <TableRow>
+                                <TableCell
+                                  style={{ fontWeight: "bold", color:"black", }}
+                                >
+                                  Bet Amount
+                                </TableCell>
+                                <TableCell
+                                  style={{ fontWeight: "bold", color:"black", }}
+                                >
+                                  {bet.betAmount}
+                                </TableCell>
+                              </TableRow>
+                              <TableRow>
+                                <TableCell
+                                  style={{ fontWeight: "bold", color:"black", }}
+                                >
+                                  Multiplier
+                                </TableCell>
+                                <TableCell
+                                  style={{ fontWeight: "bold", color:"black", }}
+                                >
+                                  {bet.multiplier}
+                                </TableCell>
+                              </TableRow>
+                              <TableRow>
+                                <TableCell
+                                  style={{ fontWeight: "bold", color:"black", }}
+                                >
+                                  Total Bet
+                                </TableCell>
+                                <TableCell
+                                  style={{ fontWeight: "bold", color: "green" }}
+                                >
+                                  {bet.totalBet}
+                                </TableCell>
+                              </TableRow>
+                              <TableRow>
+                                <TableCell
+                                  style={{ fontWeight: "bold", color:"black", }}
+                                >
+                                  Tax
+                                </TableCell>
+                                <TableCell
+                                  style={{ fontWeight: "bold", color:"black",}}
+                                >
+                                  {bet.tax}
+                                </TableCell>
+                              </TableRow>
+                              <TableRow>
+                                <TableCell
+                                  style={{ fontWeight: "bold", color:"black", }}
+                                >
+                                  Fee
+                                </TableCell>
+                                <TableCell
+                                  style={{
+                                    fontWeight: "bold",
+                                    color: "red",
+                                    color:"black",
+                                  }}
+                                >
+                                  {bet.fee}
+                                </TableCell>
+                              </TableRow>
+                              <TableRow>
+                                <TableCell
+                                  style={{ fontWeight: "bold", color:"black", }}
+                                >
+                                  Selected Timer
+                                </TableCell>
+                                <TableCell
+                                  style={{ fontWeight: "bold", color:"black", }}
+                                >
+                                  {bet.selectedTimer}
+                                </TableCell>
+                              </TableRow>{" "}
+                              <TableRow>
+                                <TableCell
+                                  style={{ fontWeight: "bold", color:"black", }}
+                                >
+                                  Your Selected Items:
+                                </TableCell>
+                                <TableCell
+                                  style={{ fontWeight: "bold", color:"black", }}
+                                >
+                                  {Array.isArray(
+                                    bet.selectedItem === "totalSum"
                                       ? bet.totalSum
                                       : bet.selectedItem ===
                                         "threeDifferentNumbers"
@@ -2507,133 +2483,184 @@ const LotteryAppk = () => {
                                       : bet.selectedItem === "threeSame"
                                       ? bet.threeSame
                                       : []
-                                    ).join(", ")
-                                  : bet.selectedItem === "totalSum"
-                                  ? bet.totalSum
-                                  : bet.selectedItem === "threeDifferentNumbers"
-                                  ? bet.threeDifferentNumbers
-                                  : bet.selectedItem === "twoSameOneDifferent"
-                                  ? bet.twoSameOneDifferent
-                                  : bet.selectedItem === "threeSame"
-                                  ? bet.threeSame
-                                  : []}
-                              </TableCell>
-                            </TableRow>
-                            <TableRow>
-                              <TableCell
-                                style={{ fontWeight: "bold", color: "white" }}
-                              >
-                                Result
-                              </TableCell>
-                              <TableCell
-                                style={{ fontWeight: "bold", color: "white" }}
-                              >
-                                {Array.isArray(bet.diceOutcome)
-                                  ? bet.diceOutcome.join(", ")
-                                  : bet.diceOutcome}
-                              </TableCell>
-                            </TableRow>
-                            <TableRow>
-                              <TableCell
-                                style={{ fontWeight: "bold", color: "white" }}
-                              >
-                                Winloss
-                              </TableCell>
-                              <TableCell
-                                style={{
-                                  fontWeight: "bold",
-                                  color: bet.status === "win" ? "green" : "red",
-                                }}
-                              >
-                                {bet.winLoss}
-                              </TableCell>
-                            </TableRow>
-                          </TableBody>
-                        </Table>
-                      </TableContainer>
-                    </AccordionDetails>
-                  </Accordion>
-                ))}
-            </Grid>
-          </TabPanel>
-        </Grid>
-        <>
-          <StyledDialog
-            open={open1}
-            onClose={handleDialog}
-            aria-labelledby="game-rules-dialog-title"
-          >
-            <StyledDialogTitle
-              id="game-rules-dialog-title"
-              justifyContent="center"
-              alignItems="center"
+                                  )
+                                    ? (bet.selectedItem === "totalSum"
+                                        ? bet.totalSum
+                                        : bet.selectedItem ===
+                                          "threeDifferentNumbers"
+                                        ? bet.threeDifferentNumbers
+                                        : bet.selectedItem ===
+                                          "twoSameOneDifferent"
+                                        ? bet.twoSameOneDifferent
+                                        : bet.selectedItem === "threeSame"
+                                        ? bet.threeSame
+                                        : []
+                                      ).join(", ")
+                                    : bet.selectedItem === "totalSum"
+                                    ? bet.totalSum
+                                    : bet.selectedItem ===
+                                      "threeDifferentNumbers"
+                                    ? bet.threeDifferentNumbers
+                                    : bet.selectedItem === "twoSameOneDifferent"
+                                    ? bet.twoSameOneDifferent
+                                    : bet.selectedItem === "threeSame"
+                                    ? bet.threeSame
+                                    : []}
+                                </TableCell>
+                              </TableRow>
+                              <TableRow>
+                                <TableCell
+                                  style={{ fontWeight: "bold", color:"black", }}
+                                >
+                                  Result
+                                </TableCell>
+                                <TableCell
+                                  style={{ fontWeight: "bold", color:"black", }}
+                                >
+                                  {Array.isArray(bet.diceOutcome)
+                                    ? bet.diceOutcome.join(", ")
+                                    : bet.diceOutcome}
+                                </TableCell>
+                              </TableRow>
+                              <TableRow>
+                                <TableCell
+                                  style={{ fontWeight: "bold", color:"black", }}
+                                >
+                                  Winloss
+                                </TableCell>
+                                <TableCell
+                                  style={{
+                                    fontWeight: "bold",
+                                    color:
+                                      bet.status === "win" ? "green" : "red",
+                                  }}
+                                >
+                                  {bet.winLoss}
+                                </TableCell>
+                              </TableRow>
+                            </TableBody>
+                          </Table>
+                        </TableContainer>
+                      </AccordionDetails>
+                    </Accordion>
+                  ))}
+              </Grid>
+            </TabPanel>
+          </Grid>
+          <>
+            <Dialog
+              open={open1}
+              onClose={handleDialog}
+              aria-labelledby="game-rules-dialog-title"
             >
-              How to play
-            </StyledDialogTitle>
-            <DialogContent>
-              <DialogContentText
-                sx={{
+              <div
+                style={{
+                  position: "fixed",
+                  top: "50%",
+                  left: "50%",
+                  transform: "translate(-50%, -50%)",
+                  width: "300px",
+                  padding: "0",
+                  backgroundColor: "#201D2B",
+                  boxShadow: "0px 0px 10px rgba(0, 0, 0, 0.1)",
+                  borderRadius: "10px",
                   color: "white",
-                  padding: "1px",
-                  paddingTop: "20px",
-                  paddingBottom: "20px",
-                  fontSize: "14px",
-                  textAlign: "left",
+                  zIndex: 1000,
                 }}
               >
-                Fast3openwith3numbersineachperiod astheopeningnumber
-                Theopeningnumbersare111to666 Naturalnumber .Nozerosinthearray
-                Andtheopeningnumbersareinno particularorder
-                Quick3istoguessallorpartof the3winningnumbers.
-                <br />
-                SumValue
-                <br />
-                Placeabetonthesumofthreenumbers
-                <br />
-                Choose3samenumberall
-                <br />
-                Forallthesamethreenumbers
-                <br />
-                Makeanall-inclusivebet
-                <br />
-                Choose3samenumbersingle
-                <br />
-                Fromallthesamethreenumbers
-                <br />
-                Chooseagroupofnumbersinanyofthemto placebets
-                <br />
-                Choose2SameMultiple
-                <br />
-                Placeabetontwodesignatedsamenumber sandanarbitrary
-                numberamongthethreenumbers
-                <br />
-                Choose2SameSingle
-                <br />
-                Placeabetontwodesignatedsamenumbers andadesignated
-                <br />
-                differentnumberamongthethreenumbers
-                <br />
-                3numbersdifferent
-              </DialogContentText>
-            </DialogContent>
-            <StyledDialogActions>
-              <Button
-                onClick={handleDialog}
-                sx={{
-                  color: "white",
-                  backgroundColor: "#2986F2",
-                  padding: "10px",
-                  paddingLeft: "30px",
-                  paddingRight: "30px",
-                  borderRadius: "20px",
-                }}
-              >
-                Close
-              </Button>
-            </StyledDialogActions>
-          </StyledDialog>
-          {/* ...rest of the code... */}
-          {/* <Dialog
+                {" "}
+                <div
+                  style={{
+                    backgroundImage:
+                      "linear-gradient(to right,#F88F02, #EB7B02)",
+                    borderTopLeftRadius: "10px",
+                    borderTopRightRadius: "10px",
+                    padding: "15px",
+                    textAlign: "center",
+                  }}
+                >
+                  <h2 style={{ margin: 0, color: "white" }}>How to play</h2>
+                </div>
+                <div
+                  style={{
+                    padding: "20px",
+                    maxHeight: "400px",
+                    overflowY: "auto",
+                    textAlign: "left ",
+                    color: "#F5F6FD",
+                  }}
+                >
+                  <p>
+                    <span
+                      style={{ display: "block", marginBottom: "20px" }}
+                    ></span>
+                    Fast3openwith3numbersineach periodastheopeningnumber
+                    Theopeningnumbersare111to666 Naturalnumber
+                    .Nozerosinthearray Andtheopeningnumbersareinno
+                    particularorder Quick3istoguessallorpartof
+                    the3winningnumbers.
+                    <br />
+                    <span style={{ display: "block", marginBottom: "20px" }}>
+                      SumValue Placeabetonthesumofthreenumbers
+                      Choose3samenumberall Forallthesamethreenumbers
+                      Makeanall-inclusivebet Choose3samenumbersingle
+                      <br />
+                      Fromallthesamethreenumbers
+                      <br />
+                      Chooseagroupofnumbers <br />
+                      inanyofthemto placebets
+                      <br />
+                      Choose2SameMultiple
+                      <br />
+                      Placeabetontwodesignated
+                      <br />
+                      samenumber sandanarbitrary <br />
+                      numberamongthethreenumbers
+                      <br />
+                      Choose2SameSingle
+                      <br />
+                      Placeabetontwodesignated
+                      <br />
+                      samenumbersandadesignated
+                      <br />
+                      differentnumberamongthe
+                      <br />
+                      threenumbers
+                      <br />
+                      3numbersdifferent
+                    </span>
+                  </p>
+                </div>
+                <div
+                  style={{
+                    backgroundColor: "#FFFFFF",
+                    borderBottomLeftRadius: "10px",
+                    borderBottomRightRadius: "10px",
+                    padding: "20px",
+                    textAlign: "center",
+                  }}
+                >
+                  <div
+                    style={{
+                      backgroundImage:
+                        "linear-gradient(to right,#FB9302, #EA7902)",
+                      padding: "10px 20px",
+                      width: "fit-content",
+                      margin: "0 auto",
+                      textAlign: "center",
+                      color: "white",
+                      cursor: "pointer",
+                      borderRadius: "5px", // Make it look more like a button
+                    }}
+                    onClick={handleDialog} // Attach onClick event to the inner div
+                  >
+                    Close
+                  </div>
+                </div>
+              </div>
+            </Dialog>
+            {/* ...rest of the code... */}
+            {/* <Dialog
       open={open}
       onClose={() => setOpen(false)}
     >
@@ -2655,102 +2682,103 @@ const LotteryAppk = () => {
         </Button>
       </DialogActions>
     </Dialog> */}
-        </>
+          </>
 
-        <div
+          <div
             style={{
               display: open ? "block" : "none",
               position: "absolute", // changed from fixed to absolute
               zIndex: 1,
-              left:isSmall ? 20 : 10,
+              left: isSmall ? 20 : 10,
               top: "120px",
-              width: isSmall ? '90%' : "95%",
-              height: isSmall ? '98%':"95%",
+              width: isSmall ? "90%" : "95%",
+              height: isSmall ? "98%" : "95%",
               overflow: "auto",
-              border:"none"
+              border: "none",
             }}
           >
-          <div
-            style={{
-              backgroundColor: "transparent",
-              margin: "15% auto",
-              padding: 20,
-              width: "80%",
-              height: "50%",
-              backgroundImage: `url(${
-                gameResult === "Failed"
-                  ? "assets/images/missningLBg-73e02111.png"
-                  : "assets/images/missningBg-6f17b242.png"
-              })`,
-              backgroundSize: "100% 100%",
-              backgroundRepeat: "no-repeat",
-              backgroundPosition: "center",
-              padding: "20px",
-              display: "flex",
-              flexDirection: "column",
-              justifyContent: "center",
-              alignItems: "center",
-            }}
-          >
-            <Typography
-              variant="h4"
+            <div
               style={{
-                textAlign: "center",
-                fontWeight: "bold",
-                position: "absolute",
-                marginTop: "-100px",
-                color: "white",
+                backgroundColor: "transparent",
+                margin: "15% auto",
+                padding: 20,
+                width: "80%",
+                height: "50%",
+                backgroundImage: `url(${
+                  gameResult === "Failed"
+                    ? "../../assets/images/missningLBg-73e02111.png"
+                    : "../../assets/images/missningBg-6f17b242.png"
+                })`,
+                backgroundSize: "100% 100%",
+                backgroundRepeat: "no-repeat",
+                backgroundPosition: "center",
+                padding: "20px",
+                display: "flex",
+                flexDirection: "column",
+                justifyContent: "center",
+                alignItems: "center",
               }}
             >
-              {gameResult === "Failed" ? "Sorry" : "Congratulations"}
-            </Typography>
-            <br />
-            <Typography
-              variant="h6"
-              style={{
-                textAlign: "center",
-                position: "absolute",
-                marginTop: "-30px",
-                color: "white",
-              }}
-            >
-              Lottery results {Array.isArray(res) ? res.join(", ") : res}
-            </Typography>
-
-            <Typography
-              sx={{
-                marginTop: "150px",
-                marginLeft: "50px",
-                marginRight: "50px",
-                fontWeight: "bold",
-              }}
-              variant="h6"
-              color="text.secondary"
-            >
-              {dialogContent}
-              <br />
-              <span
-                style={{ color: gameResult === "Failed" ? "red" : "green" }}
+              <Typography
+                variant="h4"
+                style={{
+                  textAlign: "center",
+                  fontWeight: "bold",
+                  position: "absolute",
+                  marginTop: "-100px",
+                  color: "white",
+                }}
               >
-                ₹{winloss}
-              </span>
+                {gameResult === "Failed" ? "Sorry" : "Congratulations"}
+              </Typography>
               <br />
-              <span style={{ fontSize: "14px" }}>
-                Period: {popupperiodid.slice(0, -2)}
-              </span>
-            </Typography>
+              <Typography
+                variant="h6"
+                style={{
+                  textAlign: "center",
+                  position: "absolute",
+                  marginTop: "-30px",
+                  color: "white",
+                }}
+              >
+                Lottery results {Array.isArray(res) ? res.join(", ") : res}
+              </Typography>
 
-            <Button
-              sx={{
-                marginTop: isSmall ? '350px' :"370px",
-                marginLeft: "50px",
-                marginRight: "50px",
-                position: "absolute",
-              }}
-              onClick={() => setOpen(false)}
-            >
-              Close
-            </Button>
+              <Typography
+                sx={{
+                  marginTop: "150px",
+                  marginLeft: "50px",
+                  marginRight: "50px",
+                  fontWeight: "bold",
+                }}
+                variant="h6"
+                color="text.secondary"
+              >
+                {dialogContent}
+                <br />
+                <span
+                  style={{ color: gameResult === "Failed" ? "red" : "green" }}
+                >
+                  ₹{winloss}
+                </span>
+                <br />
+                <span style={{ fontSize: "14px" }}>
+                  Period: {popupperiodid.slice(0, -2)}
+                </span>
+              </Typography>
+
+              <Button
+                sx={{
+                  marginTop: isSmall ? "350px" : "370px",
+                  marginLeft: "50px",
+                  marginRight: "50px",
+                  position: "absolute",
+                }}
+                onClick={() => setOpen(false)}
+              >
+                Close
+              </Button>
+            </div>
           </div>
         </div>
       </Mobile>

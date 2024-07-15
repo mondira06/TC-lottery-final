@@ -34,16 +34,17 @@ import BonusIcon from '@mui/icons-material/CardGiftcard';
 import GiftIcon from '@mui/icons-material/CardGiftcard';
 import SalaryIcon from '@mui/icons-material/Money';
 import UpdateIcon from '@mui/icons-material/Update';
-import {useAuth} from "../../contexts/AuthContext"
+import { useAuth } from '../../contexts/AuthContext';
 import { useNavigate } from 'react-router-dom';
+import logo from "../../assets/logo.png"
+const drawerWidth = 250;
 
-const drawerWidth = 240;
-
-const AdminPanel = ({children}) => {
+const AdminPanel = ({ children }) => {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [anchorEl, setAnchorEl] = useState(null);
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
+  const location = useLocation();
 
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
@@ -56,11 +57,10 @@ const AdminPanel = ({children}) => {
   const handleProfileMenuClose = () => {
     setAnchorEl(null);
   };
-  const location = useLocation();
 
   const { logout } = useAuth();
-
   const navigate = useNavigate();
+
   const handleLogout = async () => {
     await logout();
     navigate('/login');
@@ -71,46 +71,51 @@ const AdminPanel = ({children}) => {
       <Toolbar />
       <Divider />
       <List>
-      {[
-  { text: 'Dashboard', icon: <DashboardIcon />, link: '/dashboard' },
-  { text: 'Wingo', icon: <InboxIcon />, link: '/wingo-admin' },
-  { text: 'Members', icon: <PeopleIcon />, link: '/members' },
-  { text: 'Pending Recharge', icon: <PaymentIcon />, link: '/pending-recharge-admin' },
-  { text: 'Pending Withdraw', icon: <PaymentIcon />, link: '/withdraw-admin-status' },
-  { text: 'Recharge Status', icon: <PaymentIcon />, link: '/recharge-admin' },
-  { text: 'Withdraw Status', icon: <PaymentIcon />, link: '/withdraw-admin' },
-  { text: 'Settings', icon: <SettingsIcon /> , link: '/settings-admin'},
-  { text: 'VIP Level', icon: <PeopleIcon />, link: '/vip-levels' },
-  { text: 'Notifications', icon: <NotificationsIcon />, link: '/notifications-admin' },
-  { text: 'First Deposit Bonus', icon: <BonusIcon /> , link: '/bonus-settings'},
-  { text: 'Create Giftcode', icon: <GiftIcon /> ,link: '/create-coupon' },
-  { text: 'Created Salary', icon: <SalaryIcon /> , link: '/create-salary' },
-  { text: 'Update Salary Bonus', icon: <SalaryIcon /> , link: '/playersSalary' },
-  { text: 'Wallet Update', icon: <UpdateIcon /> , link: '/wallet-update' },
-  { text: 'Withdrawl Limits', icon: <UpdateIcon /> , link: '/withdrawl-limits' },
-  { text: 'Support', icon: <HelpIcon />, link: '/support-admin' },
-].map((item) => (
-          <ListItem 
-            button 
-            key={item.text} 
-            component={Link} 
+        {[
+            { text: 'Dashboard', icon: <DashboardIcon sx={{ color: location.pathname === '/dashboard' ? '#FFFFFF' : '#F78D02' }} />, link: '/dashboard' },
+            { text: 'Wingo', icon: <InboxIcon sx={{ color: location.pathname === '/wingo-admin' ? '#FFFFFF' : '#F78D02' }} />, link: '/wingo-admin' },
+            { text: 'Members', icon: <PeopleIcon sx={{ color: location.pathname === '/members' ? '#FFFFFF' : '#F78D02' }} />, link: '/members' },
+            { text: 'Browse Recharge', icon: <PaymentIcon sx={{ color: location.pathname === '/pending-recharge-admin' ? '#FFFFFF' : '#F78D02' }} />, link: '/pending-recharge-admin' },
+            { text: 'Browse Withdraw', icon: <PaymentIcon sx={{ color: location.pathname === '/withdraw-admin-status' ? '#FFFFFF' : '#F78D02' }} />, link: '/withdraw-admin-status' },
+            { text: 'VIP Level', icon: <PeopleIcon sx={{ color: location.pathname === '/vip-levels' ? '#FFFFFF' : '#F78D02' }} />, link: '/vip-levels' },
+            { text: 'Update', icon: <SettingsIcon sx={{ color: location.pathname === '/settings-admin' ? '#FFFFFF' : '#F78D02' }} />, link: '/settings-admin' },
+            { text: 'First Deposit Bonus', icon: <BonusIcon sx={{ color: location.pathname === '/bonus-settings' ? '#FFFFFF' : '#F78D02' }} />, link: '/bonus-settings' },
+            { text: 'Update Salary Bonus', icon: <SalaryIcon sx={{ color: location.pathname === '/playersSalary' ? '#FFFFFF' : '#F78D02' }} />, link: '/playersSalary' },
+            { text: 'Create Salary', icon: <SalaryIcon sx={{ color: location.pathname === '/create-salary' ? '#FFFFFF' : '#F78D02' }} />, link: '/create-salary' },
+          { text: 'Create Giftcode', icon: <GiftIcon sx={{ color: location.pathname === '/create-coupon' ? '#FFFFFF' : '#F78D02' }} />, link: '/create-coupon' },
+          { text: 'Notifications', icon: <NotificationsIcon sx={{ color: location.pathname === '/notifications-admin' ? '#FFFFFF' : '#F78D02' }} />, link: '/notifications-admin' },
+          { text: 'Recharge (Approved)', icon: <PaymentIcon sx={{ color: location.pathname === '/recharge-admin' ? '#FFFFFF' : '#F78D02' }} />, link: '/recharge-admin' },
+          { text: 'Withdraw (Approved)', icon: <PaymentIcon sx={{ color: location.pathname === '/withdraw-admin' ? '#FFFFFF' : '#F78D02' }} />, link: '/withdraw-admin' },
+          { text: 'Withdrawl Settings', icon: <UpdateIcon sx={{ color: location.pathname === '/withdrawl-limits' ? '#FFFFFF' : '#F78D02' }} />, link: '/withdrawl-limits' },
+          { text: 'Wallet Update', icon: <UpdateIcon sx={{ color: location.pathname === '/wallet-update' ? '#FFFFFF' : '#F78D02' }} />, link: '/wallet-update' },
+          { text: 'Support', icon: <HelpIcon sx={{ color: location.pathname === '/support-admin' ? '#FFFFFF' : '#F78D02' }} />, link: '/support-admin' },
+      
+        ].map((item) => (
+          <ListItem
+            button
+            key={item.text}
+            component={Link}
             to={item.link || '#'}
-            style={{backgroundColor: location.pathname === item.link ? 'lightgray' : 'transparent'}}
+            style={{ background: location.pathname === item.link ? '#F78D02' : 'transparent',color: location.pathname === item.link ? 'white' : 'black' }}
           >
             <ListItemIcon>{item.icon}</ListItemIcon>
-            <ListItemText primary={item.text} />
+            <ListItemText 
+  primary={
+    <Typography variant="body1" sx={{ fontWeight: '500' }}>
+      {item.text}
+    </Typography>
+  } 
+/>
           </ListItem>
         ))}
       </List>
     </div>
   );
 
-
-
   return (
     <Box sx={{ display: 'flex' }}>
       <CssBaseline />
-      <AppBar position="fixed" sx={{ zIndex: theme.zIndex.drawer + 1 }}>
+      <AppBar position="fixed" sx={{ zIndex: theme.zIndex.drawer + 1, backgroundColor: '#F78D02',color:"black" }}>
         <Toolbar>
           {isMobile && (
             <IconButton
@@ -123,14 +128,23 @@ const AdminPanel = ({children}) => {
               <MenuIcon />
             </IconButton>
           )}
-          <Typography variant="h6" noWrap component="div" sx={{ flexGrow: 1 }}>
-            Dragon Club
-          </Typography>
+        <Typography variant="h6" noWrap component="div" sx={{ flexGrow: 1, display: 'flex', alignItems: 'center' }}>
+  <Box
+    component="img"
+    sx={{
+      height: 40, // Adjust the height as needed
+      marginRight: 1, // Adjust the space between the image and the text
+    }}
+    alt="Logo"
+    src="assets/images/h5setting_20231215032755xgv9.png" // Replace with the actual path to your logo
+  />
+</Typography>
           <IconButton
             color="inherit"
             aria-controls="profile-menu"
             aria-haspopup="true"
             onClick={handleProfileMenuOpen}
+            sx={{color:"white"}}
           >
             <AccountCircleIcon />
           </IconButton>
@@ -158,22 +172,33 @@ const AdminPanel = ({children}) => {
       </AppBar>
       <Box
         component="nav"
-        sx={{ width: { sm: drawerWidth }, flexShrink: { sm: 0 } }}
+        sx={{ width: { sm: drawerWidth }, flexShrink: { sm: 0 }, overflowY: 'hidden' }}
         aria-label="mailbox folders"
       >
-        <Drawer
-          variant={isMobile ? 'temporary' : 'permanent'}
-          open={isMobile ? mobileOpen : true}
-          onClose={handleDrawerToggle}
-          ModalProps={{
-            keepMounted: true, // Better open performance on mobile.
-          }}
-          sx={{
-            '& .MuiDrawer-paper': { boxSizing: 'border-box', width: drawerWidth },
-          }}
-        >
-          {drawer}
-        </Drawer>
+      <Drawer
+  variant={isMobile ? 'temporary' : 'permanent'}
+  open={isMobile ? mobileOpen : true}
+  onClose={handleDrawerToggle}
+  ModalProps={{
+    keepMounted: true, // Better open performance on mobile.
+  }}
+  sx={{
+    '& .MuiDrawer-paper': { 
+      boxSizing: 'border-box', 
+      width: drawerWidth, 
+      backgroundColor: '#FFFFFF', 
+     
+      overflowY: 'auto',  // Enable vertical scrolling
+      '&::-webkit-scrollbar': {
+        width: '0px',  // Hide scrollbar width
+        background: 'transparent',  // Hide scrollbar background
+      },
+    },
+  }}
+>
+  {drawer}
+</Drawer>
+
       </Box>
       <Box
         component="main"
@@ -185,7 +210,7 @@ const AdminPanel = ({children}) => {
         }}
       >
         <Toolbar />
-       {children}
+        {children}
       </Box>
     </Box>
   );

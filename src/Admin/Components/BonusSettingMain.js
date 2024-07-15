@@ -5,16 +5,17 @@ import {
   TextField,
   Table,
   TableBody,
-  TableCell,
+  TableCell,tableCellClasses,
   Box,
   TableContainer,
   TableHead,
   TableRow,
   Paper,
   Grid,
+  Typography,
+  styled
 } from "@mui/material";
 import { domain } from "../../Components/config";
-
 const BonusSettingMain = () => {
   const [depositBonuses, setDepositBonuses] = useState([]);
   const [minimumDeposit, setMinimumDeposit] = useState("");
@@ -74,65 +75,135 @@ const BonusSettingMain = () => {
       console.error(err);
     }
   };
-
+  const StyledTableCell = styled(TableCell)(({ theme }) => ({
+    [`&.${tableCellClasses.head}`]: {
+      backgroundColor: theme.palette.action.hover,
+      color: theme.palette.common.black,
+      fontWeight: theme.typography.fontWeightBold,
+    },
+    [`&.${tableCellClasses.body}`]: {
+      fontSize: 14,
+    },
+  }));
+  
+  
+  const StyledTableRow = styled(TableRow)(({ theme }) => ({
+    '&:nth-of-type(odd)': {
+      backgroundColor: theme.palette.common.white,
+    },
+    '&:nth-of-type(even)': {
+      backgroundColor: theme.palette.action.hover,
+    },
+    '&:last-child td, &:last-child th': {
+      border: 0,
+    },
+  }));
+  
   return (
     <div>
       <Grid>
-        <Box display="flex" flexDirection="column" alignItems="center" m={1}>
+        
+        <Box
+          component="main"
+          sx={{
+            backgroundColor: "white",
+            p:1,
+            paddingLeft:7,
+            
+            paddingBottom:5
+           
+          }}
+        >
+          <Typography variant="h5" gutterBottom sx={{ mb: 2,mt:3 }}>
+          <b>First Deposit Bonus</b>
+        </Typography>
+        <Box
+          sx={{
+           
+            display: "flex",
+            flexDirection: "column",
+          }}
+        >
+         
           <form onSubmit={updateDepositBonus}>
-            <TextField
-              label="Minimum Deposit"
-              fullWidth
-              value={minimumDeposit}
-              onChange={(e) => setMinimumDeposit(e.target.value)}
-              margin="normal"
-              required
-              error={!!errors.minimumDeposit}
-              helperText={errors.minimumDeposit}
-            />
-
-            <TextField
-              label="Bonus"
-              fullWidth
-              value={bonus}
-              onChange={(e) => setBonus(e.target.value)}
-              margin="normal"
-              required
-              error={!!errors.bonus}
-              helperText={errors.bonus}
-            />
-            <Button
-              variant="contained"
-              fullWidth
-              color="primary"
-              type="submit"
-              margin="normal"
-            >
-              Update Deposit
-            </Button>
+            <Grid container spacing={2}>
+              <Grid item xs={4}>
+                <TextField
+                  label="Minimum Deposit"
+                  fullWidth
+                  value={minimumDeposit}
+                  onChange={(e) => setMinimumDeposit(e.target.value)}
+                  margin="normal"
+                  required
+                  error={!!errors.minimumDeposit}
+                  helperText={errors.minimumDeposit}
+                />
+              </Grid>
+              <Grid item xs={4}>
+                <TextField
+                  label="Bonus"
+                  fullWidth
+                  value={bonus}
+                  onChange={(e) => setBonus(e.target.value)}
+                  margin="normal"
+                  required
+                  error={!!errors.bonus}
+                  helperText={errors.bonus}
+                />
+              </Grid>
+              <Grid item xs={4} sx={{ display: "flex", alignItems: "center" }}>
+                <Button
+                  variant="contained"
+                  type="submit"
+                  sx={{ marginTop: 1, marginBottom: 1,backgroundColor:"#F78D02",color:"white",
+                    "&:hover": {
+                      backgroundColor: "black",
+                      color: "white",
+                    },
+                   }}
+                >
+                  Update Deposit
+                </Button>
+              </Grid>
+            </Grid>
           </form>
+          </Box>
         </Box>
-        <br></br>
-        <br></br>
+        
+        <br />
+        <br />
+        <Box
+          component="main"
+          sx={{
+            backgroundColor: "white",
+          p:5
+           
+          }}
+        >
+           <Typography variant="h5" gutterBottom sx={{ mb: 3 }}>
+          <b>Deposit Bonus Criteria</b>
+        </Typography>
         <TableContainer component={Paper}>
-          <Table>
+          <Table sx={{boxShadow: '0px 4px 10px rgba(0, 0, 0, 0.1)'}}>
             <TableHead>
-              <TableRow>
-                <TableCell>Minimum Deposit</TableCell>
-                <TableCell>Bonus</TableCell>
-              </TableRow>
+              <StyledTableRow>
+                <StyledTableCell>Minimum Deposit</StyledTableCell>
+                <StyledTableCell>Bonus</StyledTableCell>
+              </StyledTableRow>
             </TableHead>
             <TableBody>
               {depositBonuses.map((bonus) => (
-                <TableRow key={bonus._id}>
-                  <TableCell>{bonus.minimumDeposit}</TableCell>
-                  <TableCell>{bonus.bonus}</TableCell>
-                </TableRow>
+                <StyledTableRow key={bonus._id}>
+                  <StyledTableCell>{bonus.minimumDeposit}</StyledTableCell>
+                  <StyledTableCell>{bonus.bonus}</StyledTableCell>
+                </StyledTableRow>
               ))}
             </TableBody>
           </Table>
         </TableContainer>
+        </Box>
       </Grid>
+
     </div>
   );
 };

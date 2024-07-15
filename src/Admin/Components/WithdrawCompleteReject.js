@@ -1,16 +1,25 @@
 import React, { useEffect, useState } from "react";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
-import { DataGrid } from "@mui/x-data-grid";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
+import Paper from "@mui/material/Paper";
+import TableContainer from "@mui/material/TableContainer";
+import Table from "@mui/material/Table";
+import TableHead from "@mui/material/TableHead";
+import TableBody from "@mui/material/TableBody";
+import TableRow from "@mui/material/TableRow";
+import TableCell from "@mui/material/TableCell";
+import { Container } from "@mui/material";
+
+import { DataGrid } from "@mui/x-data-grid";
 import axios from "axios";
 import { domain } from "../../Components/config";
 
-const CompletedRejectedWithdrawals = () => {
-  const [completedRows, setCompletedRows] = useState([]);
-  const [rejectedRows, setRejectedRows] = useState([]);
+const WithdrawalStatus = () => {
+  const [withdrawals, setWithdrawals] = useState([]);
   const [tabValue, setTabValue] = useState(0);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     fetchWithdrawals();
@@ -22,51 +31,38 @@ const CompletedRejectedWithdrawals = () => {
         withCredentials: true,
       });
       const data = res.data.userWithdrawals.map((result) => {
-        if (result.userId && Array.isArray(result.userId.bankDetails) && result.userId.bankDetails.length > 0) {
-          const { accountNo, bankName, ifscCode, mobile, name } = result.userId.bankDetails[0];
-          const TRXAddress = Array.isArray(result.userId.TRXAddress) && result.userId.TRXAddress.length > 0 ? result.userId.TRXAddress[0] : null;
+        const { userId } = result;
+        const bankDetails = Array.isArray(userId.bankDetails) && userId.bankDetails.length > 0 ? userId.bankDetails[0] : {};
+        const TRXAddress = Array.isArray(userId.TRXAddress) && userId.TRXAddress.length > 0 ? userId.TRXAddress[0] : null;
 
-          return {
-            id: result._id,
-            status: result.status,
-            balance: result.balance,
-            accountNo,
-            bankName,
-            ifscCode,
-            mobile,
-            name,
-            withdrawMethod: result.withdrawMethod,
-            TRXAddress
-          };
-        } else {
-          return {
-            id: result._id,
-            status: result.status,
-            balance: result.balance,
-            accountNo: null,
-            bankName: null,
-            ifscCode: null,
-            mobile: null,
-            name: null,
-            withdrawMethod: result.withdrawMethod,
-            TRXAddress: null
-          };
-        }
+        return {
+          id: result._id,
+          status: result.status,
+          balance: result.balance,
+          accountNo: bankDetails.accountNo || null,
+          bankName: bankDetails.bankName || null,
+          ifscCode: bankDetails.ifscCode || null,
+          mobile: bankDetails.mobile || null,
+          name: bankDetails.name || null,
+          withdrawMethod: result.withdrawMethod,
+          TRXAddress,
+        };
       });
 
-      const completed = data.filter(row => row.status === 'Completed');
-      const rejected = data.filter(row => row.status === 'Rejected');
-
-      setCompletedRows(completed);
-      setRejectedRows(rejected);
+      setWithdrawals(data);
     } catch (error) {
       console.error("Error fetching withdrawals:", error);
+      setError(error);
     }
   };
 
   const handleTabChange = (event, newValue) => {
     setTabValue(newValue);
   };
+
+  const filteredWithdrawals = tabValue === 0
+    ? withdrawals.filter((withdrawal) => withdrawal.status === 'Completed')
+    : withdrawals.filter((withdrawal) => withdrawal.status === 'Rejected');
 
   const columns = [
     { field: 'id', headerName: 'ID', width: 150 },
@@ -81,58 +77,106 @@ const CompletedRejectedWithdrawals = () => {
     { field: 'TRXAddress', headerName: 'TRX Address', width: 250 },
   ];
 
+  if (error) {
+    return <Typography variant="h6">Error fetching withdrawals. Please try again later.</Typography>;
+  }
+
   return (
-    <div style={{ height: 400, width: '100%' }}>
-      <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
-        <Tabs value={tabValue} onChange={handleTabChange} aria-label="withdrawal tabs">
-          <Tab label="Completed Withdrawals" />
-          <Tab label="Rejected Withdrawals" />
-        </Tabs>
-      </Box>
-      <TabPanel value={tabValue} index={0}>
-        <Typography variant="h5" sx={{ p: 3 }}>
-          Completed Withdrawals
+    <Container maxWidth="lg" sx={{ mt: 4, minHeight: "85vh" }}>
+      <Paper elevation={3} sx={{ p: 3 }}>
+        <Typography
+          variant="h5"
+          align="left"
+          fontWeight="bold"
+          gutterBottom
+          style={{ paddingLeft: "15px" }}
+        >
+          Withdrawal Status
         </Typography>
-        <DataGrid
-          rows={completedRows}
-          columns={columns}
-          pageSize={5}
-          rowsPerPageOptions={[5, 10, 20]}
-        />
-      </TabPanel>
-      <TabPanel value={tabValue} index={1}>
-        <Typography variant="h5" sx={{ p: 3 }}>
-          Rejected Withdrawals
-        </Typography>
-        <DataGrid
-          rows={rejectedRows}
-          columns={columns}
-          pageSize={5}
-          rowsPerPageOptions={[5, 10, 20]}
-        />
-      </TabPanel>
-    </div>
+        <Box
+          sx={{
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "center",
+            mb: 3,
+          }}
+        >
+          <Tabs
+            value={tabValue}
+            onChange={handleTabChange}
+            aria-label="Withdrawal Status Tabs"
+            TabIndicatorProps={{ style: { display: "none" } }}
+            sx={{
+              "& .MuiTabs-flexContainer": {
+                justifyContent: "space-between",
+                width: "100%",
+              },
+            }}
+          >
+            <Tab
+              label="Completed Withdrawals"
+              sx={{
+                fontWeight: "bold",
+                color: tabValue === 0 ? "#00FF00" : "#000000",
+                textTransform: "none",
+                fontSize: "17px"
+              }}
+            />
+            <Tab
+              label="Rejected Withdrawals"
+              sx={{
+                fontWeight: "bold",
+                color: tabValue === 1 ? "#FF0000" : "#000000",
+                textTransform: "none",
+                fontSize: "17px"
+              }}
+            />
+          </Tabs>
+        </Box>
+        <TableContainer sx={{ boxShadow: "0px 2px 8px rgba(0, 0, 0, 0.1)" }}>
+          <Table>
+            <TableHead>
+              <TableRow sx={{ backgroundColor: "#f0f0f0" }}>
+                {columns.map((column) => (
+                  <TableCell
+                    key={column.field}
+                    align="center"
+                    sx={{
+                      fontWeight: "bold",
+                      borderRight: "1px solid #e0e0e0",
+                    }}
+                  >
+                    {column.headerName}
+                  </TableCell>
+                ))}
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {filteredWithdrawals.map((row, index) => (
+                <TableRow
+                  key={row.id}
+                  sx={{
+                    backgroundColor: index % 2 === 0 ? "#ffffff" : "#f2f2f2",
+                    border: "1px solid #e0e0e0",
+                  }}
+                >
+                  {columns.map((column) => (
+                    <TableCell
+                      key={column.field}
+                      align="center"
+                      sx={{ borderRight: "1px solid #e0e0e0" }}
+                    >
+                      {row[column.field]}
+                    </TableCell>
+                  ))}
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </TableContainer>
+      </Paper>
+    </Container>
   );
 };
 
-function TabPanel(props) {
-  const { children, value, index, ...other } = props;
-
-  return (
-    <div
-      role="tabpanel"
-      hidden={value !== index}
-      id={`tabpanel-${index}`}
-      aria-labelledby={`tab-${index}`}
-      {...other}
-    >
-      {value === index && (
-        <Box sx={{ p: 3 }}>
-          {children}
-        </Box>
-      )}
-    </div>
-  );
-}
-
-export default CompletedRejectedWithdrawals;
+export default WithdrawalStatus;

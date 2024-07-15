@@ -52,6 +52,7 @@ const CommisionDetailsMain = ({ children }) => {
           flexDirection="column"
           height="calc(var(--vh, 1vh) * 100)"
           position="relative"
+          backgroundColor="#F7F8FF"
         >
           <Box flexGrow={1}>
 
@@ -64,9 +65,9 @@ const CommisionDetailsMain = ({ children }) => {
                 position: 'sticky',
                 top: 0,
                 zIndex: 1000,
-                backgroundColor: 'rgb(34,39,91)',
+                backgroundColor: '#FFFFFF',
                 padding: '8px 16px',
-                color: 'white'
+                color: 'black'
                 
               }}
             >
@@ -83,7 +84,7 @@ const CommisionDetailsMain = ({ children }) => {
               </Grid>
             </Grid>
 
-            <select style={{marginTop: '1em', width: '95%', fontSize: '20px', color: 'white', backgroundColor: 'transparent', borderColor: 'white'}} onChange={(event) => setSelectedGame(event.target.value)}>
+            <select style={{marginTop: '1em', width: '95%', fontSize: '20px', color: 'black', backgroundColor: '#FFFFFF', borderColor: 'white'}} onChange={(event) => setSelectedGame(event.target.value)}>
   <option value='All'>All</option>
   <option value='Lottery'>Lottery</option>
   <option value='K3 Game'>Slots</option>
@@ -91,20 +92,20 @@ const CommisionDetailsMain = ({ children }) => {
   <option value='PVC'>PVC</option>
 </select>
 
-            <Card sx={{ borderRadius: '15px', padding: '10px', backgroundColor: 'rgb(55,74,148)', marginTop: '16px',marginLeft:"auto",marginRight:"auto", width:"90%" }}>
+            <Card sx={{ borderRadius: '15px', padding: '10px', backgroundColor: '#FFFFFF', marginTop: '16px',marginLeft:"auto",marginRight:"auto", width:"90%" }}>
   <CardHeader
     title="Lottery"
     titleTypographyProps={{ align: 'center', variant: 'h6' }}
-    style={{ backgroundColor: 'rgb(55,74,148)', color: 'white', height: '40px', lineHeight: '40px' }}
+    style={{ backgroundColor: 'transparent', color: 'black', height: '40px', lineHeight: '40px' }}
   />
   <CardContent>
   <Grid container spacing={2}>
   {Object.entries(userData || {}).map(([level, value]) => (
     <React.Fragment key={level}>
-      <Grid item xs={6} style={{ backgroundColor: 'rgb(55,74,148)', marginTop: '10px',padding:"10px" }}>
-        <Typography variant="caption" sx={{color:"white"}}>Level {level}:</Typography>
+      <Grid item xs={6} style={{ backgroundColor: 'transparent', marginTop: '10px',padding:"10px" }}>
+        <Typography variant="caption" sx={{color:"black"}}>Level {level}:</Typography>
       </Grid>
-      <Grid item xs={6} style={{ textAlign: 'right', backgroundColor: 'rgb(55,74,148)', marginTop: '10px', color: 'red',padding:"10px" }}>
+      <Grid item xs={6} style={{ textAlign: 'right', backgroundColor: 'transparent', marginTop: '10px', color: 'red',padding:"10px" }}>
         <Typography variant="caption">₹{value}</Typography>
       </Grid>
     </React.Fragment>

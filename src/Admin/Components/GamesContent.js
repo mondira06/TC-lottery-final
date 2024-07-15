@@ -1,112 +1,169 @@
-import React, { useEffect, useState } from 'react';
-import axios from 'axios';
-import { domain } from '../../Components/config';
-import { Grid, Paper, Typography, Button, TextField, MenuItem, Box, Card, CardContent, CardActions } from "@mui/material";
+import React, { useEffect, useState } from "react";
+import axios from "axios";
+import { domain } from "../../Components/config";
+import {
+  Grid,
+  Paper,
+  Typography,
+  Button,
+  TextField,
+  MenuItem,
+  Box,
+  Card,
+  CardContent,
+  CardActions,
+} from "@mui/material";
 
-const numberColorMap = {
-  "0": ["violet", "red"],
-  "1": "green",
-  "2": "red",
-  "3": "green",
-  "4": "red",
-  "5": ["violet", "green"],
-  "6": "red",
-  "7": "green",
-  "8": "red",
-  "9": "green",
+const getColorForNumber = (number) => {
+  const colorMap = {
+    0: "linear-gradient(to right, #d13838, #9a47da)",
+    1: "#16b15e",
+    2: "#d23838",
+    3: "#16b15e",
+    4: "#d23838",
+    5: "linear-gradient(to right, #19b25f, #9a47da)",
+    6: "#d23838",
+    7: "#16b15e",
+    8: "#d23838",
+    9: "#16b15e",
+  };
+
+  const color = colorMap[number];
+  return color;
 };
 
 const GamesContent = () => {
   const [data, setData] = useState({});
-  const [selectedTimer, setSelectedTimer] = useState('1min');
-  const [manualResult, setManualResult] = useState('');
-  const [colorOutcome, setColorOutcome] = useState('');
+  const [selectedTimer, setSelectedTimer] = useState("1min");
+  const [manualResult, setManualResult] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
-    const fetchData = async () => {
-      const result = await axios.get(`${domain}/latest-bet-sums`, { withCredentials: true });
-      setData(result.data);
-    };
-
     fetchData();
   }, []);
 
+  const fetchData = async () => {
+    setIsLoading(true);
+    setError(null);
+    try {
+      const result = await axios.get(`${domain}/latest-bet-sums`, {
+        withCredentials: true,
+      });
+      setData(result.data);
+    } catch (error) {
+      console.error("Error fetching data:", error);
+      setError("Failed to fetch data. Please try again.");
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
   const handleTimerChange = async (event) => {
     setSelectedTimer(event.target.value);
-    const result = await axios.get(`${domain}/latest-bet-sums`, { withCredentials: true });
-    setData(result.data);
+    fetchData();
   };
 
   const handleManualResultChange = (event) => {
-    const result = event.target.value;
-    setManualResult(result);
-    setColorOutcome(numberColorMap[result]);
+    setManualResult(event.target.value);
   };
 
   const handleSubmit = async () => {
     const postData = {
       periodId: data[selectedTimer]?.periodId,
-      numberOutcome: manualResult,
-      colorOutcome: numberColorMap[manualResult],
-      sizeOutcome: determineSize(manualResult),
-      timer: selectedTimer
+      result: manualResult,
+      timer: selectedTimer,
     };
 
     try {
-      await axios.post(`${domain}/set-manual-result`, postData, { withCredentials: true });
-      alert('Manual result set successfully!');
+      setIsLoading(true);
+      setError(null);
+      await axios.post(`${domain}/set-manual-result`, postData, {
+        withCredentials: true,
+      });
+      alert("Manual result set successfully!");
     } catch (error) {
-      console.error('Error setting manual result:', error);
-      alert('Failed to set manual result. Please try again.');
+      console.error("Error setting manual result:", error);
+      alert("Failed to set manual result. Please try again.");
+      setError("Failed to set manual result. Please try again.");
+    } finally {
+      setIsLoading(false);
+      fetchData(); // Refresh data after submitting
     }
   };
 
-  const determineSize = (numberOutcome) => {
-    const number = parseInt(numberOutcome);
-    if (number >= 0 && number <= 4) {
-      return 'small';
-    } else if (number >= 5 && number <= 9) {
-      return 'big';
-    } else {
-      return ''; // Handle other cases as needed
-    }
-  };
+  const renderGrid = (betSums) => (
+    <Grid container spacing={3}>
+  <Grid item xs={12}>
+    <Typography variant="h5" align="center" gutterBottom>
+      Period ID: <span style={{ color: "red" }}>{betSums.periodId}</span>
+    </Typography>
+  </Grid>
+  {betSums.numberBetSums.map((item, index) => (
+    <Grid item xs={12} sm={6} md={4} lg={2.4} key={index}>
+      <Paper style={{ padding: "20px", textAlign: "center" }}>
+        <Typography variant="body1">Number: {item.number}</Typography>
+        <div
+          style={{
+            background: getColorForNumber(item.number),
+            color: "white",
+            padding: "10px",
+            borderRadius: "4px",
+            marginTop: "10px",
+          }}
+        >
+          <Typography variant="body2">Total Bet: {item.totalBet}</Typography>
+        </div>
+      </Paper>
+    </Grid>
+  ))}
+  {Object.entries(betSums.sizeBetSums).map(([key, value]) => (
+    <Grid item xs={12} sm={6} md={4} lg={2.4} key={key}>
+      <Paper style={{ padding: "20px", textAlign: "center" }}>
+        <Typography variant="body1">Size: {key}</Typography>
+        <div
+          style={{
+            backgroundColor: key === "big" ? "#5088d3" : "#dd9138",
+            color: "white",
+            padding: "10px",
+            borderRadius: "4px",
+            marginTop: "10px",
+          }}
+        >
+          <Typography variant="body2">Total Bet: {value}</Typography>
+        </div>
+      </Paper>
+    </Grid>
+  ))}
+  {Object.entries(betSums.colorBetSums).map(([key, value]) => (
+    <Grid item xs={12} sm={6} md={4} lg={2.4} key={key}>
+      <Paper style={{ padding: "20px", textAlign: "center" }}>
+        <Typography variant="body1">Color: {key}</Typography>
+        <div
+          style={{
+            backgroundColor:
+              key === "green"
+                ? "#40ad72"
+                : key === "red"
+                ? "#fd565d"
+                : key === "violet"
+                ? "#b659ff"
+                : "defaultColor",
+            color: "white",
+            padding: "10px",
+            borderRadius: "4px",
+            marginTop: "10px",
+          }}
+        >
+          <Typography variant="body2">Total Bet: {value}</Typography>
+        </div>
+      </Paper>
+    </Grid>
+  ))}
+</Grid>
 
-  const renderGrid = (betSums) => {
-    return (
-      <Grid container spacing={3}>
-        <Grid item xs={12}>
-          <Typography variant="h5" align="center" gutterBottom>
-            Period ID: <span style={{ color: "red" }}>{betSums.periodId}</span>
-          </Typography>
-        </Grid>
-        {betSums.numberBetSums.map((item, index) => (
-          <Grid item xs={12} sm={6} md={4} lg={3} key={index}>
-            <Paper style={{ padding: '20px', textAlign: 'center' }}>
-              <Typography variant="body1">Number: {item.number}</Typography>
-              <Typography variant="body2" sx={{ color: "green" }}>Total Bet: {item.totalBet}</Typography>
-            </Paper>
-          </Grid>
-        ))}
-        {Object.entries(betSums.sizeBetSums).map(([key, value]) => (
-          <Grid item xs={12} sm={6} md={4} lg={3} key={key}>
-            <Paper style={{ padding: '20px', textAlign: 'center' }}>
-              <Typography variant="body1">Size: {key}</Typography>
-              <Typography variant="body2" sx={{ color: "red" }}>Total Bet: {value}</Typography>
-            </Paper>
-          </Grid>
-        ))}
-        {Object.entries(betSums.colorBetSums).map(([key, value]) => (
-          <Grid item xs={12} sm={6} md={4} lg={3} key={key}>
-            <Paper style={{ padding: '20px', textAlign: 'center' }}>
-              <Typography variant="body1">Color: {key}</Typography>
-              <Typography variant="body2" sx={{ color: "blue" }}>Total Bet: {value}</Typography>
-            </Paper>
-          </Grid>
-        ))}
-      </Grid>
-    );
-  };
+  
+  );
 
   return (
     <Box sx={{ padding: '20px' }}>
@@ -117,10 +174,15 @@ const GamesContent = () => {
           onChange={handleTimerChange}
           variant="outlined"
           sx={{
-            width: '200px',
-            '& .MuiInputBase-root': {
-              height: '50px',
-              fontSize: '20px',
+            width: { xs: "150px", sm: "200px" },
+            "& .MuiInputBase-root": {
+              height: { xs: "40px", sm: "50px" },
+              fontSize: { xs: "16px", sm: "20px" },
+            },
+            "& .MuiOutlinedInput-root.Mui-focused": {
+              "& fieldset": {
+                borderColor: "gold",
+              },
             },
           }}
         >
@@ -130,12 +192,41 @@ const GamesContent = () => {
           <MenuItem value="10min">10min</MenuItem>
         </TextField>
       </Box>
-      {data[selectedTimer] && renderGrid(data[selectedTimer])}
-      <Box sx={{ marginTop: '40px', textAlign: 'center' }}>
-        <Card sx={{ maxWidth: 600, margin: '0 auto' }}>
+      {isLoading ? (
+        <Typography variant="body1" align="center">
+          Loading...
+        </Typography>
+      ) : error ? (
+        <Typography variant="body1" align="center" style={{ color: "red" }}>
+          {error}
+        </Typography>
+      ) : (
+        data[selectedTimer] && renderGrid(data[selectedTimer])
+      )}
+      <Box sx={{ marginTop: { xs: "20px", sm: "40px" }, textAlign: "center" }}>
+        <Card
+          sx={{
+            maxWidth: { xs: 300, sm: 600 },
+            margin: "0 auto",
+            padding: "20px",
+            backgroundColor: "#ffffff",
+            borderRadius: "10px",
+            boxShadow: "0 3px 10px rgba(0, 0, 0, 0.1)",
+          }}
+        >
           <CardContent>
-            <Typography variant="h6" gutterBottom>Set Manual Result</Typography>
-            <Box sx={{ display: 'grid', gap: '20px', padding: '20px' }}>
+            <Typography variant="h5" gutterBottom sx={{ fontWeight: "bold", mb: 3 }}>
+              Set Manual Result
+            </Typography>
+            <Box
+              sx={{
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                flexWrap: "wrap",
+                gap: "20px",
+              }}
+            >
               <TextField
                 select
                 label="Select Timer"
@@ -143,6 +234,14 @@ const GamesContent = () => {
                 onChange={handleTimerChange}
                 variant="outlined"
                 fullWidth
+                sx={{
+                  "& .MuiOutlinedInput-root.Mui-focused": {
+                    "& fieldset": {
+                      borderColor: "black",
+                    },
+                  },
+                  marginBottom: { xs: "10px", sm: "0" },
+                }}
               >
                 <MenuItem value="1min">1min</MenuItem>
                 <MenuItem value="3min">3min</MenuItem>
@@ -151,10 +250,18 @@ const GamesContent = () => {
               </TextField>
               <TextField
                 label="Latest Period ID"
-                value={data[selectedTimer]?.periodId || ''}
+                value={data[selectedTimer]?.periodId || ""}
                 disabled
                 variant="outlined"
                 fullWidth
+                sx={{
+                  "& .MuiOutlinedInput-root.Mui-focused": {
+                    "& fieldset": {
+                      borderColor: "black",
+                    },
+                  },
+                  marginBottom: { xs: "10px", sm: "0" },
+                }}
               />
               <TextField
                 select
@@ -163,6 +270,13 @@ const GamesContent = () => {
                 onChange={handleManualResultChange}
                 variant="outlined"
                 fullWidth
+                sx={{
+                  "& .MuiOutlinedInput-root.Mui-focused": {
+                    "& fieldset": {
+                      borderColor: "black",
+                    },
+                  },
+                }}
               >
                 {[...Array(9)].map((_, index) => (
                   <MenuItem key={index} value={`${index + 1}`}>
@@ -170,26 +284,25 @@ const GamesContent = () => {
                   </MenuItem>
                 ))}
               </TextField>
-              <TextField
-                label="Color Outcome"
-                value={colorOutcome}
-                disabled
-                variant="outlined"
-                fullWidth
-              />
-              <TextField
-                label="Size Outcome"
-                value={determineSize(manualResult)}
-                disabled
-                variant="outlined"
-                fullWidth
-              />
             </Box>
           </CardContent>
-          <CardActions sx={{ justifyContent: 'center', paddingBottom: '20px' }}>
-            <Button variant="contained" color="primary" onClick={handleSubmit}>
-              Submit
-            </Button>
+          <CardActions sx={{ justifyContent: "center" }}>
+          <Button
+          variant="contained"
+          onClick={handleSubmit}
+          disabled={isLoading}
+          sx={{
+            mt: 2,
+            backgroundColor: "#F78D02",
+            color: "color",
+            "&:hover": {
+              backgroundColor: "black",
+              color: "white",
+            },
+          }}
+        >
+          Submit
+        </Button>
           </CardActions>
         </Card>
       </Box>

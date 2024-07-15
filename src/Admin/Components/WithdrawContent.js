@@ -4,14 +4,51 @@ import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import { DataGrid, GridToolbar } from "@mui/x-data-grid";
 import Button from "@mui/material/Button";
+import Paper from "@mui/material/Paper";
 import Cookies from "js-cookie";
 import axios from "axios";
 import { domain } from "../../Components/config";
+import { createTheme, ThemeProvider } from '@mui/material/styles';
+
+const theme = createTheme({
+  palette: {
+    copy: {
+      main: '#ffc107',
+    },
+    accept: {
+      main: '#4caf50',
+    },
+    reject: {
+      main: '#f44336',
+    },
+  },
+  typography: {
+    fontWeightSemiBold: 600,
+  },
+});
+
+const styles = `
+  .bold-header .MuiDataGrid-columnHeaderTitle {
+    font-weight: 700;
+  }
+  .semibold-cell {
+    font-weight: 600;
+  }
+  .custom-even-row {
+    background-color: #f5f5f5;
+  }
+  .custom-odd-row {
+    background-color: #ffffff;
+  }
+`;
 
 function UpdateWithdrawRequest() {
   const [rows, setRows] = useState([]);
   const [filteredRows, setFilteredRows] = useState([]);
   const [disabledRows, setDisabledRows] = useState({});
+  const [filterModel, setFilterModel] = useState({
+    items: [{ columnField: "status", operatorValue: "contains", value: "" }],
+  });
 
   useEffect(() => {
     fetchData();
@@ -24,7 +61,7 @@ function UpdateWithdrawRequest() {
       });
 
       const data = res.data.userWithdrawals
-        .filter((result) => result.status === "Pending" && !result.withdrawDone) // Filter only pending withdrawals where withdrawDone is false
+        .filter((result) => result.status === "Pending" && !result.withdrawDone)
         .map((result, index) => {
           const accountDetails = result.userId && Array.isArray(result.userId.bankDetails) && result.userId.bankDetails.length > 0
             ? result.userId.bankDetails[0]
@@ -126,102 +163,110 @@ function UpdateWithdrawRequest() {
     localStorage.setItem("withdrawals", JSON.stringify(updatedRows));
   };
 
-  const [filterModel, setFilterModel] = useState({
-    items: [{ columnField: "status", operatorValue: "contains", value: "" }],
-  });
-
   const columns = [
-    { field: "srNo", headerName: "Id", width: 30 },
-    { field: "status", headerName: "Status", width: 100 },
-    { field: "withdrawMethod", headerName: "Withdraw Method", width: 130 },
-    { field: "balance", headerName: "Balance", width: 100 },
+    { field: "srNo", headerName: "Id", width: 70, headerClassName: 'bold-header', cellClassName: 'semibold-cell' },
+    { field: "status", headerName: "Status", width: 120, headerClassName: 'bold-header', cellClassName: 'semibold-cell' },
+    { field: "withdrawMethod", headerName: "Withdraw Method", width: 150, headerClassName: 'bold-header', cellClassName: 'semibold-cell' },
+    { field: "balance", headerName: "Balance", width: 120, headerClassName: 'bold-header', cellClassName: 'semibold-cell', type: 'number' },
     {
       field: "accountNo",
       headerName: "Account No",
-      width: 200,
+      width: 220,
+      headerClassName: 'bold-header',
+      cellClassName: 'semibold-cell',
       renderCell: (params) => (
-        <Box sx={{ display: "flex", gap: 1 }}>
-          <Typography>{params.value}</Typography>
+        <Box sx={{ display: "flex", gap: 1, alignItems: "center" }}>
+          <Typography sx={{ fontWeight: theme.typography.fontWeightSemiBold }}>{params.value}</Typography>
           <Button
             variant="contained"
-            color="primary"
+            color="copy"
             size="small"
             onClick={() => navigator.clipboard.writeText(params.value)}
+            sx={{ minWidth: '60px', height: '24px', fontSize: '0.75rem' }}
           >
             Copy
           </Button>
         </Box>
       ),
     },
-    { field: "bankName", headerName: "Bank Name", width: 150 },
+    { field: "bankName", headerName: "Bank Name", width: 150, headerClassName: 'bold-header', cellClassName: 'semibold-cell' },
     {
       field: "ifscCode",
       headerName: "IFSC Code",
-      width: 200,
+      width: 220,
+      headerClassName: 'bold-header',
+      cellClassName: 'semibold-cell',
       renderCell: (params) => (
-        <Box sx={{ display: "flex", gap: 1 }}>
-          <Typography>{params.value}</Typography>
+        <Box sx={{ display: "flex", gap: 1, alignItems: "center" }}>
+          <Typography sx={{ fontWeight: theme.typography.fontWeightSemiBold }}>{params.value}</Typography>
           <Button
             variant="contained"
-            color="primary"
+            color="copy"
             size="small"
             onClick={() => navigator.clipboard.writeText(params.value)}
+            sx={{ minWidth: '60px', height: '24px', fontSize: '0.75rem' }}
           >
             Copy
           </Button>
         </Box>
       ),
     },
-    { field: "mobile", headerName: "Mobile", width: 100 },
-    { field: "name", headerName: "Name", width: 100 },
+    { field: "mobile", headerName: "Mobile", width: 120, headerClassName: 'bold-header', cellClassName: 'semibold-cell' },
+    { field: "name", headerName: "Name", width: 150, headerClassName: 'bold-header', cellClassName: 'semibold-cell' },
     {
       field: "TRXAddress",
       headerName: "TRX Address",
-      width: 250,
+      width: 270,
+      headerClassName: 'bold-header',
+      cellClassName: 'semibold-cell',
       renderCell: (params) => (
-        <Box sx={{ display: "flex", gap: 1 }}>
-          <Typography>{params.value}</Typography>
+        <Box sx={{ display: "flex", gap: 1, alignItems: "center" }}>
+          <Typography sx={{ fontWeight: theme.typography.fontWeightBold }}>{params.value}</Typography>
           <Button
             variant="contained"
-            color="primary"
+            color="copy"
             size="small"
             onClick={() => navigator.clipboard.writeText(params.value)}
+            sx={{ minWidth: '60px', height: '24px', fontSize: '0.75rem' }}
           >
             Copy
           </Button>
         </Box>
       ),
     },
-    { field: "createdAt", headerName: "Date", width: 150 },
+    { 
+      field: "createdAt", 
+      headerName: "Date", 
+      width: 180, 
+      headerClassName: 'bold-header', 
+      cellClassName: 'semibold-cell',
+      type: 'dateTime',
+      valueGetter: (params) => new Date(params.value),
+    },
     {
       field: "actions",
       headerName: "Actions",
-      width: 170,
+      width: 200,
+      headerClassName: 'bold-header',
       renderCell: (params) => (
         <Box sx={{ display: "flex", gap: 1 }}>
           <Button
             variant="contained"
-            color="primary"
+            color="accept"
             size="small"
             disabled={disabledRows[params.row.id]}
             onClick={() => handleAccept(params.row.id)}
-            sx={{
-              backgroundColor:
-                disabledRows[params.row.id] === "accepted" ? "grey" : "primary.main",
-            }}
+            sx={{ color: 'white' }}
           >
             Accept
           </Button>
           <Button
             variant="contained"
-            color="secondary"
+            color="reject"
             size="small"
             disabled={disabledRows[params.row.id]}
             onClick={() => handleReject(params.row.id)}
-            sx={{
-              backgroundColor:
-                disabledRows[params.row.id] === "rejected" ? "grey" : "secondary.main",
-            }}
+            sx={{ color: 'white' }}
           >
             Reject
           </Button>
@@ -231,30 +276,48 @@ function UpdateWithdrawRequest() {
   ];
 
   return (
-    <div style={{ height: 600, width: "100%" }}>
-      <Typography variant="h5" sx={{ p: 3 }}>
-        Withdraw Status
-      </Typography>
-      <DataGrid
-        rows={filteredRows}
-        columns={columns}
-        pageSize={10}
-        rowsPerPageOptions={[10, 20, 50]}
-        sortingOrder={["asc", "desc"]}
-        disableSelectionOnClick
-        filterModel={filterModel}
-        filterMode="check"
-        disableColumnFilter={false}
-        components={{
-          Toolbar: GridToolbar,
-        }}
-        onFilterModelChange={(model) => {
-          if (JSON.stringify(model) !== JSON.stringify(filterModel)) {
-            setFilterModel(model);
-          }
-        }}
-      />
-    </div>
+    <ThemeProvider theme={theme}>
+      <style>{styles}</style>
+      <Box sx={{ minHeight: "85vh", padding: 3, backgroundColor: "whitesmoke" }}>
+        <Paper elevation={3} sx={{ padding: 3, borderRadius: 1 }}>
+          <Typography variant="h5" sx={{ fontWeight: 'bold', mb: 3, color: '#333' }}>
+            Withdraw Status
+          </Typography>
+          <DataGrid
+            rows={filteredRows}
+            columns={columns}
+            pageSize={10}
+            rowsPerPageOptions={[10, 20, 50]}
+            sortingOrder={["asc", "desc"]}
+            disableSelectionOnClick
+            filterModel={filterModel}
+            filterMode="server"
+            components={{
+              Toolbar: GridToolbar,
+            }}
+            getRowClassName={(params) =>
+              params.indexRelativeToCurrentPage % 2 === 0 ? 'custom-odd-row' : 'custom-even-row'
+            }
+            localeText={{ noRowsLabel: 'No withdraw requests found' }}
+            onFilterModelChange={(model) => {
+              if (JSON.stringify(model) !== JSON.stringify(filterModel)) {
+                setFilterModel(model);
+              }
+            }}
+            autoHeight
+            sx={{
+              '& .MuiDataGrid-cell:hover': {
+                color: 'primary.main',
+              },
+              '& .MuiDataGrid-columnHeaders': {
+                backgroundColor: '#f0f0f0',
+                color: '#333',
+              },
+            }}
+          />
+        </Paper>
+      </Box>
+    </ThemeProvider>
   );
 }
 

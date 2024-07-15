@@ -59,6 +59,38 @@ import OnePage from "./Pages/OpenPage";
 import WithdrawlLimits from "./Admin/Components/WithdrawlLimits";
 import WithdrawStatus from "./Admin/Components/WithdrawStatus";
 import AdminPanel from "./Admin/Components/Admin";
+const gameData = [
+  { id: 1, title: "Win Go 1Min", imgSrc: "/assets/lotterycategory_20240110062051do1k.png", game: "Win Go", path: "/timer/1min" },
+  { id: 2, title: "Win Go 3Min", imgSrc: "/assets/lotterycategory_20240110062051do1k.png", game: "Win Go", path: "/timer/3min" },
+  { id: 3, title: "Win Go 5Min", imgSrc: "/assets/lotterycategory_20240110062051do1k.png", game: "Win Go", path: "/timer/5min" },
+  { id: 4, title: "Win Go 10Min", imgSrc: "/assets/lotterycategory_20240110062051do1k.png", game: "Win Go", path: "/timer/10min" },
+];
+
+const k3GameData = [
+  { id: 5, title: "K3 1Min", imgSrc: "/assets/lotterycategory_20240110062111bt8e.png", game: "K3", path: "/k3/1min" },
+  { id: 6, title: "K3 3Min", imgSrc: "/assets/lotterycategory_20240110062111bt8e.png", game: "K3", path: "/k3/3min" },
+  { id: 7, title: "K3 5Min", imgSrc: "/assets/lotterycategory_20240110062111bt8e.png", game: "K3", path: "/k3/5min" },
+  { id: 8, title: "K3 10Min", imgSrc: "/assets/lotterycategory_20240110062111bt8e.png", game: "K3", path: "/k3/10min" },
+];
+
+const trxGameData = [
+  { id: 9, title: "TRX 1Min", imgSrc: "/assets/lotterycategory_20240110062124qut6.png", game: "Trx Win", path: "/trx/1min" },
+  { id: 10, title: "TRX 3Min", imgSrc: "/assets/lotterycategory_20240110062124qut6.png", game: "Trx Win", path: "/trx/3min" },
+  { id: 11, title: "TRX 5Min", imgSrc: "/assets/lotterycategory_20240110062124qut6.png", game: "Trx Win", path: "/trx/5min" },
+  { id: 12, title: "TRX 10Min", imgSrc: "/assets/lotterycategory_20240110062124qut6.png", game: "Trx Win", path: "/trx/10min" },
+];
+
+const extractTimerKey = (path) => {
+  const parts = path.split('/');
+  return parts[2];
+};
+
+
+const extractK3TimerKey = (path) => {
+  const parts = path.split('/');
+  return parts[2];
+};
+
 
 const App = () => {
   const isAuthenticated = useAuth();
@@ -75,6 +107,7 @@ const App = () => {
     );
   }
   return (
+    <div style={{ backgroundColor: "whitesmoke"}}>
     <AuthProvider>
       <Router>
         <Routes>
@@ -294,14 +327,16 @@ const App = () => {
               </ProtectedRoute>
             }
           />
-          <Route
-            path="/k3"
-            element={
-              <ProtectedRoute>
-                <LotteryAppk />
-              </ProtectedRoute>
-            }
-          />
+     
+            <Route
+             path="/k3"
+              element={
+                <ProtectedRoute>
+                  <LotteryAppk />
+                </ProtectedRoute>
+              }
+            />
+        
           <Route
             path="/addbank"
             element={
@@ -310,14 +345,16 @@ const App = () => {
               </ProtectedRoute>
             }
           />
-          <Route
-            path="/trx"
-            element={
-              <ProtectedRoute>
-                <LotteryAppt />
-              </ProtectedRoute>
-            }
-          />
+        
+            <Route
+           
+              path="/trx"
+              element={
+                <ProtectedRoute>
+                  <LotteryAppt/>
+                </ProtectedRoute>
+              }
+            />
           <Route
             path="/subordinate-data"
             element={
@@ -397,15 +434,15 @@ const App = () => {
                 <Wallet />
               </ProtectedRoute>
             }
-          />
-          <Route
-            path="/Head"
-            element={
-              <ProtectedRoute>
-                <Head />
-              </ProtectedRoute>
-            }
-          />
+         />
+            <Route
+              path="/head"
+              element={
+                <ProtectedRoute>
+                  <Head  />
+                </ProtectedRoute>
+              }
+            />
           <Route
             path="/invite"
             element={
@@ -475,6 +512,7 @@ const App = () => {
         </Routes>
       </Router>
     </AuthProvider>
+    </div>
   );
 };
 export default App;

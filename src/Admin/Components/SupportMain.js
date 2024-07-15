@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import {
   AppBar, Toolbar, Typography, Container, Card, CardContent,
-  Button, TextField, Grid, Select, MenuItem, FormControl, InputLabel
+  Button, TextField, Grid, Select, MenuItem, FormControl, InputLabel, Box
 } from '@mui/material';
 import axios from 'axios';
-import {domain} from '../../Components/config';
+import { domain } from '../../Components/config';
 
 axios.defaults.withCredentials = true;
 axios.defaults.baseURL = domain;
@@ -40,19 +40,27 @@ const App = () => {
   };
 
   return (
-    <div>
-   
+    <div style={{ minHeight: "85vh" }}>
       <Container>
-        <FormControl fullWidth>
-          <InputLabel>Status</InputLabel>
-          <Select
-            value={statusFilter}
-            onChange={(e) => setStatusFilter(e.target.value)}
-          >
-            <MenuItem value="open">Open</MenuItem>
-            <MenuItem value="closed">Closed</MenuItem>
-          </Select>
-        </FormControl>
+      <TextField
+          select
+          label="Status"
+          value={statusFilter}
+          onChange={(e) => setStatusFilter(e.target.value)}
+          fullWidth
+          margin="normal"
+          sx={{
+            "& .MuiOutlinedInput-root.Mui-focused": {
+              "& fieldset": {
+                borderColor: "black",
+              },
+            },
+            marginBottom: { xs: "10px", sm: "0" },
+          }}
+        >
+          <MenuItem value="open">Open</MenuItem>
+          <MenuItem value="closed">Closed</MenuItem>
+        </TextField>
         <Grid container spacing={3}>
           {tickets.map(ticket => (
             <Grid item xs={12} key={ticket._id}>
@@ -70,7 +78,7 @@ const App = () => {
                     </Typography>
                   ))}
                   {ticket.status === 'open' && (
-                    <div>
+                    <Box sx={{ mt: 2 }}>
                       <TextField
                         label="Reply"
                         fullWidth
@@ -85,7 +93,7 @@ const App = () => {
                       >
                         Reply
                       </Button>
-                    </div>
+                    </Box>
                   )}
                 </CardContent>
               </Card>
