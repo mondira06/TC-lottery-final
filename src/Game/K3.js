@@ -1635,8 +1635,12 @@ const LotteryAppk = ({ timerKey }) => {
               style={{
                 cursor: 'pointer',
                 border: activeId === image.id ? '1px solid #FE9902' : 'none',
+
+                backgroundColor: activeId === image.id ? '#EE7F02' : '#FFFFFF',
+
                 background: activeId === image.id ? 
                 "linear-gradient(to right,#ff9903, #e77404)" : '#FFFFFF',
+
                 borderRadius: '10px',
                 color:activeId === image.id ? "white":'#A1AFC2',
                 display: 'flex',
@@ -1828,8 +1832,12 @@ const LotteryAppk = ({ timerKey }) => {
                 <Tab
                   label="Total"
                   style={{
+
+                    backgroundColor: values === 0 ? "#ED8A1F" : "#F6F6F6",
+
                     background: values === 0 ?
                     "linear-gradient(to right,#ff9903, #e77404)" : "#F6F6F6",
+
                     color: values === 0 ? "#F6F6F6" : "#889CA1",
                     borderBottom: values === 0 ? "none" : "",
                     borderRadius: values === 0 ? "10px" : "",
@@ -1839,9 +1847,13 @@ const LotteryAppk = ({ timerKey }) => {
                 <Tab
                   label="2 same"
                   style={{
+
+                    backgroundColor: values === 1 ? "#ED8A1F" : "#F6F6F6",
+
                     background: values === 1 ? 
                     "linear-gradient(to right,#ff9903, #e77404)" : "#F6F6F6",
-                    color: values === 1 ? "#F6F6F6" : "#889CA1",
+
+                  color: values === 1 ? "#F6F6F6" : "#889CA1",
                     borderBottom: values === 1 ? "none" : "",
                     borderRadius: values === 1 ? "10px" : "",
                     minWidth: "auto",
@@ -1850,8 +1862,12 @@ const LotteryAppk = ({ timerKey }) => {
                 <Tab
                   label="3 same"
                   style={{
+
+                    backgroundColor: values === 2 ? "#ED8A1F" : "#F6F6F6",
+
                     background: values === 2 ?  
                     "linear-gradient(to right,#ff9903, #e77404)" : "#F6F6F6",
+
                     color: values === 2 ? "#F6F6F6" : "#889CA1",
                     borderBottom: values === 2 ? "none" : "",
                     borderRadius: values === 2 ? "10px" : "",
@@ -1861,8 +1877,12 @@ const LotteryAppk = ({ timerKey }) => {
                 <Tab
                   label="Different"
                   style={{
+
+                    backgroundColor: values === 3 ? "#ED8A1F" : "#F6F6F6",
+
                     background: values === 3 ? 
                     "linear-gradient(to right,#ff9903, #e77404)" : "#F6F6F6",
+
                     color: values === 3 ? "#F6F6F6" : "#889CA1",
                     borderBottom: values === 3 ? "none" : "",
                     borderRadius: values === 3 ? "10px" : "",
@@ -2187,6 +2207,83 @@ const LotteryAppk = ({ timerKey }) => {
           </Snackbar>
 
           <Dialog
+
+            open={openDialog}
+            aria-labelledby="alert-dialog-title"
+            aria-describedby="alert-dialog-description"
+            PaperProps={{
+              style: {
+                width: "350px", // Set this to the desired size of your square
+                height: "250px", // Set this to the same value as width
+                backgroundColor: "white", // This sets the opacity of the dialog box background
+                overflow: "hidden",
+                borderRadius: "40px", // This removes the scrollbars
+              },
+            }}
+          >
+            <DialogContent>
+              <DialogContentText
+                id="alert-dialog-description"
+                style={{
+                  textAlign: "center",
+                  fontSize: "120px",
+                  fontWeight: "bold",
+                  color: "#EE7F02",
+                }}
+              >
+                {remainingTime ? remainingTime.split(":")[1] : ""}
+              </DialogContentText>
+            </DialogContent>
+          </Dialog>
+          <Grid mt={2} sx={{ marginBottom: "10px" }}>
+            <Tabs
+              value={value}
+              onChange={handleChange}
+              indicatorColor="transparent"
+              style={{
+                marginLeft: "20px",
+                marginBottom: "10px",
+                paddingTop: "20px",
+              }}
+            >
+              <Tab
+                label="Game History"
+                style={
+                  value === 0
+                    ? {
+                        backgroundColor: "#ED8A1F",
+                        color:  "#F6F6F6",  
+                        borderRadius: "20px",
+                      }
+                    : { color: "#A8A5A1" }
+                }
+              />
+              <Tab
+                label="Chart"
+                style={
+                  value === 1
+                    ? {
+                        backgroundColor: "#ED8A1F",
+                        color: "#F6F6F6",
+                        borderRadius: "20px",
+                      }
+                    : { color: "#A8A5A1" }
+                }
+              />
+              <Tab
+                label="My History"
+                style={
+                  value === 2
+                    ? {
+                        backgroundColor: "#ED8A1F",
+                        color: "#F6F6F6",
+                        borderRadius: "20px",
+                      }
+                    : { color: "#A8A5A1" }
+                }
+              />
+            </Tabs>
+
           open={openDialog}
           aria-labelledby="alert-dialog-title"
           aria-describedby="alert-dialog-description"
@@ -2263,6 +2360,7 @@ const LotteryAppk = ({ timerKey }) => {
               }
             />
           </Tabs>
+
             <TabPanel value={value} index={0}>
               <CustomTable data={filteredData} />
             </TabPanel>
