@@ -3,7 +3,7 @@ import Mobile from '../Components/Mobile';
 import IconButton from '@mui/material/IconButton';
 import SmsIcon from '@mui/icons-material/Sms';
 import DownloadIcon from '@mui/icons-material/Download';
-import { Typography,  Card, CardMedia, CardContent,Grid , Box,Paper} from '@mui/material';
+import { Typography,  Card, CardMedia,tableCellClasses,styled, CardContent,Grid , Box,Paper} from '@mui/material';
 import { useState } from 'react';
 import { getFirestore, doc, getDoc, updateDoc, arrayUnion } from 'firebase/firestore';
 import { getAuth } from 'firebase/auth';
@@ -25,6 +25,31 @@ const InvitationRulesMain = ({ children }) => {
 
     return () => window.removeEventListener('resize', setVh);
   }, []);
+  const StyledTableCell = styled(TableCell)(({ theme }) => ({
+    [`&.${tableCellClasses.head}`]: {
+     
+      color: theme.palette.common.white,
+      
+    },
+    [`&.${tableCellClasses.body}`]: {
+      fontSize: 14,
+      whiteSpace: "pre-wrap", // Allow text to wrap
+      maxWidth: "300px", 
+      overflowWrap: "break-word",// Adjust max-width as needed
+    },
+  }));
+
+  const StyledTableRow = styled(TableRow)(({ theme }) => ({
+    '&:nth-of-type(odd)': {
+      backgroundColor: theme.palette.common.white,
+    },
+    '&:nth-of-type(even)': {
+      backgroundColor: theme.palette.action.hover,
+    },
+    '&:last-child td, &:last-child th': {
+      border: 0,
+    },
+  }));
   const rows = [
     { stars: 'L0', coins: 0, goldCoins: 0, teamRanking: '0' },
     { stars: 'L1', coins: '500K', goldCoins: '100K', teamRanking: '100k' },
@@ -97,13 +122,15 @@ const InvitationRulesMain = ({ children }) => {
   return (
     <div>
       <Mobile>
+        <div style={{backgroundColor:"#F7F8FF"}}>
         <Box
           display="flex"
           flexDirection="column"
           height="calc(var(--vh, 1vh) * 100)"
           position="relative"
+         sx={{backgroundColor:"#F7F8FF"}} 
         >
-          <Box flexGrow={1}>
+          <Box flexGrow={1}  sx={{backgroundColor:"#F7F8FF"}}>
 
 
             <Grid
@@ -114,9 +141,9 @@ const InvitationRulesMain = ({ children }) => {
                 position: 'sticky',
                 top: 0,
                 zIndex: 1000,
-                backgroundColor: 'rgb(34,39,91)',
+                backgroundColor: '#FFFFFF',
                 padding: '8px 16px',
-                color: 'white'
+                color: 'black'
                 
               }}
             >
@@ -140,57 +167,57 @@ const InvitationRulesMain = ({ children }) => {
 
           <Box sx={{ maxWidth:"90%", mx: 'auto', mt: 4 }}>
       
-        <Typography variant="h5" gutterBottom sx={{color:"orange"}}>
+        <Typography variant="h5" gutterBottom sx={{color:"#ED8A1F"}}>
         [Promotion partner] program
         </Typography>
-        <Typography variant="subtitle1" sx={{color:"white"}} gutterBottom>
+        <Typography variant="subtitle1" sx={{color:"#A8A5A1"}} gutterBottom>
         This activity is valid for a long time
 
 
         </Typography>
 
-        <Box sx={{ my: 2, border: '1px solid orange', p: 2 }}>
-          <Typography variant="body1" sx={{color:"white"}} gutterBottom>
+        <Box sx={{ my: 2, border: '1px solid #ffffff', p: 2,backgroundColor:"#FFFFFF" }}>
+          <Typography variant="body1" sx={{color:"white",backgroundColor:"#ED8A1F"}} gutterBottom>
             01
           </Typography>
-          <Typography variant="body2" sx={{color:"white"}} gutterBottom>
+          <Typography variant="body2" sx={{color:"#A8A5A1"}} gutterBottom>
           There are 4 subordinate levels in inviting friends, if A invites B, then B is a level 1 subordinate of A. If B invites C, then C is a level 1 subordinate of B and also a level 2 subordinate of A. If C invites D, then D is a level 1 subordinate of C, at the same time a level 2 subordinate of B and also a level 3 subordinate of A.          </Typography>
         </Box>
 
-        <Box sx={{ my: 2, border: '1px solid orange', p: 2 }}>
-          <Typography variant="body1" sx={{color:"white"}} gutterBottom>
+        <Box sx={{ my: 2, border: '1px solid #ffffff', p: 2,backgroundColor:"#FFFFFF" }}>
+          <Typography variant="body1" sx={{color:"white",backgroundColor:"#ED8A1F"}} gutterBottom>
             02
           </Typography>
-          <Typography variant="body2"  sx={{color:"white"}} gutterBottom>
+          <Typography variant="body2"  sx={{color:"#A8A5A1"}} gutterBottom>
           When inviting friends to register, you must send the invitation link provided or enter the invitation code manually so that your friends become your level 1 subordinates.
 
 </Typography>
         </Box>
 
-        <Box sx={{ my: 2, border: '1px solid orange', p: 2 }}>
-          <Typography variant="body1" sx={{color:"white"}} gutterBottom>
+        <Box sx={{ my: 2, border: '1px solid #ffffff', p: 2,backgroundColor:"#ffffff" }}>
+          <Typography variant="body1" sx={{color:"white",backgroundColor:"#ED8A1F"}} gutterBottom>
             03
           </Typography>
-          <Typography variant="body2" sx={{color:"white"}} gutterBottom>
+          <Typography variant="body2" sx={{color:"#A8A5A1"}} gutterBottom>
           The invitee registers via the inviter's invitation code and completes the deposit, shortly after that the commission will be received immediately
 
 </Typography>
         </Box>
 
-        <Box sx={{ my: 2, border: '1px solid orange', p: 2 }}>
-          <Typography variant="body1" sx={{color:"white"}} gutterBottom>
+        <Box sx={{ my: 2, border: '1px solid #ffffff', p: 2,backgroundColor:"#ffffff" }}>
+          <Typography variant="body1" sx={{color:"white",backgroundColor:"#ED8A1F"}} gutterBottom>
             04
           </Typography>
-          <Typography variant="body2" sx={{color:"white"}} gutterBottom>
+          <Typography variant="body2" sx={{color:"#A8A5A1"}} gutterBottom>
           The calculation of yesterday's commission starts every morning at 01:00. After the commission calculation is completed, the commission is rewarded to the wallet and can be viewed through the commission collection record.
 
 </Typography>
         </Box>
-        <Box sx={{ my: 2, border: '1px solid orange', p: 2 }}>
-          <Typography variant="body1" sx={{color:"white"}} gutterBottom>
+        <Box sx={{ my: 2, border: '1px solid #ffffff', p: 2 ,backgroundColor:"#ffffff"}}>
+          <Typography variant="body1" sx={{color:"white",backgroundColor:"#ED8A1F"}} gutterBottom>
             05
           </Typography>
-          <Typography variant="body2" sx={{color:"white"}} gutterBottom>
+          <Typography variant="body2" sx={{color:"#A8A5A1"}} gutterBottom>
             The calculation of yesterday's commission starts every morning at 01:00. After the commission calculation is completed, the commission is rewarded to the wallet and can be viewed through the commission collection record.
           </Typography> 
         </Box>
@@ -201,23 +228,23 @@ const InvitationRulesMain = ({ children }) => {
     <TableContainer component={Paper}>
   <Table>
   <TableHead>
-  <TableRow style={{backgroundColor:"orange",color:"white"}}>
-    <TableCell style={{ border: '1px solid orange',color:"white" }}>Lvl</TableCell>
-    <TableCell style={{ border: '1px solid orange',color:"white" }} align="right">Team Number</TableCell>
-    <TableCell style={{ border: '1px solid orange',color:"white" }} align="right">Team Building</TableCell>
-    <TableCell style={{ border: '1px solid orange',color:"white" }} align="right">Team Deposit</TableCell>
-  </TableRow>
+  <StyledTableRow style={{backgroundColor:"#ED8A1F",color:"white"}}>
+    <StyledTableCell style={{ color:"white" }}>Lvl</StyledTableCell>
+    <StyledTableCell style={{ color:"white" }} align="right">Team Number</StyledTableCell>
+    <StyledTableCell style={{ color:"white" }} align="right">Team Building</StyledTableCell>
+    <StyledTableCell style={{ color:"white" }} align="right">Team Deposit</StyledTableCell>
+  </StyledTableRow>
 </TableHead>
-<TableBody>
+<TableBody style={{backgroundColor:"#ffffff"}}>
   {rows.map((row) => (
-    <TableRow key={row.stars}>
-      <TableCell style={{ border: '1px solid orange' }} component="th" scope="row" sx={{ color: 'orange' }}>
+    <StyledTableRow key={row.stars}>
+      <StyledTableCell  component="th" scope="row" sx={{ color:"#D9AC45" }}>
         {row.stars}
-      </TableCell>
-      <TableCell style={{ border: '1px solid orange' }} align="right">{row.coins}</TableCell>
-      <TableCell style={{ border: '1px solid orange' }} align="right">{row.goldCoins}</TableCell>
-      <TableCell style={{ border: '1px solid orange' }} align="right">{row.teamRanking}</TableCell>
-    </TableRow>
+      </StyledTableCell>
+      <StyledTableCell style={{ color:"#A8A5A1" }} align="right">{row.coins}</StyledTableCell>
+      <StyledTableCell style={{ color:"#A8A5A1" }} align="right">{row.goldCoins}</StyledTableCell>
+      <StyledTableCell style={{ color:"#A8A5A1" }} align="right">{row.teamRanking}</StyledTableCell>
+    </StyledTableRow>
   ))}
 </TableBody>
   </Table>
@@ -228,70 +255,157 @@ const InvitationRulesMain = ({ children }) => {
       <Paper >
        
 
-        <Box sx={{ my: 2, border: '1px solid orange', p: 2 }}>
-          <Typography variant="body1" gutterBottom>
+        <Box sx={{ my: 2, border: '1px solid #ffffff',backgroundColor:"#fffffff", p: 2 }}>
+          <Typography variant="body1" sx={{color:"white",backgroundColor:"#ED8A1F"}} gutterBottom>
             06
           </Typography>
-          <Typography variant="body2" gutterBottom>
+          <Typography variant="body2" sx={{color:"#A8A5A1"}} gutterBottom>
           The commission percentage depends on the membership level. The higher the membership level, the higher the bonus percentage. Different game types also have different payout percentages.           </Typography>
         </Box>
 
         
       </Paper>
     </Box>
-    <Grid  >
+   
     
-    <TableContainer  component={Paper}>
-  <Table>
-  <TableHead>
-  <TableRow style={{backgroundColor:"orange",color:"white"}}>
-    <TableCell style={{ border: '1px solid orange',color:"white" }}>Lvl</TableCell>
-    <TableCell style={{ border: '1px solid orange',color:"white" }} align="right">Tier 1</TableCell>
-    <TableCell style={{ border: '1px solid orange',color:"white" }} align="right">Tier 2</TableCell>
-    <TableCell style={{ border: '1px solid orange',color:"white" }} align="right">Tier 3</TableCell>
-    <TableCell style={{ border: '1px solid orange',color:"white" }} align="right">Tier 4</TableCell>
-  </TableRow>
-</TableHead>
-<TableBody>
-  {rows2.map((rows2) => (
-    <TableRow key={rows2.stars}>
-      <TableCell style={{ border: '1px solid orange',color:"orange" }} component="th" scope="row">
-        {rows2.stars}
-      </TableCell>
-      <TableCell style={{ border: '1px solid orange' }} align="right">{rows2.tier1}</TableCell>
-      <TableCell style={{ border: '1px solid orange' }} align="right">{rows2.tier2}</TableCell>
-      <TableCell style={{ border: '1px solid orange' }} align="right">{rows2.tier3}</TableCell>
-      <TableCell style={{ border: '1px solid orange' }} align="right">{rows2.tier4}</TableCell>
-    </TableRow>
-  ))}
-</TableBody>
-  </Table>
-</TableContainer>
-    </Grid>
+    <Grid sx={{mt:4}}>
+    <TableContainer component={Paper}>
+          <Table>
+            <TableHead>
+              <StyledTableRow style={{backgroundColor:"#ED8A1F",color:"white"}}>
+                <StyledTableCell>Lvl</StyledTableCell>
+                <StyledTableCell align="right">Tier 1</StyledTableCell>
+                <StyledTableCell align="right">Tier 2</StyledTableCell>
+                <StyledTableCell align="right">Tier 3</StyledTableCell>
+                <StyledTableCell align="right">Tier 4</StyledTableCell>
+              </StyledTableRow>
+            </TableHead>
+            <TableBody>
+              {rows2.map((row) => (
+                <StyledTableRow key={row.stars}>
+                  <StyledTableCell style={{ color: "#D9AC45" }} component="th" scope="row">
+                    {row.stars}
+                  </StyledTableCell>
+                  <StyledTableCell align="right">{row.tier1}</StyledTableCell>
+                  <StyledTableCell align="right">{row.tier2}</StyledTableCell>
+                  <StyledTableCell align="right">{row.tier3}</StyledTableCell>
+                  <StyledTableCell align="right">{row.tier4}</StyledTableCell>
+                </StyledTableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </TableContainer>
+      </Grid>
+
+      <Grid sx={{ mt: 4 }}>
+        <TableContainer component={Paper}>
+          <Table>
+            <TableHead>
+              <StyledTableRow style={{backgroundColor:"#ED8A1F",color:"white"}}>
+                <StyledTableCell>Lvl</StyledTableCell>
+                <StyledTableCell align="right">Tier 1</StyledTableCell>
+                <StyledTableCell align="right">Tier 2</StyledTableCell>
+                <StyledTableCell align="right">Tier 3</StyledTableCell>
+                <StyledTableCell align="right">Tier 4</StyledTableCell>
+              </StyledTableRow>
+            </TableHead>
+            <TableBody>
+              {rows3.map((row) => (
+                <StyledTableRow key={row.stars}>
+                  <StyledTableCell style={{ color: "#D9AC45" }} component="th" scope="row">
+                    {row.stars}
+                  </StyledTableCell>
+                  <StyledTableCell align="right">{row.tier1}</StyledTableCell>
+                  <StyledTableCell align="right">{row.tier2}</StyledTableCell>
+                  <StyledTableCell align="right">{row.tier3}</StyledTableCell>
+                  <StyledTableCell align="right">{row.tier4}</StyledTableCell>
+                </StyledTableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </TableContainer>
+      </Grid>
+
+      <Grid sx={{ mt: 4 }}>
+        <TableContainer component={Paper}>
+          <Table>
+            <TableHead>
+              <StyledTableRow style={{backgroundColor:"#ED8A1F",color:"white"}}>
+                <StyledTableCell>Lvl</StyledTableCell>
+                <StyledTableCell align="right">Tier 1</StyledTableCell>
+                <StyledTableCell align="right">Tier 2</StyledTableCell>
+                <StyledTableCell align="right">Tier 3</StyledTableCell>
+                <StyledTableCell align="right">Tier 4</StyledTableCell>
+              </StyledTableRow>
+            </TableHead>
+            <TableBody>
+              {rows4.map((row) => (
+                <StyledTableRow key={row.stars}>
+                  <StyledTableCell style={{ color: "#D9AC45" }} component="th" scope="row">
+                    {row.stars}
+                  </StyledTableCell>
+                  <StyledTableCell align="right">{row.tier1}</StyledTableCell>
+                  <StyledTableCell align="right">{row.tier2}</StyledTableCell>
+                  <StyledTableCell align="right">{row.tier3}</StyledTableCell>
+                  <StyledTableCell align="right">{row.tier4}</StyledTableCell>
+                </StyledTableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </TableContainer>
+      </Grid>
+
+      <Grid sx={{ mt: 4 }}>
+        <TableContainer component={Paper}>
+          <Table>
+            <TableHead>
+              <StyledTableRow style={{backgroundColor:"#ED8A1F",color:"white"}}>
+                <StyledTableCell>Lvl</StyledTableCell>
+                <StyledTableCell align="right">Tier 1</StyledTableCell>
+                <StyledTableCell align="right">Tier 2</StyledTableCell>
+                <StyledTableCell align="right">Tier 3</StyledTableCell>
+                <StyledTableCell align="right">Tier 4</StyledTableCell>
+              </StyledTableRow>
+            </TableHead>
+            <TableBody>
+              {rows5.map((row) => (
+                <StyledTableRow key={row.stars}>
+                  <StyledTableCell style={{ color: "#D9AC45" }} component="th" scope="row">
+                    {row.stars}
+                  </StyledTableCell>
+                  <StyledTableCell align="right">{row.tier1}</StyledTableCell>
+                  <StyledTableCell align="right">{row.tier2}</StyledTableCell>
+                  <StyledTableCell align="right">{row.tier3}</StyledTableCell>
+                  <StyledTableCell align="right">{row.tier4}</StyledTableCell>
+                </StyledTableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </TableContainer>
 
     <Grid sx={{mt:4}}>
     
     <TableContainer component={Paper}>
   <Table>
   <TableHead>
-  <TableRow style={{backgroundColor:"orange"}}>
-    <TableCell style={{ border: '1px solid orange',color:"white" }}>Lvl</TableCell>
-    <TableCell style={{ border: '1px solid orange',color:"white" }} align="right">Tier 1</TableCell>
-    <TableCell style={{ border: '1px solid orange',color:"white" }} align="right">Tier 2</TableCell>
-    <TableCell style={{ border: '1px solid orange',color:"white" }} align="right">Tier 3</TableCell>
-    <TableCell style={{ border: '1px solid orange',color:"white" }} align="right">Tier 4</TableCell>
+  <TableRow style={{backgroundColor:"#ED8A1F",color:"white"}}>
+    <TableCell style={{ color:"white" }}>Lvl</TableCell>
+    <TableCell style={{ color:"white" }} align="right">Tier 1</TableCell>
+    <TableCell style={{ color:"white" }} align="right">Tier 2</TableCell>
+    <TableCell style={{ color:"white" }} align="right">Tier 3</TableCell>
+    <TableCell style={{ color:"white" }} align="right">Tier 4</TableCell>
   </TableRow>
 </TableHead>
-<TableBody>
+<TableBody style={{backgroundColor:"#ffffff"}}>
   {rows3.map((row) => (
     <TableRow key={row.stars}>
-      <TableCell style={{ border: '1px solid orange' }} component="th" scope="row">
+      <TableCell style={{ color:"#D9AC45" }} component="th" scope="row">
         {row.stars}
       </TableCell>
-      <TableCell style={{ border: '1px solid orange' }} align="right">{row.tier1}</TableCell>
-      <TableCell style={{ border: '1px solid orange' }} align="right">{row.tier2}</TableCell>
-      <TableCell style={{ border: '1px solid orange' }} align="right">{row.tier3}</TableCell>
-      <TableCell style={{ border: '1px solid orange' }} align="right">{row.tier4}</TableCell>
+      <TableCell style={{ color:"#A8A5A1" }} align="right">{row.tier1}</TableCell>
+      <TableCell style={{ color:"#A8A5A1" }} align="right">{row.tier2}</TableCell>
+      <TableCell style={{ color:"#A8A5A1" }} align="right">{row.tier3}</TableCell>
+      <TableCell style={{ color:"#A8A5A1" }} align="right">{row.tier4}</TableCell>
     </TableRow>
   ))}
 </TableBody>
@@ -304,25 +418,25 @@ const InvitationRulesMain = ({ children }) => {
     <TableContainer component={Paper}>
   <Table>
   <TableHead>
-  <TableRow style={{backgroundColor:"orange"}}>
-    <TableCell style={{ border: '1px solid orange',color:"white" }}>Lvl</TableCell>
-    <TableCell style={{ border: '1px solid orange',color:"white" }} align="right">Tier 1</TableCell>
-    <TableCell style={{ border: '1px solid orange',color:"white" }} align="right">Tier 2</TableCell>
-    <TableCell style={{ border: '1px solid orange',color:"white" }} align="right">Tier 3</TableCell>
-    <TableCell style={{ border: '1px solid orange',color:"white" }} align="right">Tier 4</TableCell>
-  </TableRow>
+  <StyledTableRow style={{backgroundColor:"#ED8A1F",color:"white"}}>
+    <StyledTableCell style={{ color:"white" }}>Lvl</StyledTableCell>
+    <StyledTableCell style={{ color:"white" }} align="right">Tier 1</StyledTableCell>
+    <StyledTableCell style={{ color:"white" }} align="right">Tier 2</StyledTableCell>
+    <StyledTableCell style={{ color:"white" }} align="right">Tier 3</StyledTableCell>
+    <StyledTableCell style={{ color:"white" }} align="right">Tier 4</StyledTableCell>
+  </StyledTableRow>
 </TableHead>
-<TableBody>
+<TableBody style={{backgroundColor:"#ffffff"}}>
   {rows4.map((row) => (
-    <TableRow key={row.stars}>
-      <TableCell style={{ border: '1px solid orange' }} component="th" scope="row">
+    <StyledTableRow key={row.stars}>
+      <StyledTableCell style={{color:"#D9AC45" }} component="th" scope="row">
         {row.stars}
-      </TableCell>
-      <TableCell style={{ border: '1px solid orange' }} align="right">{row.tier1}</TableCell>
-      <TableCell style={{ border: '1px solid orange' }} align="right">{row.tier2}</TableCell>
-      <TableCell style={{ border: '1px solid orange' }} align="right">{row.tier3}</TableCell>
-      <TableCell style={{ border: '1px solid orange' }} align="right">{row.tier4}</TableCell>
-    </TableRow>
+      </StyledTableCell>
+      <StyledTableCell style={{ color:"#A8A5A1" }} align="right">{row.tier1}</StyledTableCell>
+      <StyledTableCell style={{ color:"#A8A5A1" }} align="right">{row.tier2}</StyledTableCell>
+      <StyledTableCell style={{ color:"#A8A5A1" }} align="right">{row.tier3}</StyledTableCell>
+      <StyledTableCell style={{ color:"#A8A5A1" }} align="right">{row.tier4}</StyledTableCell>
+    </StyledTableRow>
   ))}
 </TableBody>
   </Table>
@@ -334,40 +448,41 @@ const InvitationRulesMain = ({ children }) => {
     <TableContainer component={Paper}>
   <Table>
   <TableHead>
-  <TableRow style={{backgroundColor:"orange"}}>
-    <TableCell style={{ border: '1px solid orange',color:"white" }}>Lvl</TableCell>
-    <TableCell style={{ border: '1px solid orange',color:"white" }} align="right">Tier 1</TableCell>
-    <TableCell style={{ border: '1px solid orange',color:"white" }} align="right">Tier 2</TableCell>
-    <TableCell style={{ border: '1px solid orange',color:"white" }} align="right">Tier 3</TableCell>
-    <TableCell style={{ border: '1px solid orange',color:"white" }} align="right">Tier 4</TableCell>
-  </TableRow>
+  <StyledTableRow style={{backgroundColor:"#ED8A1F",color:"white"}}>
+    <StyledTableCell style={{ color:"white" }}>Lvl</StyledTableCell>
+    <StyledTableCell style={{ color:"white" }} align="right">Tier 1</StyledTableCell>
+    <StyledTableCell style={{ color:"white" }} align="right">Tier 2</StyledTableCell>
+    <StyledTableCell style={{ color:"white" }} align="right">Tier 3</StyledTableCell>
+    <StyledTableCell style={{color:"white" }} align="right">Tier 4</StyledTableCell>
+  </StyledTableRow>
 </TableHead>
-<TableBody>
+<TableBody style={{backgroundColor:"#ffffff"}}>
   {rows5.map((row) => (
-    <TableRow key={row.stars}>
-      <TableCell style={{ border: '1px solid orange' }} component="th" scope="row">
+    <StyledTableRow key={row.stars}>
+      <StyledTableCell style={{ color:"#D9AC45" }} component="th" scope="row">
         {row.stars}
-      </TableCell>
-      <TableCell style={{ border: '1px solid orange' }} align="right">{row.tier1}</TableCell>
-      <TableCell style={{ border: '1px solid orange' }} align="right">{row.tier2}</TableCell>
-      <TableCell style={{ border: '1px solid orange' }} align="right">{row.tier3}</TableCell>
-      <TableCell style={{ border: '1px solid orange' }} align="right">{row.tier4}</TableCell>
-    </TableRow>
+      </StyledTableCell>
+      <StyledTableCell style={{ color:"#A8A5A1" }} align="right">{row.tier1}</StyledTableCell>
+      <StyledTableCell style={{ color:"#A8A5A1" }} align="right">{row.tier2}</StyledTableCell>
+      <StyledTableCell style={{ color:"#A8A5A1" }} align="right">{row.tier3}</StyledTableCell>
+      <StyledTableCell style={{  color:"#A8A5A1"}} align="right">{row.tier4}</StyledTableCell>
+    </StyledTableRow>
   ))}
 </TableBody>
   </Table>
 </TableContainer>
+</Grid>
     </Grid>
 
     <Box sx={{ maxWidth:"90%", mx: 'auto', mt: 4 }}>
       <Paper >
        
 
-        <Box sx={{ my: 2, border: '1px solid orange', p: 2 }}>
-          <Typography variant="body1" gutterBottom>
+        <Box sx={{ my: 2,border: '1px solid ffffff',backgroundColor:"#ffffff", p: 2 }}>
+          <Typography variant="body1" sx={{color:"white",backgroundColor:"#ED8A1F"}} gutterBottom>
             07
           </Typography>
-          <Typography variant="body2" gutterBottom>
+          <Typography variant="body2" sx={{color:"#A8A5A1"}} gutterBottom>
           TOP20 commission rankings will be randomly awarded with  a separate bonus          </Typography>
         </Box>
 
@@ -379,11 +494,11 @@ const InvitationRulesMain = ({ children }) => {
       <Paper >
        
 
-        <Box sx={{ my: 2, border: '1px solid orange', p: 2,marginBottom:"100px" }}>
-          <Typography variant="body1" gutterBottom>
+        <Box sx={{ my: 2, border: '1px solid ffffff',backgroundColor:"#ffffff", p: 2,marginBottom:"100px" }}>
+          <Typography variant="body1" sx={{color:"white",backgroundColor:"#ED8A1F"}} gutterBottom>
             08
           </Typography>
-          <Typography variant="body2" gutterBottom>
+          <Typography variant="body2" sx={{color:"#A8A5A1"}} gutterBottom>
           The final interpretation of this activity belongs to          </Typography>
         </Box>
 
@@ -393,6 +508,7 @@ const InvitationRulesMain = ({ children }) => {
 {children}
 
         </Box>
+        </div>
       </Mobile>
     </div>
   )

@@ -4,20 +4,21 @@ import {
   Button,
   Box,
   Typography,
-  Container,
-  CssBaseline,
   Table,
   TableBody,
-  TableCell,
   TableContainer,
   TableHead,
   TableRow,
   Paper,
   IconButton,
+  Grid,
+  Divider,
 } from "@mui/material";
+import TableCell, { tableCellClasses } from "@mui/material/TableCell";
 import axios from "axios";
 import { domain } from "../../Components/config";
 import DeleteIcon from "@mui/icons-material/Delete";
+import { styled } from "@mui/material/styles";
 
 function NotificationMain() {
   const [title, setTitle] = useState("");
@@ -45,6 +46,32 @@ function NotificationMain() {
         console.error(error);
       });
   };
+
+  const StyledTableCell = styled(TableCell)(({ theme }) => ({
+    [`&.${tableCellClasses.head}`]: {
+      backgroundColor: theme.palette.action.hover,
+      color: theme.palette.common.black,
+      fontWeight: theme.typography.fontWeightBold,
+    },
+    [`&.${tableCellClasses.body}`]: {
+      fontSize: 14,
+      whiteSpace: "pre-wrap", // Allow text to wrap
+      maxWidth: "300px", 
+      overflowWrap: "break-word",// Adjust max-width as needed
+    },
+  }));
+
+  const StyledTableRow = styled(TableRow)(({ theme }) => ({
+    '&:nth-of-type(odd)': {
+      backgroundColor: theme.palette.common.white,
+    },
+    '&:nth-of-type(even)': {
+      backgroundColor: theme.palette.action.hover,
+    },
+    '&:last-child td, &:last-child th': {
+      border: 0,
+    },
+  }));
 
   const fetchNotifications = () => {
     axios
@@ -92,14 +119,14 @@ function NotificationMain() {
   }, []);
 
   return (
-    <div>
-      <Box sx={{ border: "1px solid #D9D9D9" }}>
+    <div style={{ minHeight: "85vh", backgroundColor: "whitesmoke" }}>
+      <Box sx={{ border: "1px solid #D9D9D9", margin: "0 auto", maxWidth: "1200px" }}>
         <Box
           component="main"
           sx={{
             backgroundColor: "white",
             flexGrow: 2,
-            p: 1,
+            p: 4,
           }}
         >
           <Box
@@ -107,11 +134,10 @@ function NotificationMain() {
               marginTop: 4,
               display: "flex",
               flexDirection: "column",
-              alignItems: "center",
             }}
           >
-            <Typography component="h1" variant="h5">
-              Create Notification
+            <Typography component="h1" variant="h5" align="left" sx={{mt:1,mb:2}}>
+              <b>Create Notification</b>
             </Typography>
             <Box
               component="form"
@@ -119,70 +145,93 @@ function NotificationMain() {
               noValidate
               sx={{ mt: 1, width: "100%" }}
             >
-              <TextField
-                margin="normal"
-                required
-                fullWidth
-                id="title"
-                label="Title"
-                name="title"
-                autoComplete="title"
-                autoFocus
-                value={title}
-                onChange={(e) => setTitle(e.target.value)}
-              />
-              <TextField
-                margin="normal"
-                required
-                fullWidth
-                id="message"
-                label="Message"
-                name="message"
-                autoComplete="message"
-                value={message}
-                onChange={(e) => setMessage(e.target.value)}
-              />
-              <Button
-                type="submit"
-                fullWidth
-                variant="contained"
-                sx={{ mt: 3, mb: 2 }}
-              >
-                Submit
-              </Button>
+              <Grid container spacing={2} alignItems="center">
+                <Grid item xs={4}>
+                  <TextField
+                    margin="normal"
+                    required
+                    fullWidth
+                    id="title"
+                    label="Title"
+                    name="title"
+                    autoComplete="title"
+                    autoFocus
+                    value={title}
+                    onChange={(e) => setTitle(e.target.value)}
+                    sx={{ marginBottom: 2 }}
+                  />
+                </Grid>
+                <Grid item xs={6}>
+                  <TextField
+                    margin="normal"
+                    required
+                    fullWidth
+                    id="message"
+                    label="Message"
+                    name="message"
+                    autoComplete="message"
+                    value={message}
+                    onChange={(e) => setMessage(e.target.value)}
+                    sx={{ marginBottom: 2 }}
+                  />
+                </Grid>
+                <Grid item xs={2}>
+                  <Button
+                    type="submit"
+                    fullWidth
+                    variant="contained"
+                    sx={{
+                      height: '56px', // Set height to match TextField height
+                      backgroundColor:"#F78D02",color:"white",
+                      "&:hover": {
+                        backgroundColor: "black",
+                        color: "white",
+                      },
+                    }}
+                  >
+                    Submit
+                  </Button>
+                </Grid>
+              </Grid>
             </Box>
           </Box>
         </Box>
       </Box>
+      <Box sx={{ mt: 6, backgroundColor: "white", p: 4 }}>
+      <Typography variant="h5" gutterBottom sx={{ mb: 3, mt: 2 }}>
+        <b>View Notification</b>
+      </Typography>
       <TableContainer component={Paper} sx={{ mt: 2 }}>
-        <Table sx={{ minWidth: 650 }} aria-label="simple table">
+        <Table sx={{ minWidth: 650, boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.1)" }} aria-label="simple table">
           <TableHead>
             <TableRow>
-              <TableCell>Serial No.</TableCell>
-              <TableCell>Title</TableCell>
-              <TableCell>Message</TableCell>
-              <TableCell>Actions</TableCell>
+              <StyledTableCell>Serial No.</StyledTableCell>
+              <StyledTableCell>Title</StyledTableCell>
+              <StyledTableCell>Message</StyledTableCell>
+              <StyledTableCell>Actions</StyledTableCell>
             </TableRow>
           </TableHead>
           <TableBody>
             {notifications.map((notification, index) => (
               <TableRow key={notification._id}>
-                <TableCell>{index + 1}</TableCell>
-                <TableCell>{notification.title}</TableCell>
-                <TableCell>{notification.message}</TableCell>
-                <TableCell>
+                <StyledTableCell>{index + 1}</StyledTableCell>
+                <StyledTableCell>{notification.title}</StyledTableCell>
+                <StyledTableCell>{notification.message}</StyledTableCell>
+                <StyledTableCell>
                   <IconButton
                     onClick={() => handleDelete(notification._id)}
                     aria-label="delete"
                   >
                     <DeleteIcon />
                   </IconButton>
-                </TableCell>
+                </StyledTableCell>
               </TableRow>
             ))}
           </TableBody>
         </Table>
       </TableContainer>
+    </Box>
+     
     </div>
   );
 }
