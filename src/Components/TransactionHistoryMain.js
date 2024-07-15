@@ -197,7 +197,7 @@ const TransactionHistoryMain = ({ children }) => {
                       style={{
                         borderRadius: "1px",
                         padding: "10px",
-                        backgroundColor: "rgb(51,51,50)",
+                        backgroundColor: "#FFFFFF",
                       }}
                     >
                       <CardHeader
@@ -207,7 +207,7 @@ const TransactionHistoryMain = ({ children }) => {
                           variant: "body2",
                         }}
                         style={{
-                          backgroundColor: "rgb(51,51,50)",
+                          background: "linear-gradient(to right,#ff9903, #e77404)",
                           color: "white",
                           height: "10px",
                           lineHeight: "40px",
@@ -219,14 +219,14 @@ const TransactionHistoryMain = ({ children }) => {
                             item
                             xs={3}
                             style={{
-                              backgroundColor: "rgb(36,36,36)",
+                              backgroundColor: "#f7f8ff",
                               marginTop: "10px",
                               padding: "10px",
                             }}
                           >
                             <Typography
                               variant="caption"
-                              sx={{ color: "white" }}
+                              sx={{ color: "black" }}
                             >
                               Amount:
                             </Typography>
@@ -236,7 +236,7 @@ const TransactionHistoryMain = ({ children }) => {
                             xs={9}
                             style={{
                               textAlign: "right",
-                              backgroundColor: "rgb(36,36,36)",
+                              backgroundColor: "#f7f8ff",
                               color: "red",
                               marginTop: "10px",
                               padding: "10px",
@@ -250,14 +250,14 @@ const TransactionHistoryMain = ({ children }) => {
                             item
                             xs={3}
                             style={{
-                              backgroundColor: "rgb(36,36,36)",
+                              backgroundColor: "#f7f8ff",
                               marginTop: "10px",
                               padding: "10px",
                             }}
                           >
                             <Typography
                               variant="caption"
-                              sx={{ color: "white" }}
+                              sx={{ color: "black" }}
                             >
                               Time:
                             </Typography>
@@ -267,14 +267,14 @@ const TransactionHistoryMain = ({ children }) => {
                             xs={9}
                             style={{
                               textAlign: "right",
-                              backgroundColor: "rgb(36,36,36)",
+                              backgroundColor: "#f7f8ff",
                               marginTop: "10px",
                               padding: "10px",
                             }}
                           >
                             <Typography
                               variant="caption"
-                              sx={{ color: "white" }}
+                              sx={{ color: "black" }}
                             >
                               {new Date(transaction.date).toLocaleString()}
                             </Typography>
