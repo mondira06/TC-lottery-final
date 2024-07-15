@@ -16,11 +16,7 @@ import MuiAlert from "@mui/material/Alert";
 import {
   Tabs,
   Tab,
-  Divider,
-  Pagination,
-  Card,
-  CardHeader,
-  CardContent,
+ 
 } from "@mui/material";
 import Accordion from "@mui/material/Accordion";
 import AccordionSummary from "@mui/material/AccordionSummary";
@@ -90,29 +86,33 @@ const StyledButtonGroup = styled(ButtonGroup)(({ theme }) => ({
   "& .MuiButtonGroup-grouped": {
     border: "none",
     "&:not(:last-of-type)": {
-      borderRight: "1px solid rgba(255, 255, 255, 0.2)",
+      borderRight: "1px solid #117B15E",
     },
   },
 }));
-
 const StyledButton = styled(Button)(({ theme, active }) => ({
-  backgroundColor: active ? "#ff9903" : "rgb(232,117,3)",
-  color: "white",
-  fontSize: "0.875rem",
-  padding: "3px 8px", // Reduced padding
-  "&:hover": {
-    backgroundColor: active ? "#1565c0" : "rgb(232,117,3)",
+  backgroundColor: active ? '#17B15E' : '#FFFFFF',
+  color: '#768096',
+  fontSize: '0.875rem',
+  padding: '3px 8px', // Reduced padding
+  '&:hover': {
+    backgroundColor: '#17B15E',
+    color:"white"
   },
-  "&.random": {
-    backgroundColor: "rgb(232,117,3)",
-    paddingLeft: "10px",
-    paddingRight: "10px",
-    "&:hover": {
-      backgroundColor: "rgb(232,117,3)",
+  '&.random': {
+    backgroundColor: '#117B15E',
+    border: "1px solid #D23838",
+    borderRadius:"10px",
+   color:"#D23838",
+    paddingLeft: '10px', // Reduced padding
+    paddingRight: '10px',
+    gap:2,// Reduced padding
+    '&:hover': {
+      backgroundColor: '#D23838',
+      color:"white"
     },
   },
 }));
-
 const multipliers = [
   { label: "Random", value: "random", isRandom: true },
   { label: "X1", value: 1 },
@@ -443,11 +443,9 @@ const LotteryAppt = () => {
 
   const [selectedColor, setSelectedColor] = useState("RGB(71,129,255)");
   const handleEventSelection = (event) => {
-    // ... your existing code ...
-
     switch (event) {
       case "violet":
-        setSelectedColor("RGB(182,89,254)");
+        setSelectedColor("#9B48DB");
         break;
       case "green":
         setSelectedColor("RGB(64,173,114)");
@@ -460,6 +458,19 @@ const LotteryAppt = () => {
         break;
       case "blue":
         setSelectedColor("RGB(253,86,92)");
+        break;
+      case "big":
+        setSelectedColor("rgb(255,168,46)");
+        break;
+      case "mix1":
+        setSelectedColor(
+          "linear-gradient(to right, rgb(253,86,92) 50%, rgb(182,89,254) 50%)"
+        );
+        break;
+      case "mix2":
+        setSelectedColor(
+          "linear-gradient(to right, rgb(64,173,114) 50%, rgb(182,89,254) 50%)"
+        );
         break;
       default:
         setSelectedColor("RGB(71,129,255)");
@@ -1126,7 +1137,7 @@ const LotteryAppt = () => {
                 style={{ width: "15%" }}
                 onClick={() => {
                   handleOpenDrawer("0");
-                  handleEventSelection("violet");
+                  handleEventSelection("mix1");
                 }}
               />
               <img
@@ -1173,7 +1184,7 @@ const LotteryAppt = () => {
                 style={{ width: "15%" }}
                 onClick={() => {
                   handleOpenDrawer("5");
-                  handleEventSelection("green");
+                  handleEventSelection("mix2");
                 }}
               />
               <img
@@ -1302,50 +1313,66 @@ const LotteryAppt = () => {
           </MuiAlert>
         </Snackbar>
 
-        <Drawer anchor="bottom" open={drawerOpen} onClose={handleCloseDrawer}>
-          <Grid container alignItems="center">
+        <Drawer
+            anchor="bottom"
+            open={drawerOpen}
+            onClose={handleCloseDrawer}
+            PaperProps={{
+              style: {
+                margin: "auto",
+                maxWidth: "400px", // Set this to the desired size of your square
+                // Adjust height as needed
+              },
+            }}
+          >
             <Grid
-              item
-              xs={12}
-              align="center"
+              container
+              alignItems="center"
               style={{
                 position: "relative",
-                marginBottom: "20px",
-                height: "100px",
-                color: "white",
-                backgroundColor: "transparent",
+                color: "black",
+                backgroundColor: "white",
               }}
             >
-              <div
-                style={{
-                  position: "absolute",
-                  top: 0,
-                  left: 0,
-                  width: "100%",
-                  height: "100%",
-                  background: selectedColor,
-                  clipPath: "polygon(0 0, 100% 0, 100% 75%, 50% 100%, 0 75%)",
-                }}
-              ></div>
-              <div style={{ position: "relative" }}>
-                <Typography variant="h6">{`Win Go ${selectedTimer}`}</Typography>
-                <Typography variant="body1">{`${selectedItem} is selected`}</Typography>
-              </div>
-            </Grid>
-
-            <Grid item xs={12}>
               <Grid
-                container
-                justifyContent="space-between"
-                alignItems="center"
+                item
+                xs={12}
+                align="center"
+                style={{
+                  position: "relative",
+                  marginBottom: "-5px",
+                  height: "90px",
+                  color: "white",
+                  backgroundColor: "white",
+                }}
               >
-                <Typography variant="h6">Balance</Typography>
+                <div
+                  style={{
+                    position: "absolute",
+                    top: 0,
+                    left: 0,
+                    width: "100%",
+                    height: "70%",
+                    background: selectedColor,
+                    clipPath: "polygon(0 0, 100% 0, 100% 75%, 50% 100%, 0 75%)",
+                  }}
+                ></div>
+                <div style={{ position: "relative" }}>
+                  <Typography variant="h6">{`Win Go ${selectedTimer}`}</Typography>
+                  <Typography variant="body1">{`${selectedItem} is selected`}</Typography>
+                </div>
+              </Grid>
+
+              <Grid item xs={12}>
+              <Grid container justifyContent="space-between">
+                <Typography variant="h6" sx={{color:"#1E2637"}}>Balance</Typography>
                 <Button
                   variant="contained"
                   style={{
-                    borderRadius: 15,
+                    borderRadius: 50,
                     backgroundColor:
-                      activeBetAmount === 1 ? selectedColor : undefined,
+                      activeBetAmount === 1 ? "#ED8A1F" : '#F6F6F6',
+                      color: activeBetAmount === 1 ?"white":"#858EA1"
                   }}
                   onClick={() => {
                     handleBetAmount(1);
@@ -1357,9 +1384,10 @@ const LotteryAppt = () => {
                 <Button
                   variant="contained"
                   style={{
-                    borderRadius: 15,
+                    borderRadius: 50,
                     backgroundColor:
-                      activeBetAmount === 10 ? selectedColor : undefined,
+                      activeBetAmount === 10 ? '#ED8A1F' : '#F6F6F6',
+                      color: activeBetAmount === 10 ?"white":"#858EA1"
                   }}
                   onClick={() => {
                     handleBetAmount(10);
@@ -1371,9 +1399,10 @@ const LotteryAppt = () => {
                 <Button
                   variant="contained"
                   style={{
-                    borderRadius: 15,
+                    borderRadius: 50,
                     backgroundColor:
-                      activeBetAmount === 100 ? selectedColor : undefined,
+                      activeBetAmount === 100 ? '#ED8A1F' : '#F6F6F6',
+                      color: activeBetAmount === 100 ?"white":"#858EA1"
                   }}
                   onClick={() => {
                     handleBetAmount(100);
@@ -1385,9 +1414,10 @@ const LotteryAppt = () => {
                 <Button
                   variant="contained"
                   style={{
-                    borderRadius: 15,
+                    borderRadius: 50,
                     backgroundColor:
-                      activeBetAmount === 1000 ? selectedColor : undefined,
+                      activeBetAmount === 1000 ? '#ED8A1F' : '#F6F6F6',
+                      color: activeBetAmount === 1000 ?"white":"#858EA1"
                   }}
                   onClick={() => {
                     handleBetAmount(1000);
@@ -1396,37 +1426,6 @@ const LotteryAppt = () => {
                 >
                   {"\u20B9" + "1000"}
                 </Button>
-              </Grid>
-            </Grid>
-            <Grid item xs={12} mt={2}>
-              <Grid
-                container
-                alignItems="center"
-                justifyContent="space-between"
-              >
-                <Typography variant="h6">Add your money</Typography>
-                <Grid justifyContent="flex-end">
-                  <TextField
-                    label="Add Custom Amount"
-                    variant="outlined"
-                    value={customBetAmount}
-                    onChange={handleCustomBetChange}
-                    style={{
-                      borderRadius: 15,
-                      height: 50,
-                    }}
-                    InputProps={{
-                      style: {
-                        color: "black",
-                        borderRadius: 15,
-                        height: 50,
-                      },
-                    }}
-                    InputLabelProps={{
-                      style: { color: "#1876D2" },
-                    }}
-                  />
-                </Grid>
               </Grid>
             </Grid>
             <Grid item xs={12} mt={2}>
@@ -1439,25 +1438,52 @@ const LotteryAppt = () => {
                   align="center"
                   alignItems="center"
                 >
-                  <Typography variant="h6">Quantity</Typography>
+                   <Typography variant="h6" style={{color:"#1E2637"}}>Add your money</Typography>
+                  <Grid justifyContent="flex-end">
+                    <TextField
+                      label="Add Custom Amount"
+                      variant="outlined"
+                      value={customBetAmount}
+                      onChange={handleCustomBetChange}
+                      style={{
+                        borderRadius: 15,
+                        height: 50,
+                        
+                        color:"#1E2637"
+                      }}
+                      InputProps={{
+                        style: {
+                          color: "black",
+                          borderRadius: 15,
+                          height: 50,
+                        },
+                      }}
+                      InputLabelProps={{
+                        style: { color: "black" },
+                      }}
+                    />
+                    </Grid>
+                  <Typography variant="h6" style={{color:"#1E2637"}}>Quantity</Typography>
                   <div
                     className="button1"
                     onClick={() =>
                       setMultiplier(multiplier > 1 ? multiplier - 1 : 1)
                     }
+                    style={{backgroundColor:'#ED8A1F',color:"white"}}
                   >
                     -
                   </div>
 
                   <Typography
                     variant="body1"
-                    style={{ border: "1px solid black", width: "50px" }}
+                    style={{ border: "1px solid #F6F6F6", width: "50px",backgroundColor:"#F6F6F6" }}
                   >
                     {multiplier}
                   </Typography>
                   <div
                     className="button1"
                     onClick={() => setMultiplier(multiplier + 1)}
+                    style={{backgroundColor:'#ED8A1F',color:"white"}}
                   >
                     +
                   </div>
@@ -1473,7 +1499,7 @@ const LotteryAppt = () => {
                     setActiveButton(1);
                   }}
                   style={
-                    activeButton === 1 ? { backgroundColor: selectedColor } : {}
+                    activeButton === 1 ? { backgroundColor: '#ED8A1F',color:"white" } : { backgroundColor:'#F6F6F6',color:"#858EA1"}
                   }
                 >
                   X1
@@ -1485,7 +1511,7 @@ const LotteryAppt = () => {
                     setActiveButton(5);
                   }}
                   style={
-                    activeButton === 5 ? { backgroundColor: selectedColor } : {}
+                    activeButton === 5 ? { backgroundColor: '#ED8A1F',color:"white" } : { backgroundColor:'#F6F6F6',color:"#858EA1"}
                   }
                 >
                   X5
@@ -1498,8 +1524,8 @@ const LotteryAppt = () => {
                   }}
                   style={
                     activeButton === 10
-                      ? { backgroundColor: selectedColor }
-                      : {}
+                      ? { backgroundColor: '#ED8A1F',color:"white" }
+                      : { backgroundColor:'#F6F6F6',color:"#858EA1"}
                   }
                 >
                   X10
@@ -1512,8 +1538,8 @@ const LotteryAppt = () => {
                   }}
                   style={
                     activeButton === 20
-                      ? { backgroundColor: selectedColor }
-                      : {}
+                      ? { backgroundColor: '#ED8A1F',color:"white" }
+                      : { backgroundColor:'#F6F6F6',color:"#858EA1"}
                   }
                 >
                   X20
@@ -1526,8 +1552,8 @@ const LotteryAppt = () => {
                   }}
                   style={
                     activeButton === 50
-                      ? { backgroundColor: selectedColor }
-                      : {}
+                      ? { backgroundColor: '#ED8A1F',color:"white" }
+                      : { backgroundColor:'#F6F6F6',color:"#858EA1"}
                   }
                 >
                   X50
@@ -1540,21 +1566,22 @@ const LotteryAppt = () => {
                   }}
                   style={
                     activeButton === 100
-                      ? { backgroundColor: selectedColor }
-                      : {}
+                      ? { backgroundColor: '#ED8A1F',color:"white" }
+                      : { backgroundColor:'#F6F6F6',color:"#858EA1"}
                   }
                 >
                   X100
                 </div>
               </Grid>
             </Grid>
+
             <Grid item xs={12} mt={2}>
               <Grid container justifyContent="space-around" spacing={0}>
                 <Grid item xs={3}>
                   <Button
                     onClick={handleCancelBet}
                     fullWidth
-                    style={{ backgroundColor: "black" }}
+                    style={{ backgroundColor: "white",color:"#817F7C" }}
                     variant="contained"
                   >
                     Cancel
@@ -1564,15 +1591,14 @@ const LotteryAppt = () => {
                   <Button
                     onClick={handlePlaceBet}
                     fullWidth
-                    style={{ background: selectedColor }}
+                    style={{ background: '#ED8A1F',color:"white" }}
                     variant="contained"
                   >{`Total Bet: ${betAmount * multiplier}`}</Button>
                 </Grid>
               </Grid>
             </Grid>
           </Grid>
-        </Drawer>
-
+          </Drawer>
         <Dialog
           open={openDialog}
           aria-labelledby="alert-dialog-title"
@@ -1602,7 +1628,7 @@ const LotteryAppt = () => {
           </DialogContent>
         </Dialog>
 
-        <Grid mt={2} sx={{ marginBottom: "100px" }}>
+        <Grid mt={2}>
           <Tabs
             value={value}
             onChange={handleChange}
@@ -1844,7 +1870,7 @@ const LotteryAppt = () => {
                                 style={{
                                   fontWeight: "bold",
                                   color: "red",
-                                  color: "white",
+                               
                                 }}
                               >
                                 {bet.fee}
@@ -1917,7 +1943,7 @@ const LotteryAppt = () => {
               style={{
                 backgroundColor: "transparent",
                 margin: "15% auto",
-                padding: 20,
+              
                 width: "80%",
                 height: "50%",
                 backgroundImage: `url(${

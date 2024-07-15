@@ -28,14 +28,14 @@ const CustomTable = ({ data }) => {
           xs={2.4}
           key={column.id}
           sx={{
-            backgroundColor: "RGB(71,129,255)",
-            color: "white",
-            padding: "8px ",
-            fontWeight: "bold",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            fontSize: "0.8rem",
+            backgroundColor: '#ED8A1F',
+            color: 'white',
+            padding: '8px',
+            fontWeight: 'bold',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            width: '100%',
           }}
         >
           {column.label}
@@ -55,8 +55,8 @@ const CustomTable = ({ data }) => {
               justifyContent: "center",
               fontSize: "10px",
               fontWeight: "bold",
-              color: "white",
-              backgroundColor: "#2b3270",
+              color: "black",
+              backgroundColor: "#ffffff",
             }}
           >
             {row.periodId.slice(0, 3) + "**" + row.periodId.slice(-4)}
@@ -72,8 +72,8 @@ const CustomTable = ({ data }) => {
               justifyContent: "center",
               fontSize: "10px",
               fontWeight: "bold",
-              color: "white",
-              backgroundColor: "#2b3270",
+              color: "black",
+              backgroundColor: "#ffffff",
             }}
           >
             {row.trxBlockAddress}
@@ -89,8 +89,8 @@ const CustomTable = ({ data }) => {
               justifyContent: "center",
               fontSize: "10px",
               fontWeight: "bold",
-              color: "white",
-              backgroundColor: "#2b3270",
+              color: "black",
+              backgroundColor: "#ffffff",
             }}
           >
             {row.blockTime}
@@ -106,8 +106,8 @@ const CustomTable = ({ data }) => {
               justifyContent: "center",
               fontSize: "10px",
               fontWeight: "bold",
-              color: "white",
-              backgroundColor: "#2b3270",
+              color: "black",
+              backgroundColor: "#ffffff",
             }}
           >
             {"** " + row.hash.slice(-4)}{" "}
@@ -120,7 +120,7 @@ const CustomTable = ({ data }) => {
               borderBottom: "1px solid #ccc",
               display: "flex",
               alignItems: "center",
-              backgroundColor: "#2b3270",
+              backgroundColor: "#ffffff",
               justifyContent: "center",
             }}
           >
@@ -153,7 +153,7 @@ const CustomTable = ({ data }) => {
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
-                color: "white",
+                color: "black",
                 fontWeight: "bold",
                 fontSize: "12px",
               }}
@@ -177,7 +177,7 @@ const CustomTable = ({ data }) => {
                 row.sizeOutcome.charAt(0).toUpperCase() === "B"
                   ? "#dd9138"
                   : "#5088d3",
-              backgroundColor: "#2b3270",
+              backgroundColor: "#ffffff",
             }}
           >
             {row.sizeOutcome.charAt(0).toUpperCase()}
@@ -193,15 +193,30 @@ const CustomTable = ({ data }) => {
           count={Math.ceil(data.length / pageSize)}
           page={page}
           onChange={handleChangePage}
-          sx={{
-            "& .MuiPaginationItem-root": {
-              color: "white",
-            },
-            "& .MuiPaginationItem-page.Mui-selected": {
-              backgroundColor: "white",
-              color: "black",
-            },
-          }}
+          sx={{"& .MuiPaginationItem-root": {
+            color: "grey",
+          },
+          "& .MuiPaginationItem-page.Mui-selected": {
+            color: "grey",
+          },
+          "& .MuiPaginationItem-ellipsis": {
+            color: "#D9AC4F",
+            backgroundColor: "#ED8A1F",
+          },
+          "& .MuiPaginationItem-previousNext": {
+            backgroundColor: "#ED8A1F",
+            color: "#ffffff",
+            padding: "3px",
+            width: "auto", // Ensure it doesn't stretch
+            height: "auto", // Ensure it doesn't stretch
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+          },
+          "& .MuiPaginationItem-icon": {
+            width: "70px", // Adjust the size to make it square
+            height: "40px", // Adjust the size to make it square
+          },}}
         />
       </Grid>
     </Grid>
