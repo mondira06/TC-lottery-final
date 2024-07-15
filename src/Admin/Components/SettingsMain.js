@@ -6,7 +6,9 @@ import {
   Typography,
   Container,
   CssBaseline,
-  Grid,
+  Tabs,
+  Tab,
+  Paper,
 } from "@mui/material";
 import axios from "axios";
 import { domain } from "../../Components/config";
@@ -25,15 +27,16 @@ function SettingsMain() {
   const [level3bet, setLevel3bet] = useState("");
   const [level4bet, setLevel4bet] = useState("");
   const [level5bet, setLevel5bet] = useState("");
+  const [values, setValues] = useState(0);
 
   useEffect(() => {
     axios
       .get(`${domain}/Getid`, { withCredentials: true })
-      .then(function (response) {
+      .then((response) => {
         setUpi(response.data.Upi);
         setTrx(response.data.Trx);
       })
-      .catch(function (error) {
+      .catch((error) => {
         console.error(error);
       });
   }, []);
@@ -79,13 +82,13 @@ function SettingsMain() {
 
     axios
       .post(`${domain}/upsertID`, data, { withCredentials: true })
-      .then(function (response) {
+      .then((response) => {
         alert("Successful");
         setUpi("");
         setTrx("");
         setImage(null);
       })
-      .catch(function (error) {
+      .catch((error) => {
         console.error(error);
       });
   };
@@ -93,18 +96,18 @@ function SettingsMain() {
   const handleSubmit2 = (e) => {
     e.preventDefault();
     const formData = {
-      level1: level1,
-      level2: level2,
-      level3: level3,
-      level4: level4,
-      level5: level5,
+      level1,
+      level2,
+      level3,
+      level4,
+      level5,
     };
 
     axios
       .put(`${domain}/update-commission-rates`, formData, {
         withCredentials: true,
       })
-      .then(function (response) {
+      .then((response) => {
         alert("Successful");
         setLevel1("");
         setLevel2("");
@@ -112,7 +115,7 @@ function SettingsMain() {
         setLevel4("");
         setLevel5("");
       })
-      .catch(function (error) {
+      .catch((error) => {
         console.error(error);
       });
   };
@@ -129,7 +132,7 @@ function SettingsMain() {
 
     axios
       .put(`${domain}/commissionRates`, formData, { withCredentials: true })
-      .then(function (response) {
+      .then((response) => {
         alert("Successful");
         setLevel1bet("");
         setLevel2bet("");
@@ -137,20 +140,76 @@ function SettingsMain() {
         setLevel4bet("");
         setLevel5bet("");
       })
-      .catch(function (error) {
+      .catch((error) => {
         console.error(error);
       });
   };
 
+  const handleTabChange = (event, newValue) => {
+    setValues(newValue);
+  };
+
+  const TabPanel = (props) => {
+    const { children, value, index, ...other } = props;
+
+    return (
+      <div
+        role="tabpanel"
+        hidden={value !== index}
+        id={`simple-tabpanel-${index}`}
+        aria-labelledby={`simple-tab-${index}`}
+        {...other}
+      >
+        {value === index && <Box sx={{ p: 3 }}>{children}</Box>}
+      </div>
+    );
+  };
+
   return (
-    <Container maxWidth="lg">
+    <Container maxWidth="lg"  sx={{minHeight:"85vh"}}> 
       <CssBaseline />
-      <Box sx={{ my: 4 }}>
-        <Typography variant="h4" align="center" gutterBottom>
-          Settings
+      <Box >
+       
+        <Paper  sx={{boxShadow:"0px 4px 10px rgba(0, 0, 0, 0.1)",paddingTop:"20px",marginTop:"60px" }}>
+
+        <Typography variant="h5" align="left" sx={{ml: 4, marginBottom:"20px",marginTop:"20px"}}>
+          <b>Updates</b>
         </Typography>
-        <Grid container spacing={4}>
-          <Grid item xs={12} md={4}>
+
+          <Tabs
+              value={values}
+             
+              // TabIndicatorProps={{ style: { display: "none" } }}
+              variant="fullWidth"
+            onChange={handleTabChange}
+            sx={{
+              display: "flex",
+              justifyContent: "space-between",
+              paddingLeft: "20px",
+              paddingRight: "20px",
+            }}
+            aria-label="settings tabs"
+          >
+            <Tab
+              label="Update UPI / TRX Address"
+              sx={{
+                color: values === 0 ? "#F2F2F2" : "#A8A5A1",
+              }}
+            />
+            <Tab
+              label="Update Deposit Bonus Commission"
+              sx={{
+                color: values === 1 ? "#F2F2F2" : "#A8A5A1",
+              }}
+            />
+            <Tab
+              label="Update Wengo Bet Commission"
+              sx={{
+                color: values=== 2 ? "#F2F2F2" : "#A8A5A1",
+              }}
+            />
+          </Tabs>
+          <TabPanel value={values} index={0}>
             <Box
               sx={{ p: 3, border: "1px solid #D9D9D9", borderRadius: "8px" }}
             >
@@ -172,8 +231,16 @@ function SettingsMain() {
                   name="upi"
                   autoComplete="upi"
                   autoFocus
-                  value={upi}
-                  onChange={(e) => setUpi(e.target.value)}
+                  defaultValue={upi}
+                  onBlur={(e) => setUpi(e.target.value)}
+                  sx={{
+                    "& .MuiOutlinedInput-root.Mui-focused": {
+                      "& fieldset": {
+                        borderColor: "black",
+                      },
+                    },
+                    marginBottom: { xs: "10px", sm: "0" },
+                  }}
                 />
                 <TextField
                   margin="normal"
@@ -183,28 +250,42 @@ function SettingsMain() {
                   label="Trx"
                   name="trx"
                   autoComplete="trx"
-                  value={trx}
-                  onChange={(e) => setTrx(e.target.value)}
+                  defaultValue={trx}
+                  onBlur={(e) => setTrx(e.target.value)}
+                  sx={{
+                    "& .MuiOutlinedInput-root.Mui-focused": {
+                      "& fieldset": {
+                        borderColor: "black",
+                      },
+                    },
+                    marginBottom: { xs: "10px", sm: "0" },
+                  }}
                 />
                 <input
                   type="file"
-                  onChange={(e) => setImage(e.target.files[0])}
+                  onBlur={(e) => setImage(e.target.files[0])}
                   style={{ margin: "16px 0" }}
                 />
                 <Button
                   type="button"
                   fullWidth
                   variant="contained"
-                  color="primary"
-                  sx={{ mt: 2 }}
                   onClick={handleSubmit}
+                  sx={{
+                    backgroundColor: "#F78D02",
+                    color: "white",
+                    "&:hover": {
+                      backgroundColor: "black",
+                      color: "white",
+                    },
+                  }}
                 >
                   Update
                 </Button>
               </Box>
             </Box>
-          </Grid>
-          <Grid item xs={12} md={4}>
+          </TabPanel>
+          <TabPanel value={values} index={1}>
             <Box
               sx={{ p: 3, border: "1px solid #D9D9D9", borderRadius: "8px" }}
             >
@@ -230,8 +311,16 @@ function SettingsMain() {
                   label="Level 1"
                   name="Level1"
                   autoComplete="level1"
-                  value={level1}
-                  onChange={(e) => setLevel1(e.target.value)}
+                  defaultValue={level1}
+                  onBlur={(e) => setLevel1(e.target.value)}
+                  sx={{
+                    "& .MuiOutlinedInput-root.Mui-focused": {
+                      "& fieldset": {
+                        borderColor: "black",
+                      },
+                    },
+                    marginBottom: { xs: "10px", sm: "0" },
+                  }}
                 />
                 <TextField
                   margin="normal"
@@ -241,143 +330,229 @@ function SettingsMain() {
                   label="Level 2"
                   name="Level2"
                   autoComplete="level2"
-                  value={level2}
-                  onChange={(e) => setLevel2(e.target.value)}
+                  defaultValue={level2}
+                  onBlur={(e) => setLevel2(e.target.value)}
+                  sx={{
+                    "& .MuiOutlinedInput-root.Mui-focused": {
+                      "& fieldset": {
+                        borderColor: "black",
+                      },
+                    },
+                    marginBottom: { xs: "10px", sm: "0" },
+                  }}
                 />
                 <TextField
                   margin="normal"
-                  required
-                  fullWidth
-                  id="level3"
-                  label="Level 3"
-                  name="level3"
-                  autoComplete="level3"
-                  value={level3}
-                  onChange={(e) => setLevel3(e.target.value)}
-                />
-                <TextField
-                  margin="normal"
-                  required
-                  fullWidth
-                  id="level4"
-                  label="Level 4"
-                  name="Level4"
-                  autoComplete="level4"
-                  value={level4}
-                  onChange={(e) => setLevel4(e.target.value)}
-                />
-                <TextField
-                  margin="normal"
-                  required
-                  fullWidth
-                  id="level5"
-                  label="Level 5"
-                  name="level5"
-                  autoComplete="level5"
-                  value={level5}
-                  onChange={(e) => setLevel5(e.target.value)}
-                />
-                <Button
-                  type="submit"
-                  fullWidth
-                  variant="contained"
-                  color="primary"
-                  sx={{ mt: 2 }}
-                >
-                  Update
-                </Button>
-              </Box>
-            </Box>
-          </Grid>
-          <Grid item xs={12} md={4}>
-            <Box
-              sx={{ p: 3, border: "1px solid #D9D9D9", borderRadius: "8px" }}
+              required
+              fullWidth
+              id="level3"
+              label="Level 3"
+              name="level3"
+              autoComplete="level3"
+              defaultValue={level3}
+              onBlur={(e) => setLevel3(e.target.value)}
+              sx={{
+                "& .MuiOutlinedInput-root.Mui-focused": {
+                  "& fieldset": {
+                    borderColor: "black",
+                  },
+                },
+                marginBottom: { xs: "10px", sm: "0" },
+              }}
+            />
+            <TextField
+              margin="normal"
+              required
+              fullWidth
+              id="level4"
+              label="Level 4"
+              name="Level4"
+              autoComplete="level4"
+              defaultValue={level4}
+              onBlur={(e) => setLevel4(e.target.value)}
+              sx={{
+                "& .MuiOutlinedInput-root.Mui-focused": {
+                  "& fieldset": {
+                    borderColor: "black",
+                  },
+                },
+                marginBottom: { xs: "10px", sm: "0" },
+              }}
+            />
+            <TextField
+              margin="normal"
+              required
+              fullWidth
+              id="level5"
+              label="Level 5"
+              name="level5"
+              autoComplete="level5"
+              defaultValue={level5}
+              onBlur={(e) => setLevel5(e.target.value)}
+              sx={{
+                "& .MuiOutlinedInput-root.Mui-focused": {
+                  "& fieldset": {
+                    borderColor: "black",
+                  },
+                },
+                marginBottom: { xs: "10px", sm: "0" },
+              }}
+            />
+            <Button
+              type="submit"
+              fullWidth
+              variant="contained"
+              sx={{
+                mt: 2,
+                backgroundColor: "#F78D02",
+                color: "white",
+                "&:hover": {
+                  backgroundColor: "black",
+                  color: "white",
+                },
+              }}
             >
-              <Typography
-                component="h1"
-                variant="h5"
-                align="center"
-                gutterBottom
-              >
-                Update Wengo Bet Commission
-              </Typography>
-              <Box
-                component="form"
-                onSubmit={handleSubmit3}
-                noValidate
-                sx={{ mt: 1 }}
-              >
-                <TextField
-                  margin="normal"
-                  required
-                  fullWidth
-                  id="level1"
-                  label="Level 1"
-                  name="Level1"
-                  autoComplete="level1"
-                  value={level1bet}
-                  onChange={(e) => setLevel1bet(e.target.value)}
-                />
-                <TextField
-                  margin="normal"
-                  required
-                  fullWidth
-                  id="level2"
-                  label="Level 2"
-                  name="Level2"
-                  autoComplete="level2"
-                  value={level2bet}
-                  onChange={(e) => setLevel2bet(e.target.value)}
-                />
-                <TextField
-                  margin="normal"
-                  required
-                  fullWidth
-                  id="level3"
-                  label="Level 3"
-                  name="level3"
-                  autoComplete="level3"
-                  value={level3bet}
-                  onChange={(e) => setLevel3bet(e.target.value)}
-                />
-                <TextField
-                  margin="normal"
-                  required
-                  fullWidth
-                  id="level4"
-                  label="Level 4"
-                  name="Level4"
-                  autoComplete="level4"
-                  value={level4bet}
-                  onChange={(e) => setLevel4bet(e.target.value)}
-                />
-                <TextField
-                  margin="normal"
-                  required
-                  fullWidth
-                  id="level5"
-                  label="Level 5"
-                  name="level5"
-                  autoComplete="level5"
-                  value={level5bet}
-                  onChange={(e) => setLevel5bet(e.target.value)}
-                />
-                <Button
-                  type="submit"
-                  fullWidth
-                  variant="contained"
-                  color="primary"
-                  sx={{ mt: 2 }}
-                >
-                  Update
-                </Button>
-              </Box>
-            </Box>
-          </Grid>
-        </Grid>
-      </Box>
-    </Container>
-  );
+              Update
+            </Button>
+          </Box>
+        </Box>
+      </TabPanel>
+      <TabPanel value={values} index={2}>
+        <Box
+          sx={{ p: 3, border: "1px solid #D9D9D9", borderRadius: "8px" }}
+        >
+          <Typography
+            component="h1"
+            variant="h5"
+            align="center"
+            gutterBottom
+          >
+            Update Wengo Bet Commission
+          </Typography>
+          <Box
+            component="form"
+            onSubmit={handleSubmit3}
+            noValidate
+            sx={{ mt: 1 }}
+          >
+            <TextField
+              margin="normal"
+              required
+              fullWidth
+              id="level1"
+              label="Level 1"
+              name="Level1"
+              autoComplete="level1"
+              defaultValue={level1bet}
+              onBlur={(e) => setLevel1bet(e.target.value)}
+              sx={{
+                "& .MuiOutlinedInput-root.Mui-focused": {
+                  "& fieldset": {
+                    borderColor: "black",
+                  },
+                },
+                marginBottom: { xs: "10px", sm: "0" },
+              }}
+            />
+            <TextField
+              margin="normal"
+              required
+              fullWidth
+              id="level2"
+              label="Level 2"
+              name="Level2"
+              autoComplete="level2"
+              defaultValue={level2bet}
+              onBlur={(e) => setLevel2bet(e.target.value)}
+              sx={{
+                "& .MuiOutlinedInput-root.Mui-focused": {
+                  "& fieldset": {
+                    borderColor: "black",
+                  },
+                },
+                marginBottom: { xs: "10px", sm: "0" },
+              }}
+            />
+            <TextField
+              margin="normal"
+              required
+              fullWidth
+              id="level3"
+              label="Level 3"
+              name="level3"
+              autoComplete="level3"
+              defaultValue={level3bet}
+              onBlur={(e) => setLevel3bet(e.target.value)}
+              sx={{
+                "& .MuiOutlinedInput-root.Mui-focused": {
+                  "& fieldset": {
+                    borderColor: "black",
+                  },
+                },
+                marginBottom: { xs: "10px", sm: "0" },
+              }}
+            />
+            <TextField
+              margin="normal"
+              required
+              fullWidth
+              id="level4"
+              label="Level 4"
+              name="Level4"
+              autoComplete="level4"
+              defaultValue={level4bet}
+              onBlur={(e) => setLevel4bet(e.target.value)}
+              sx={{
+                "& .MuiOutlinedInput-root.Mui-focused": {
+                  "& fieldset": {
+                    borderColor: "black",
+                  },
+                },
+                marginBottom: { xs: "10px", sm: "0" },
+              }}
+            />
+            <TextField
+              margin="normal"
+              required
+              fullWidth
+              id="level5"
+              label="Level 5"
+              name="level5"
+              autoComplete="level5"
+              defaultValue={level5bet}
+              onBlur={(e) => setLevel5bet(e.target.value)}
+              sx={{
+                "& .MuiOutlinedInput-root.Mui-focused": {
+                  "& fieldset": {
+                    borderColor: "black",
+                  },
+                },
+                marginBottom: { xs: "10px", sm: "0" },
+              }}
+            />
+            <Button
+              type="submit"
+              fullWidth
+              variant="contained"
+              sx={{
+                mt: 2,
+                backgroundColor: "#F78D02",
+                color: "white",
+                "&:hover": {
+                  backgroundColor: "black",
+                  color: "white",
+                },
+              }}
+            >
+              Update
+            </Button>
+          </Box>
+        </Box>
+      </TabPanel>
+    </Paper>
+  </Box>
+</Container>
+);
 }
 
 export default SettingsMain;

@@ -5,39 +5,43 @@ const Play = ({ isOpen, onClose }) => {
 
   return (
     <div
-      style={{
-        position: 'fixed',
-        top: '50%',
-        left: '50%',
-        transform: 'translate(-50%, -50%)',
-        width: '300px',
-        padding: '0',
-        backgroundColor: '#211d2b',
-        boxShadow: '0px 0px 10px rgba(0, 0, 0, 0.1)',
-        borderRadius: '10px',
-        color: 'white',
-        zIndex: 1000,
-      }}
-    >
-      <div
-        style={{
-          backgroundImage: "linear-gradient(to right,#2ba7f3, #2a7cf2)",
-          borderTopLeftRadius: '10px',
-          borderTopRightRadius: '10px',
-          padding: '15px',
-          textAlign: 'center',
-        }}
-      >
-        <h2 style={{ margin: 0 }}>How to play</h2>
-      </div>
-      <div
-  style={{
-    padding: '20px',
-    maxHeight: '400px',
-    overflowY: 'auto',
-    textAlign: 'left ', 
-  }}
->
+                style={{
+                  position: "fixed",
+                  top: "50%",
+                  left: "50%",
+                  transform: "translate(-50%, -50%)",
+                  width: "300px",
+                  padding: "0",
+                  backgroundColor: "#201D2B",
+                  boxShadow: "0px 0px 10px rgba(0, 0, 0, 0.1)",
+                  borderRadius: "10px",
+                  color: "white",
+                  zIndex: 1000,
+                }}
+              >
+                {" "}
+                <div
+                  style={{
+                    backgroundImage:
+                      "linear-gradient(to right,#F88F02, #EB7B02)",
+                    borderTopLeftRadius: "10px",
+                    borderTopRightRadius: "10px",
+                    padding: "15px",
+                    textAlign: "center",
+                  }}
+                >
+                  <h2 style={{ margin: 0, color: "white" }}>How to play</h2>
+                </div>
+                <div
+                  style={{
+                    padding: "20px",
+                    maxHeight: "400px",
+                    overflowY: "auto",
+                    textAlign: "left ",
+                    backgroundColor:"white",
+                    color: "grey",
+                  }}
+                >
   <p>
   1 minutes 1 issue, 55 seconds to order, 5 seconds waiting for the draw. It opens all day. The total number of trade is 1440 issues.<br />
     <span style={{ display: 'block', marginBottom: '20px' }}></span>
@@ -61,28 +65,30 @@ const Play = ({ isOpen, onClose }) => {
   </p>
 </div>
 <div
-        style={{
-          backgroundColor: '#2b3270',
-          borderBottomLeftRadius: '10px',
-          borderBottomRightRadius: '10px',
-          padding: '20px',
-          textAlign: 'center',
-        }}
-      >
-        <div
-          style={{
-            backgroundImage: "linear-gradient(to right,#2ba7f3, #2a7cf2)",
-            padding: '10px 20px',
-            width: 'fit-content',
-            margin: '0 auto',
-            textAlign: 'center',
-            cursor: 'pointer',
-            borderRadius: '5px', // Make it look more like a button
-          }}
-          onClick={onClose} // Attach onClick event to the inner div
-        >
-          Close
-        </div>
+                  style={{
+                    backgroundColor: "#FFFFFF",
+                    borderBottomLeftRadius: "10px",
+                    borderBottomRightRadius: "10px",
+                    padding: "20px",
+                    textAlign: "center",
+                  }}
+                >
+                  <div
+                    style={{
+                      backgroundImage:
+                        "linear-gradient(to right,#FB9302, #EA7902)",
+                      padding: "10px 20px",
+                      width: "fit-content",
+                      margin: "0 auto",
+                      textAlign: "center",
+                      color: "white",
+                      cursor: "pointer",
+                      borderRadius: "5px", // Make it look more like a button
+                    }}
+                    onClick={onClose} // Attach onClick event to the inner div
+                  >
+                    Close
+                  </div>
       </div>
     </div>
   );

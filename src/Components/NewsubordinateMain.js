@@ -79,8 +79,9 @@ const filteredSubordinatesData = subordinatesData.filter((subordinate) => {
           flexDirection="column"
           height="calc(var(--vh, 1vh) * 100)"
           position="relative"
+          backgroundColor="#F7F8FF"
         >
-          <Box flexGrow={1} sx={{backgroundColor: 'rgb(34,39,91)'}}>
+          <Box flexGrow={1} sx={{backgroundColor: '#F7F8FF'}}>
 
 
             
@@ -92,9 +93,9 @@ const filteredSubordinatesData = subordinatesData.filter((subordinate) => {
     position: 'sticky',
     top: 0,
     zIndex: 1000,
-    backgroundColor: 'Rgb(55,72,146)',
+    backgroundColor: '#FFFFFF',
     padding: isSmallScreen ? '8px' : '8px 16px',
-    color: 'white'
+    color: 'black'
   }}
 >
   <Grid item xs={6} textAlign={isSmallScreen ? "center" : "left"}>
@@ -111,16 +112,19 @@ const filteredSubordinatesData = subordinatesData.filter((subordinate) => {
 </Grid>
 
 
-<ButtonGroup variant="contained" aria-label="outlined primary button group" sx={{margin: 1, display: isSmallScreen ? 'block' : 'flex', justifyContent: 'center'}}>
-  <Button onClick={() => setFilter('today')}>Today</Button>
-  <Button onClick={() => setFilter('thisWeek')}>This Week</Button>
-  <Button onClick={() => setFilter('thisMonth')}>This Month</Button>
+<ButtonGroup variant="contained" backgroundColor= '#F7F8FF' sx={{margin: 1, display: isSmallScreen ? 'block' : 'flex', justifyContent: 'center'}}>
+  <Button style={{color:"white",
+                  backgroundColor:"#ED8A1F"}}onClick={() => setFilter('today')}>Today</Button>
+  <Button style={{color:"white",
+                  backgroundColor:"#ED8A1F"}}onClick={() => setFilter('thisWeek')}>This Week</Button>
+  <Button style={{color:"white",
+                  backgroundColor:"#ED8A1F"}}onClick={() => setFilter('thisMonth')}>This Month</Button>
 </ButtonGroup>
 
 
 {filteredSubordinatesData.map((subordinate, index) => (
   <Box key={index} m={isSmallScreen ? 1 : 2} borderRadius={2}>
-    <Card sx={{backgroundColor:"rgb(54,72,146)",color:"white"}}>
+    <Card sx={{backgroundColor:"white",color:"black"}}>
       <CardContent>
         <Grid container spacing={2}>
           <Grid item xs={6} sm={6}>

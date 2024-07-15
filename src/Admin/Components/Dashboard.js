@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
-import { Grid, Paper, Typography, Box } from "@mui/material";
+import { Grid, Paper, Typography } from "@mui/material";
 import axios from "axios";
-import {domain} from '../../Components/config';
+import { domain } from "../../Components/config";
+
 const Dashboard = () => {
   const [data, setData] = useState(0);
   const [userBalance, setUserBalance] = useState(0);
@@ -73,7 +74,7 @@ const Dashboard = () => {
         console.log("Error while fetching user details:", err);
       });
 
-      axios
+    axios
       .get(`${domain}/success-recharge`, { withCredentials: true })
       .then((res) => {
         setSuccessRecharge(res.data.successAmount);
@@ -81,7 +82,8 @@ const Dashboard = () => {
       .catch((err) => {
         console.log("Error while fetching user details:", err);
       });
-      axios
+
+    axios
       .get(`${domain}/total-withdrawl-amount`, { withCredentials: true })
       .then((res) => {
         setTotalWithdrawal(res.data.completeWithdrawAmount);
@@ -89,8 +91,8 @@ const Dashboard = () => {
       .catch((err) => {
         console.log("Error while fetching user details:", err);
       });
-   }, []);
-   
+  }, []);
+
   const dat = [
     { heading: "Today User Join", value: data },
     { heading: "Today's Recharge", value: todayrecharge },
@@ -105,27 +107,26 @@ const Dashboard = () => {
     { heading: "Withdrawal Status", value: 0 },
     { heading: "Pending Complaints", value: 0 },
   ];
+
   return (
-    <div>
-
+    <div style={{minHeight: "85vh"}}>
       <Grid container spacing={4}>
-      {dat.map((item, index) => (
-  <Grid item xs={12} sm={6} md={4} lg={3} key={index}>
-    <Paper
-      style={{
-        padding: "25px",
-        textAlign: "left",
-        backgroundColor: " rgb(24,118,209) ",
-        color: "#FFFFFF",
-      }}
-    >
-      <Typography variant="h6">{item.heading}</Typography>
-      <Typography variant="h6">{item.value}</Typography>
-    </Paper>
-  </Grid>
-))}
+        {dat.map((item, index) => (
+          <Grid item xs={12} sm={6} md={4} lg={3} key={index}>
+            <Paper
+              style={{
+                padding: "25px",
+                textAlign: "left",
+                backgroundColor: "#ffffff", // Change background color here
+                color: "#F78D02",
+              }}
+            >
+              <Typography variant="h6">{item.heading}</Typography>
+              <Typography variant="h6">{item.value}</Typography>
+            </Paper>
+          </Grid>
+        ))}
       </Grid>
-
     </div>
   );
 };

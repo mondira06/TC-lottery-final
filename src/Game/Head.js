@@ -44,26 +44,26 @@ countdownSound.loop = true;
 const images = [
   {
     id: 1,
-    src: "games/assets/time-5d4e96a3.png",
-    altSrc: "games/assets/time_a-afd768a9.png",
+    src: "../../games/assets/time-5d4e96a3.png",
+    altSrc: "../../games/assets/time_a-07f92409.png",
     subtitle: "1Min",
   },
   {
     id: 2,
-    src: "games/assets/time-5d4e96a3.png",
-    altSrc: "games/assets/time_a-afd768a9.png",
+    src: "../../games/assets/time-5d4e96a3.png",
+    altSrc: "../../games/assets/time_a-07f92409.png",
     subtitle: "3Min",
   },
   {
     id: 3,
-    src: "games/assets/time-5d4e96a3.png",
-    altSrc: "games/assets/time_a-afd768a9.png",
+    src: "../../games/assets/time-5d4e96a3.png",
+    altSrc: "../../games/assets/time_a-07f92409.png",
     subtitle: "5Min",
   },
   {
     id: 4,
-    src: "games/assets/time-5d4e96a3.png",
-    altSrc: "games/assets/time_a-afd768a9.png",
+    src: "../../games/assets/time-5d4e96a3.png",
+    altSrc: "../../games/assets/time_a-07f92409.png",
     subtitle: "10Min",
   },
 ];
@@ -75,31 +75,34 @@ const TabPanel = ({ children, value, index }) => {
     </div>
   );
 };
-
 const StyledButtonGroup = styled(ButtonGroup)(({ theme }) => ({
   "& .MuiButtonGroup-grouped": {
     border: "none",
     "&:not(:last-of-type)": {
-      borderRight: "1px solid rgba(255, 255, 255, 0.2)",
+      borderRight: "1px solid #117B15E",
     },
   },
 }));
-
 const StyledButton = styled(Button)(({ theme, active }) => ({
-  backgroundColor: active ? "#1976d2" : "rgb(34,39,91)",
-  color: "white",
-  fontSize: "0.875rem",
-  padding: "3px 8px", // Reduced padding
-  "&:hover": {
-    backgroundColor: active ? "#1565c0" : "rgb(34,39,91)",
+  backgroundColor: active ? '#17B15E' : '#FFFFFF',
+  color: '#768096',
+  fontSize: '0.875rem',
+  padding: '3px 8px', // Reduced padding
+  '&:hover': {
+    backgroundColor: '#17B15E',
+    color:"white"
   },
-  "&.random": {
-    backgroundColor: "rgb(34,39,91)",
-
-    paddingLeft: "10px", // Reduced padding
-    paddingRight: "10px", // Reduced padding
-    "&:hover": {
-      backgroundColor: "rgb(34,39,91)",
+  '&.random': {
+    backgroundColor: '#117B15E',
+    border: "1px solid #D23838",
+    borderRadius:"10px",
+   color:"#D23838",
+    paddingLeft: '10px', // Reduced padding
+    paddingRight: '10px',
+    gap:2,// Reduced padding
+    '&:hover': {
+      backgroundColor: '#D23838',
+      color:"white"
     },
   },
 }));
@@ -128,7 +131,7 @@ const Head = () => {
   const [selectedItem, setSelectedItem] = useState("");
   const [betAmount, setBetAmount] = useState(1);
   const [multiplier, setMultiplier] = useState(1);
-  const [totalBet, setTotalBet] = useState(0);
+  const [totalBet, setTotalBet] = useState(1);
   const [betPlaced, setBetPlaced] = useState(false);
   const [betPeriodId, setBetPeriodId] = useState(null);
   const [lastAlertedPeriodId, setLastAlertedPeriodId] = useState(null);
@@ -149,6 +152,10 @@ const Head = () => {
   const [isSmall, setIsSmall] = useState(false);
   const [isBig, setIsBig] = useState(true);
 
+  const navigate = useNavigate();
+
+ // Include navigate in the dependency array
+
   useEffect(() => {
     const handleResize = () => {
       if (window.innerWidth < 600) {
@@ -159,9 +166,9 @@ const Head = () => {
         setIsBig(true);
       }
     };
-    window.addEventListener('resize', handleResize);
+    window.addEventListener("resize", handleResize);
     handleResize(); // Set the initial state
-    return () => window.removeEventListener('resize', handleResize);
+    return () => window.removeEventListener("resize", handleResize);
   }, []);
 
   const handleOpenPopup = () => {
@@ -226,6 +233,13 @@ const Head = () => {
     return () => socket.close(); // Cleanup WebSocket connection
   }, [selectedTimer]);
 
+  const handleTimerChange = (id, subtitle) => {
+    setActiveId(id);
+    const newTimerKey = subtitle.toLowerCase().replace("min", "min");
+    setSelectedTimer(subtitle);
+    navigate(`/timer/${newTimerKey}`);
+  };
+
   const handleClick = (id) => {
     let timerKey;
     switch (id) {
@@ -268,9 +282,6 @@ const Head = () => {
 
     return () => clearInterval(timer);
   }, []);
-
-  // Inside your component
-  const navigate = useNavigate();
 
   const navigateToPage = () => {
     navigate("/"); // Replace '/path-to-page' with the actual path
@@ -358,9 +369,9 @@ const Head = () => {
 
   const handleCancelBet = () => {
     setSelectedItem("");
-    setBetAmount(0);
+    setBetAmount(1);
     setMultiplier(1);
-    setTotalBet(0);
+    setTotalBet(1);
     handleCloseDrawer();
   };
   const handleCloseSnackbar = (event, reason) => {
@@ -382,7 +393,7 @@ const Head = () => {
   };
 
   useEffect(() => {
-    if (["00:05","00:04","00:03", "00:02", "00:01"].includes(remainingTime)) {
+    if (["00:05", "00:04", "00:03", "00:02", "00:01"].includes(remainingTime)) {
       setOpenDialog(true);
       if (isSoundOn && remainingTime !== lastPlayedTime) {
         countdownSound.play();
@@ -405,7 +416,7 @@ const Head = () => {
   const handleEventSelection = (event) => {
     switch (event) {
       case "violet":
-        setSelectedColor("RGB(182,89,254)");
+        setSelectedColor("#9B48DB");
         break;
       case "green":
         setSelectedColor("RGB(64,173,114)");
@@ -422,10 +433,21 @@ const Head = () => {
       case "big":
         setSelectedColor("rgb(255,168,46)");
         break;
+      case "mix1":
+        setSelectedColor(
+          "linear-gradient(to right, rgb(253,86,92) 50%, rgb(182,89,254) 50%)"
+        );
+        break;
+      case "mix2":
+        setSelectedColor(
+          "linear-gradient(to right, rgb(64,173,114) 50%, rgb(182,89,254) 50%)"
+        );
+        break;
       default:
         setSelectedColor("RGB(71,129,255)");
     }
   };
+
   const [activeButton, setActiveButton] = useState(1);
   const [activeBetAmount, setActiveBetAmount] = useState(1);
   const [customBetAmount, setCustomBetAmount] = useState("");
@@ -537,7 +559,8 @@ const Head = () => {
 
   return (
     <div>
-      <Mobile>
+    <Mobile>
+      <div style={{ backgroundColor: "#F7F8FF" }}>
         <Grid
           container
           alignItems="center"
@@ -546,7 +569,7 @@ const Head = () => {
             position: "sticky",
             top: 0,
             zIndex: 1000,
-            backgroundColor: "rgb(34,39,91)",
+            backgroundColor: "#F89002",
             padding: "8px 16px",
             color: "white",
           }}
@@ -575,14 +598,17 @@ const Head = () => {
           direction="column"
           sx={{
             height: "300px",
-            backgroundColor: "rgb(34,39,91)",
+            backgroundColor: "#FF9902",
             borderRadius: "0 0 70px 70px",
             textAlign: "center",
           }}
         >
           <Grid
             sx={{
-              backgroundColor: "rgb(62,93,174)",
+              
+              backgroundSize: "cover",
+              backgroundColor: "#F7F7F7",
+              backgroundPosition: "center",
               margin: "0 20px 20px 20px",
               borderRadius: "30px",
               padding: "10px",
@@ -596,13 +622,13 @@ const Head = () => {
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
-                color: "white",
+                color: "black",
               }}
             >
               <Typography variant="h6" sx={{ fontWeight: "bold" }}>
                 {user ? user.walletAmount : " Loading"}
               </Typography>
-              <IconButton sx={{ color: "white" }}>
+              <IconButton sx={{ color: "black" }}>
                 <Refresh />
               </IconButton>
             </Grid>
@@ -614,11 +640,11 @@ const Head = () => {
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
-                color: "white",
+                color: "black",
               }}
             >
               <AccountBalanceWallet
-                sx={{ marginRight: "10px", color: "RGB(71,129,255)" }}
+                sx={{ marginRight: "10px", color: '#FF3B52' }}
               />
               <Typography variant="subtitle2">Wallet Balance</Typography>
             </Grid>
@@ -639,7 +665,8 @@ const Head = () => {
                 sx={{
                   marginLeft: "10px",
                   color: "white",
-                  borderColor: "white",
+                  backgroundColor: "#FF3B52",
+                  borderColor: "#FF3B52",
                   borderRadius: "50px",
                 }}
               >
@@ -651,7 +678,7 @@ const Head = () => {
                 fullWidth
                 sx={{
                   marginLeft: "10px",
-                  backgroundColor: "RGB(71,129,255)",
+                  backgroundColor: "#17B15E",
                   borderRadius: "50px",
                 }}
               >
@@ -663,7 +690,7 @@ const Head = () => {
           <Grid
             item
             sx={{
-              backgroundColor: "rgb(62,93,174)",
+              backgroundColor: "#FFFBE8",
               margin: "0 20px 20px 20px",
               borderRadius: "3px",
               padding: "10px",
@@ -673,7 +700,7 @@ const Head = () => {
             }}
           >
             <IconButton>
-              <VolumeUp sx={{ color: "RGB(71,129,255)" }} />
+              <VolumeUp sx={{ color: "#FF3B52" }} />
             </IconButton>
             <CSSTransition
               in={inProp}
@@ -681,7 +708,7 @@ const Head = () => {
               classNames="message"
               unmountOnExit
             >
-              <Typography variant="caption" sx={{ color: "white" }}>
+              <Typography variant="caption" sx={{ color: "#F88F02" }}>
                 {textArray[index]}
               </Typography>
             </CSSTransition>
@@ -690,456 +717,466 @@ const Head = () => {
               variant="contained"
               size="small"
               sx={{
-                backgroundColor: "RGB(71,129,255)",
+                backgroundColor: "#EE7F02",
                 borderRadius: "50px",
                 fontSize: "9px",
                 paddingLeft: "12px",
                 paddingRight: "12px",
+                color: "white",
               }}
-              startIcon={<WhatshotIcon />}
+             
             >
               Details
             </Button>
           </Grid>
         </Grid>
 
-        <Grid
-          container
-          spacing={1}
-          sx={{
-            marginLeft: "auto",
-            marginRight: "auto",
-            maxWidth: "95%",
-            boxShadow: "0px 4px 8px rgba(0, 0, 0, 0.1)",
-            marginTop: "-50px",
-            backgroundColor: "rgb(42,50,112)",
-            borderRadius: "30px",
-            color: "white",
-          }}
-        >
-          {images.map((image) => (
+        <Grid container spacing={1} sx={{
+        marginLeft: 'auto',
+        marginRight: 'auto',
+        maxWidth: '95%',
+        boxShadow: '0px 4px 8px rgba(0, 0, 0, 0.1)',
+        marginTop: '-50px',
+        backgroundColor: '#FFFFFF',
+        borderRadius: '30px'
+      }}>
+        {images.map((image) => (
+          <Grid
+            item
+            xs={3}
+            key={image.id}
+            onClick={() => handleClick(image.id)}
+            style={{
+              cursor: 'pointer',
+              border: activeId === image.id ? '1px solid #FE9902' : 'none',
+              backgroundColor: activeId === image.id ? '#EE7F02' : '#FFFFFF',
+              borderRadius: '10px',
+              color:activeId === image.id ? "white":'#A1AFC2',
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center', // Align items horizontally
+              justifyContent: 'center', // Align items vertically
+            }}
+          >
+            <img src={activeId === image.id ? image.altSrc : image.src} alt={image.subtitle} style={{ width: '80%' }} />
+            <Typography variant="caption">{image.subtitle}</Typography>
+          </Grid>
+        ))}
+      </Grid>
+
+
+          <Grid
+            container
+            spacing={0}
+            mt={2}
+            sx={{
+              marginLeft: "auto",
+              marginRight: "auto",
+              maxWidth: "95%",
+              boxShadow: "0px 4px 8px rgba(0, 0, 0, 0.1)",
+              backgroundImage:
+                'url("../../games/assets/diban-ad1641e92.png")',
+              backgroundSize: "cover",
+              backgroundPosition: "center",
+            }}
+          >
             <Grid
               item
-              xs={3}
-              key={image.id}
-              onClick={() => handleClick(image.id)}
-              style={{
-                cursor: "pointer",
-                border:
-                  activeId === image.id ? "1px solid rgb(65,101,188)" : "none",
-                backgroundColor:
-                  activeId === image.id ? "rgb(65,101,188)" : "transparent",
-                borderRadius: "10px",
+              xs={6}
+              sx={{
                 display: "flex",
                 flexDirection: "column",
-                alignItems: "center", // Align items horizontally
-                justifyContent: "center", // Align items vertically
+                justifyContent: "space-evenly",
               }}
             >
-              <img
-                src={activeId === image.id ? image.altSrc : image.src}
-                alt={image.subtitle}
-                style={{ width: "80%" }}
-              />
-              <Typography variant="caption">{image.subtitle}</Typography>
-            </Grid>
-          ))}
-        </Grid>
-
-        <Grid
-          container
-          spacing={0}
-          mt={2}
-          sx={{
-            marginLeft: "auto",
-            marginRight: "auto",
-            maxWidth: "95%",
-            boxShadow: "0px 4px 8px rgba(0, 0, 0, 0.1)",
-            backgroundImage: 'url("games/assets/diban-ad1641e9.png")',
-            backgroundSize: "cover",
-            backgroundPosition: "center",
-          }}
-        >
-          <Grid
-            item
-            xs={6}
-            sx={{
-              display: "flex",
-              flexDirection: "column",
-              justifyContent: "space-evenly",
-            }}
-          >
-            <Grid item mt={2} sx={{ justifyContent: "flex-start" }}>
-              <Button
-                variant="outlined"
-                size="small"
+              <Grid item mt={2} sx={{ justifyContent: "flex-start" }}>
+                <Button
+                  variant="outlined"
+                  size="small"
+                  sx={{
+                    color: "white",
+                    borderColor: "white",
+                    borderRadius: "20px",
+                  }}
+                  startIcon={<NoteIcon />}
+                  onClick={handleOpenPopup}
+                >
+                  How To Play
+                </Button>
+                <Play isOpen={isPopupOpen} onClose={handleClosePopup} />
+              </Grid>
+              <Grid item>
+                <Typography
+                  variant="caption"
+                  sx={{ color: "white" }}
+                >{`Win Go ${selectedTimer}`}</Typography>
+              </Grid>
+              <Grid
+                item
                 sx={{
-                  color: "white",
-                  borderColor: "white",
-                  borderRadius: "20px",
+                  display: "flex",
+                  marginBottom: "10px",
+                  justifyContent: "center",
                 }}
-                startIcon={<NoteIcon />}
-                onClick={handleOpenPopup}
               >
-                How To Play
-              </Button>
-              <Play isOpen={isPopupOpen} onClose={handleClosePopup} />
-            </Grid>
-            <Grid item>
-              <Typography
-                variant="caption"
-                sx={{ color: "white" }}
-              >{`Win Go ${selectedTimer}`}</Typography>
+                {firstFiveRows.map((row, index) => (
+                  <img
+                    key={index}
+                    src={`../../games/assets/games/${row.numberOutcome.trim()}.png`}
+                    className="auja"
+                    alt={`Image ${index + 1}`}
+                    style={{
+                      width: "13%",
+                      marginRight:
+                        index !== firstFiveRows.length - 1 ? "10px" : "0",
+                    }}
+                  />
+                ))}
+              </Grid>
             </Grid>
             <Grid
               item
+              xs={6}
               sx={{
                 display: "flex",
-                marginBottom: "10px",
+                flexDirection: "column",
                 justifyContent: "center",
+                alignItems: "center",
               }}
             >
-              {firstFiveRows.map((row, index) => (
-                <img
-                  key={index}
-                  src={`games/assets/games/${row.numberOutcome.trim()}.png`}
-                  className="auja"
-                  alt={`Image ${index + 1}`}
-                  style={{
-                    width: "13%",
-                    marginRight:
-                      index !== firstFiveRows.length - 1 ? "10px" : "0",
-                  }}
-                />
-              ))}
+              <Grid item>
+                <Typography variant="caption" sx={{ color: "white" }}>
+                  Seconds Remaining
+                </Typography>
+              </Grid>
+              <Grid item>
+                <Typography variant="h5" sx={{ color: "white" }}>
+                  {remainingTime}
+                </Typography>
+              </Grid>
+              <Grid item>
+                <Typography variant="h6" sx={{ color: "white" }}>
+                  {periodId ? periodId.toString().slice(0, -2) : ""}
+                </Typography>
+              </Grid>
             </Grid>
           </Grid>
-          <Grid
-            item
-            xs={6}
-            sx={{
-              display: "flex",
-              flexDirection: "column",
-              justifyContent: "center",
-              alignItems: "center",
-            }}
-          >
-            <Grid item>
-              <Typography variant="caption" sx={{ color: "white" }}>
-                Seconds Remaining
-              </Typography>
-            </Grid>
-            <Grid item>
-              <Typography variant="h5" sx={{ color: "white" }}>
-                {remainingTime}
-              </Typography>
-            </Grid>
-            <Grid item>
-              <Typography variant="h6" sx={{ color: "white" }}>
-                {periodId ? periodId.toString().slice(0, -2) : ""}
-              </Typography>
-            </Grid>
-          </Grid>
-        </Grid>
 
-        <Grid
-          container
-          mt={2}
-          spacing={2}
-          sx={{
-            boxShadow: "0px 4px 8px rgba(0, 0, 0, 0.1)",
-            marginLeft: "auto",
-            marginRight: "auto",
-            maxWidth: "95%",
-            borderRadius: "20px",
-            backgroundColor: "rgb(42,50,112)",
-          }}
-        >
-          {/* First Row */}
-          <Grid item xs={12} container justifyContent="space-evenly">
-            <Button
-              onClick={() => {
-                handleOpenDrawer("green");
-                handleEventSelection("green");
-              }}
-              variant="contained"
-              sx={{
-                backgroundColor: "RGB(64,173,114)",
-                width: "100px",
-                borderRadius: "0 10px 0 10px",
-              }}
-            >
-              Green
-            </Button>
-            <Button
-              onClick={() => {
-                handleOpenDrawer("violet");
-                handleEventSelection("violet");
-              }}
-              variant="contained"
-              sx={{
-                backgroundColor: "white",
-                width: "100px",
-                borderRadius: "10px",
-                color: "black",
-              }}
-            >
-              Violet
-            </Button>
-            <Button
-              onClick={() => {
-                handleOpenDrawer("red");
-                handleEventSelection("red");
-              }}
-              variant="contained"
-              sx={{
-                backgroundColor: "RGB(253,86,92)",
-                width: "100px",
-                borderRadius: "10px 0 10px 0",
-              }}
-            >
-              Red
-            </Button>
-          </Grid>
-          {/* Second Row */}
           <Grid
             container
             mt={2}
+            spacing={2}
             sx={{
-              backgroundColor: "rgb(50,58,124)",
+              boxShadow: "0px 4px 8px #FFFFFF",
               marginLeft: "auto",
               marginRight: "auto",
               maxWidth: "95%",
               borderRadius: "20px",
-              padding: "10px",
+              backgroundColor: "#FFFFFF",
             }}
           >
+            {/* First Row */}
             <Grid item xs={12} container justifyContent="space-evenly">
-              <img
-                src="games/assets/games/0.png"
-                alt="0"
-                style={{ width: "15%" }}
+              <Button
                 onClick={() => {
-                  handleOpenDrawer("0");
+                  handleOpenDrawer("green");
+                  handleEventSelection("green");
+                }}
+                variant="contained"
+                sx={{
+                  backgroundColor: "RGB(64,173,114)",
+                  width: "100px",
+                  borderRadius: "0 10px 0 10px",
+                }}
+              >
+                Green
+              </Button>
+              <Button
+                onClick={() => {
+                  handleOpenDrawer("violet");
                   handleEventSelection("violet");
                 }}
-              />
-              <img
-                src="games/assets/games/1.png"
-                alt="1"
-                style={{ width: "15%" }}
-                onClick={() => {
-                  handleOpenDrawer("1");
-                  handleEventSelection("green");
+                variant="contained"
+                sx={{
+                  backgroundColor: "#9B48DB",
+                  width: "100px",
+                  borderRadius: "10px",
+                  color: "white",
                 }}
-              />
-              <img
-                src="games/assets/games/2.png"
-                alt="2"
-                style={{ width: "15%" }}
-                onClick={() => {
-                  handleOpenDrawer("2");
-                  handleEventSelection("red");
-                }}
-              />
-              <img
-                src="games/assets/games/3.png"
-                alt="3"
-                style={{ width: "15%" }}
-                onClick={() => {
-                  handleOpenDrawer("3");
-                  handleEventSelection("green");
-                }}
-              />
-              <img
-                src="games/assets/games/4.png"
-                alt="4"
-                style={{ width: "15%" }}
-                onClick={() => {
-                  handleOpenDrawer("4");
-                  handleEventSelection("red");
-                }}
-              />
-            </Grid>
-            <Grid item xs={12} container justifyContent="space-evenly">
-              <img
-                src="games/assets/games/5.png"
-                alt="5"
-                style={{ width: "15%" }}
-                onClick={() => {
-                  handleOpenDrawer("5");
-                  handleEventSelection("green");
-                }}
-              />
-              <img
-                src="games/assets/games/6.png"
-                alt="6"
-                style={{ width: "15%" }}
-                onClick={() => {
-                  handleOpenDrawer("6");
-                  handleEventSelection("red");
-                }}
-              />
-              <img
-                src="games/assets/games/7.png"
-                alt="7"
-                style={{ width: "15%" }}
-                onClick={() => {
-                  handleOpenDrawer("7");
-                  handleEventSelection("green");
-                }}
-              />
-              <img
-                src="games/assets/games/8.png"
-                alt="8"
-                style={{ width: "15%" }}
-                onClick={() => {
-                  handleOpenDrawer("8");
-                  handleEventSelection("red");
-                }}
-              />
-              <img
-                src="games/assets/games/9.png"
-                alt="9"
-                style={{ width: "15%" }}
-                onClick={() => {
-                  handleOpenDrawer("9");
-                  handleEventSelection("green");
-                }}
-              />
-            </Grid>
-          </Grid>
-          {/* Third Row */}
-          <Box sx={{ display: "flex", justifyContent: "center", p: 2 }}>
-            <StyledButtonGroup
-              variant="contained"
-              aria-label="multiplier selection"
-            >
-              {multipliers.map((multiplier) => (
-                <StyledButton
-                  key={multiplier.label}
-                  onClick={() => handleMultiplierChange(multiplier)}
-                  active={
-                    !multiplier.isRandom &&
-                    selectedMultiplier === multiplier.value
-                      ? 1
-                      : 0
-                  }
-                  className={multiplier.isRandom ? "random" : ""}
-                >
-                  {multiplier.label}
-                </StyledButton>
-              ))}
-            </StyledButtonGroup>
-          </Box>
-          {/* Fourth Row */}
-          <Grid
-            container
-            item
-            xs={12}
-            justifyContent="center"
-            sx={{ marginBottom: "10px" }}
-          >
-            <Grid item>
+              >
+                Violet
+              </Button>
               <Button
                 onClick={() => {
-                  handleOpenDrawer("big");
-                  handleEventSelection("big");
+                  handleOpenDrawer("red");
+                  handleEventSelection("red");
                 }}
                 variant="contained"
                 sx={{
-                  width: "150px",
-                  borderRadius: "20px 0 0 20px",
-                  margin: "0",
-                  backgroundColor: "rgb(255,168,46)",
+                  backgroundColor: "RGB(253,86,92)",
+                  width: "100px",
+                  borderRadius: "10px 0 10px 0",
                 }}
               >
-                Big
+                Red
               </Button>
             </Grid>
-            <Grid item>
-              <Button
-                onClick={() => {
-                  handleOpenDrawer("small");
-                  handleEventSelection("blue");
-                }}
-                variant="contained"
-                sx={{
-                  width: "150px",
-                  borderRadius: "0 20px 20px 0",
-                  margin: "0",
-                }}
-              >
-                Small
-              </Button>
-            </Grid>
-          </Grid>
-        </Grid>
-
-        <Snackbar
-          open={openSnackbar}
-          autoHideDuration={1000}
-          onClose={handleCloseSnackbar}
-          style={{
-            position: "fixed",
-            top: "50%",
-            left: "50%",
-            transform: "translate(-50%, -50%)",
-          }}
-        >
-          <MuiAlert
-            onClose={handleCloseSnackbar}
-            severity="success"
-            style={{ backgroundColor: "rgba(0, 0, 0, 0.7)", color: "white" }}
-          >
-            Bet placed successfully!
-          </MuiAlert>
-        </Snackbar>
-
-        <Drawer anchor="bottom" open={drawerOpen} onClose={handleCloseDrawer}>
-          <Grid container alignItems="center">
+            {/* Second Row */}
             <Grid
-              item
-              xs={12}
-              align="center"
-              style={{
-                position: "relative",
-                marginBottom: "20px",
-                height: "100px",
-                color: "white",
-                backgroundColor: "transparent",
+              container
+              mt={2}
+              sx={{
+                backgroundColor: "#F7F8FF",
+                marginLeft: "auto",
+                marginRight: "auto",
+                maxWidth: "95%",
+                borderRadius: "20px",
+                padding: "10px",
               }}
             >
-              <div
-                style={{
-                  position: "absolute",
-                  top: 0,
-                  left: 0,
-                  width: "100%",
-                  height: "100%",
-                  background: selectedColor,
-                  clipPath: "polygon(0 0, 100% 0, 100% 75%, 50% 100%, 0 75%)",
-                }}
-              ></div>
-              <div style={{ position: "relative" }}>
-                <Typography variant="h6">{`Win Go ${selectedTimer}`}</Typography>
-                <Typography variant="body1">{`${selectedItem} is selected`}</Typography>
-              </div>
+              <Grid item xs={12} container justifyContent="space-evenly">
+                <img
+                  src="../../games/assets/n0-30bd92d1.png"
+                  alt="0"
+                  style={{ width: "15%" }}
+                  onClick={() => {
+                    handleOpenDrawer("0");
+                    handleEventSelection("mix1");
+                  }}
+                />
+                <img
+                  src="../../games/assets/n1-dfccbff5.png"
+                  alt="1"
+                  style={{ width: "15%" }}
+                  onClick={() => {
+                    handleOpenDrawer("1");
+                    handleEventSelection("green");
+                  }}
+                />
+                <img
+                  src="../../games/assets/n2-c2913607.png"
+                  alt="2"
+                  style={{ width: "15%" }}
+                  onClick={() => {
+                    handleOpenDrawer("2");
+                    handleEventSelection("red");
+                  }}
+                />
+                <img
+                  src="../../games/assets/n3-f92c313f.png"
+                  alt="3"
+                  style={{ width: "15%" }}
+                  onClick={() => {
+                    handleOpenDrawer("3");
+                    handleEventSelection("green");
+                  }}
+                />
+                <img
+                  src="../../games/assets/n4-cb84933b.png"
+                  alt="4"
+                  style={{ width: "15%" }}
+                  onClick={() => {
+                    handleOpenDrawer("4");
+                    handleEventSelection("red");
+                  }}
+                />
+              </Grid>
+              <Grid item xs={12} container justifyContent="space-evenly">
+                <img
+                  src="../../games/assets/n5-49d0e9c5.png"
+                  alt="5"
+                  style={{ width: "15%" }}
+                  onClick={() => {
+                    handleOpenDrawer("5");
+                    handleEventSelection("mix2");
+                  }}
+                />
+                <img
+                  src="../../games/assets/n6-a56e0b9a.png"
+                  alt="6"
+                  style={{ width: "15%" }}
+                  onClick={() => {
+                    handleOpenDrawer("6");
+                    handleEventSelection("red");
+                  }}
+                />
+                <img
+                  src="../../games/assets/n7-5961a17f.png"
+                  alt="7"
+                  style={{ width: "15%" }}
+                  onClick={() => {
+                    handleOpenDrawer("7");
+                    handleEventSelection("green");
+                  }}
+                />
+                <img
+                  src="../../games/assets/n8-d4d951a4.png"
+                  alt="8"
+                  style={{ width: "15%" }}
+                  onClick={() => {
+                    handleOpenDrawer("8");
+                    handleEventSelection("red");
+                  }}
+                />
+                <img
+                  src="../../games/assets/n9-a20f6f42.png"
+                  alt="9"
+                  style={{ width: "15%" }}
+                  onClick={() => {
+                    handleOpenDrawer("9");
+                    handleEventSelection("green");
+                  }}
+                />
+              </Grid>
             </Grid>
-
-            <Grid item xs={12}>
-              <Grid
-                container
-                justifyContent="space-between"
-                alignItems="center"
+            {/* Third Row */}
+            <Box sx={{ display: "flex", justifyContent: "center", p: 2 }}>
+              <StyledButtonGroup
+                variant="contained"
+                aria-label="multiplier selection"
               >
-                <Typography variant="h6">Balance</Typography>
+                {multipliers.map((multiplier) => (
+                  <StyledButton
+                    key={multiplier.label}
+                    onClick={() => handleMultiplierChange(multiplier)}
+                    active={
+                      !multiplier.isRandom &&
+                      selectedMultiplier === multiplier.value
+                        ? 1
+                        : 0
+                    }
+                    className={multiplier.isRandom ? "random" : ""}
+                  >
+                    {multiplier.label}
+                  </StyledButton>
+                ))}
+              </StyledButtonGroup>
+            </Box>
+            {/* Fourth Row */}
+            <Grid
+              container
+              item
+              xs={12}
+              justifyContent="center"
+              sx={{ marginBottom: "10px" }}
+            >
+              <Grid item>
+                <Button
+                  onClick={() => {
+                    handleOpenDrawer("big");
+                    handleEventSelection("big");
+                  }}
+                  variant="contained"
+                  sx={{
+                    width: "150px",
+                    borderRadius: "20px 0 0 20px",
+                    margin: "0",
+                    backgroundColor: "#FEAA57",
+                  }}
+                >
+                  Big
+                </Button>
+              </Grid>
+              <Grid item>
+                <Button
+                  onClick={() => {
+                    handleOpenDrawer("small");
+                    handleEventSelection("blue");
+                  }}
+                  variant="contained"
+                  sx={{
+                    width: "150px",
+                    borderRadius: "0 20px 20px 0",
+                    margin: "0",
+                    backgroundColor:"#6EA8F4"
+                  }}
+                >
+                  Small
+                </Button>
+              </Grid>
+            </Grid>
+          </Grid>
+
+          <Snackbar
+            open={openSnackbar}
+            autoHideDuration={1000}
+            onClose={handleCloseSnackbar}
+            style={{
+              position: "fixed",
+              top: "50%",
+              left: "50%",
+              transform: "translate(-50%, -50%)",
+            }}
+          >
+            <MuiAlert
+              onClose={handleCloseSnackbar}
+              severity="success"
+              style={{ backgroundColor: "rgba(0, 0, 0, 0.7)", color: "white" }}
+            >
+              Bet placed successfully!
+            </MuiAlert>
+          </Snackbar>
+
+          <Drawer
+            anchor="bottom"
+            open={drawerOpen}
+            onClose={handleCloseDrawer}
+            PaperProps={{
+              style: {
+                margin: "auto",
+                maxWidth: "400px", // Set this to the desired size of your square
+                // Adjust height as needed
+              },
+            }}
+          >
+            <Grid
+              container
+              alignItems="center"
+              style={{
+                position: "relative",
+                color: "black",
+                backgroundColor: "white",
+              }}
+            >
+              <Grid
+                item
+                xs={12}
+                align="center"
+                style={{
+                  position: "relative",
+                  marginBottom: "-5px",
+                  height: "90px",
+                  color: "white",
+                  backgroundColor: "white",
+                }}
+              >
+                <div
+                  style={{
+                    position: "absolute",
+                    top: 0,
+                    left: 0,
+                    width: "100%",
+                    height: "70%",
+                    background: selectedColor,
+                    clipPath: "polygon(0 0, 100% 0, 100% 75%, 50% 100%, 0 75%)",
+                  }}
+                ></div>
+                <div style={{ position: "relative" }}>
+                  <Typography variant="h6">{`Win Go ${selectedTimer}`}</Typography>
+                  <Typography variant="body1">{`${selectedItem} is selected`}</Typography>
+                </div>
+              </Grid>
+
+              <Grid item xs={12}>
+              <Grid container justifyContent="space-between">
+                <Typography variant="h6" sx={{color:"#1E2637"}}>Balance</Typography>
                 <Button
                   variant="contained"
                   style={{
-                    borderRadius: 15,
+                    borderRadius: 50,
                     backgroundColor:
-                      activeBetAmount === 1 ? selectedColor : undefined,
+                      activeBetAmount === 1 ? "#ED8A1F" : '#F6F6F6',
+                      color: activeBetAmount === 1 ?"white":"#858EA1"
                   }}
                   onClick={() => {
                     handleBetAmount(1);
@@ -1151,9 +1188,10 @@ const Head = () => {
                 <Button
                   variant="contained"
                   style={{
-                    borderRadius: 15,
+                    borderRadius: 50,
                     backgroundColor:
-                      activeBetAmount === 10 ? selectedColor : undefined,
+                      activeBetAmount === 10 ? '#ED8A1F' : '#F6F6F6',
+                      color: activeBetAmount === 10 ?"white":"#858EA1"
                   }}
                   onClick={() => {
                     handleBetAmount(10);
@@ -1165,9 +1203,10 @@ const Head = () => {
                 <Button
                   variant="contained"
                   style={{
-                    borderRadius: 15,
+                    borderRadius: 50,
                     backgroundColor:
-                      activeBetAmount === 100 ? selectedColor : undefined,
+                      activeBetAmount === 100 ? '#ED8A1F' : '#F6F6F6',
+                      color: activeBetAmount === 100 ?"white":"#858EA1"
                   }}
                   onClick={() => {
                     handleBetAmount(100);
@@ -1179,9 +1218,10 @@ const Head = () => {
                 <Button
                   variant="contained"
                   style={{
-                    borderRadius: 15,
+                    borderRadius: 50,
                     backgroundColor:
-                      activeBetAmount === 1000 ? selectedColor : undefined,
+                      activeBetAmount === 1000 ? '#ED8A1F' : '#F6F6F6',
+                      color: activeBetAmount === 1000 ?"white":"#858EA1"
                   }}
                   onClick={() => {
                     handleBetAmount(1000);
@@ -1190,37 +1230,6 @@ const Head = () => {
                 >
                   {"\u20B9" + "1000"}
                 </Button>
-              </Grid>
-            </Grid>
-            <Grid item xs={12} mt={2}>
-              <Grid
-                container
-                alignItems="center"
-                justifyContent="space-between"
-              >
-                <Typography variant="h6">Add your money</Typography>
-                <Grid justifyContent="flex-end">
-                  <TextField
-                    label="Add Custom Amount"
-                    variant="outlined"
-                    value={customBetAmount}
-                    onChange={handleCustomBetChange}
-                    style={{
-                      borderRadius: 15,
-                      height: 50,
-                    }}
-                    InputProps={{
-                      style: {
-                        color: "black",
-                        borderRadius: 15,
-                        height: 50,
-                      },
-                    }}
-                    InputLabelProps={{
-                      style: { color: "#1876D2" },
-                    }}
-                  />
-                </Grid>
               </Grid>
             </Grid>
             <Grid item xs={12} mt={2}>
@@ -1233,25 +1242,52 @@ const Head = () => {
                   align="center"
                   alignItems="center"
                 >
-                  <Typography variant="h6">Quantity</Typography>
+                   <Typography variant="h6" style={{color:"#1E2637"}}>Add your money</Typography>
+                  <Grid justifyContent="flex-end">
+                    <TextField
+                      label="Add Custom Amount"
+                      variant="outlined"
+                      value={customBetAmount}
+                      onChange={handleCustomBetChange}
+                      style={{
+                        borderRadius: 15,
+                        height: 50,
+                        
+                        color:"#1E2637"
+                      }}
+                      InputProps={{
+                        style: {
+                          color: "black",
+                          borderRadius: 15,
+                          height: 50,
+                        },
+                      }}
+                      InputLabelProps={{
+                        style: { color: "black" },
+                      }}
+                    />
+                    </Grid>
+                  <Typography variant="h6" style={{color:"#1E2637"}}>Quantity</Typography>
                   <div
                     className="button1"
                     onClick={() =>
                       setMultiplier(multiplier > 1 ? multiplier - 1 : 1)
                     }
+                    style={{backgroundColor:'#ED8A1F',color:"white"}}
                   >
                     -
                   </div>
 
                   <Typography
                     variant="body1"
-                    style={{ border: "1px solid black", width: "50px" }}
+                    style={{ border: "1px solid #F6F6F6", width: "50px",backgroundColor:"#F6F6F6" }}
                   >
                     {multiplier}
                   </Typography>
                   <div
                     className="button1"
                     onClick={() => setMultiplier(multiplier + 1)}
+                    style={{backgroundColor:'#ED8A1F',color:"white"}}
                   >
                     +
                   </div>
@@ -1267,7 +1303,7 @@ const Head = () => {
                     setActiveButton(1);
                   }}
                   style={
-                    activeButton === 1 ? { backgroundColor: selectedColor } : {}
+                    activeButton === 1 ? { backgroundColor: '#ED8A1F',color:"white" } : { backgroundColor:'#F6F6F6',color:"#858EA1"}
                   }
                 >
                   X1
@@ -1279,7 +1315,7 @@ const Head = () => {
                     setActiveButton(5);
                   }}
                   style={
-                    activeButton === 5 ? { backgroundColor: selectedColor } : {}
+                    activeButton === 5 ? { backgroundColor: '#ED8A1F',color:"white" } : { backgroundColor:'#F6F6F6',color:"#858EA1"}
                   }
                 >
                   X5
@@ -1292,8 +1328,8 @@ const Head = () => {
                   }}
                   style={
                     activeButton === 10
-                      ? { backgroundColor: selectedColor }
-                      : {}
+                      ? { backgroundColor: '#ED8A1F',color:"white" }
+                      : { backgroundColor:'#F6F6F6',color:"#858EA1"}
                   }
                 >
                   X10
@@ -1306,8 +1342,8 @@ const Head = () => {
                   }}
                   style={
                     activeButton === 20
-                      ? { backgroundColor: selectedColor }
-                      : {}
+                      ? { backgroundColor: '#ED8A1F',color:"white" }
+                      : { backgroundColor:'#F6F6F6',color:"#858EA1"}
                   }
                 >
                   X20
@@ -1320,8 +1356,8 @@ const Head = () => {
                   }}
                   style={
                     activeButton === 50
-                      ? { backgroundColor: selectedColor }
-                      : {}
+                      ? { backgroundColor: '#ED8A1F',color:"white" }
+                      : { backgroundColor:'#F6F6F6',color:"#858EA1"}
                   }
                 >
                   X50
@@ -1334,8 +1370,8 @@ const Head = () => {
                   }}
                   style={
                     activeButton === 100
-                      ? { backgroundColor: selectedColor }
-                      : {}
+                      ? { backgroundColor: '#ED8A1F',color:"white" }
+                      : { backgroundColor:'#F6F6F6',color:"#858EA1"}
                   }
                 >
                   X100
@@ -1349,7 +1385,7 @@ const Head = () => {
                   <Button
                     onClick={handleCancelBet}
                     fullWidth
-                    style={{ backgroundColor: "black" }}
+                    style={{ backgroundColor: "white",color:"#817F7C" }}
                     variant="contained"
                   >
                     Cancel
@@ -1359,436 +1395,450 @@ const Head = () => {
                   <Button
                     onClick={handlePlaceBet}
                     fullWidth
-                    style={{ background: selectedColor }}
+                    style={{ background: '#ED8A1F',color:"white" }}
                     variant="contained"
                   >{`Total Bet: ${betAmount * multiplier}`}</Button>
                 </Grid>
               </Grid>
             </Grid>
           </Grid>
-        </Drawer>
+          </Drawer>
 
-        <Dialog
-          open={openDialog}
-          aria-labelledby="alert-dialog-title"
-          aria-describedby="alert-dialog-description"
-          PaperProps={{
-            style: {
-              width: "350px", // Set this to the desired size of your square
-              height: "250px", // Set this to the same value as width
-              backgroundColor: "rgba(0, 0, 0, 0.5)", // This sets the opacity of the dialog box background
-              overflow: "hidden",
-              borderRadius: "40px", // This removes the scrollbars
-            },
-          }}
-        >
-          <DialogContent>
-            <DialogContentText
-              id="alert-dialog-description"
-              style={{
-                textAlign: "center",
-                fontSize: "120px",
-                fontWeight: "bold",
-                color: " RGB(71,129,255)",
-              }}
-            >
-              {remainingTime ? remainingTime.split(":")[1] : ""}
-            </DialogContentText>
-          </DialogContent>
-        </Dialog>
-
-        <Grid mt={2} sx={{ marginBottom: "100px" }}>
-          <Tabs
-            value={value}
-            onChange={handleChange}
-            indicatorColor="transparent"
-            style={{
-              marginLeft: "20px",
+          <Dialog
+            open={openDialog}
+            aria-labelledby="alert-dialog-title"
+            aria-describedby="alert-dialog-description"
+            PaperProps={{
+              style: {
+                width: "350px", // Set this to the desired size of your square
+                height: "250px", // Set this to the same value as width
+                backgroundColor: "#FFFFFF", // This sets the opacity of the dialog box background
+                overflow: "hidden",
+                borderRadius: "40px", // This removes the scrollbars
+              },
             }}
           >
-            <Tab
-              label="Game History"
-              style={
-                value === 0
-                  ? {
-                      backgroundColor: "RGB(71,129,255)",
-                      color: "white",
-                      borderRadius: "20px",
-                    }
-                  : { color: "white" }
-              }
-            />
-            <Tab
-              label="Chart"
-              style={
-                value === 1
-                  ? {
-                      backgroundColor: "RGB(71,129,255)",
-                      color: "white",
-                      borderRadius: "20px",
-                    }
-                  : { color: "white" }
-              }
-            />
-            <Tab
-              label="My History"
-              style={
-                value === 2
-                  ? {
-                      backgroundColor: "RGB(71,129,255)",
-                      color: "white",
-                      borderRadius: "20px",
-                    }
-                  : { color: "white" }
-              }
-            />
-          </Tabs>
-          <TabPanel value={value} index={0}>
-            <CustomTable data={rows} />
-          </TabPanel>
-          <TabPanel value={value} index={1}>
-            <RowVisualization data={rows} />
-          </TabPanel>
-          <TabPanel value={value} index={2}>
-            <Grid container style={{ marginLeft: "-15px" }}>
-              {bets
-                .slice()
-                .sort((a, b) =>
-                  b.timestamp && a.timestamp
-                    ? b.timestamp.seconds - a.timestamp.seconds
-                    : 0
-                )
-                .map((bet, index) => (
-                  <Accordion sx={{ backgroundColor: "rgb(42,50,112)" }}>
-                    <AccordionSummary
-                      aria-controls="panel1a-content"
-                      id="panel1a-header"
-                    >
-                      <Grid
-                        container
-                        style={{
-                          backgroundColor: "rgb(34,39,91)",
-                          marginTop: "10px",
-                          padding: "18px",
-                          width: "350px",
-                        }}
+            <DialogContent>
+              <DialogContentText
+                id="alert-dialog-description"
+                style={{
+                  textAlign: "center",
+                  fontSize: "120px",
+                  fontWeight: "bold",
+                  color: " #FF9902",
+                }}
+              >
+                {remainingTime ? remainingTime.split(":")[1] : ""}
+              </DialogContentText>
+            </DialogContent>
+          </Dialog>
+
+          <Grid mt={2}>
+          <Tabs
+              value={value}
+              onChange={handleChange}
+              indicatorColor="transparent"
+              style={{
+                marginLeft: "20px",
+                marginBottom: "10px",
+                paddingTop: "20px",
+              }}
+            >
+              <Tab
+                label="Game History"
+                style={
+                  value === 0
+                    ? {
+                        backgroundColor: "#ED8A1F",
+                        color:  "#F6F6F6",  
+                        borderRadius: "20px",
+                      }
+                    : { color: "#A8A5A1" }
+                }
+              />
+              <Tab
+                label="Chart"
+                style={
+                  value === 1
+                    ? {
+                        backgroundColor: "#ED8A1F",
+                        color: "#F6F6F6",
+                        borderRadius: "20px",
+                      }
+                    : { color: "#A8A5A1" }
+                }
+              />
+              <Tab
+                label="My History"
+                style={
+                  value === 2
+                    ? {
+                        backgroundColor: "#ED8A1F",
+                        color: "#F6F6F6",
+                        borderRadius: "20px",
+                      }
+                    : { color: "#A8A5A1" }
+                }
+              />
+            </Tabs>
+
+            <TabPanel value={value} index={0}>
+              <CustomTable data={rows} />
+            </TabPanel>
+            <TabPanel value={value} index={1}>
+              <RowVisualization data={rows} />
+            </TabPanel>
+            <TabPanel value={value} index={2}>
+              <Grid container style={{ marginLeft: "-15px" }}>
+                {bets
+                  .slice()
+                  .sort((a, b) =>
+                    b.timestamp && a.timestamp
+                      ? b.timestamp.seconds - a.timestamp.seconds
+                      : 0
+                  )
+                  .map((bet, index) => (
+                    <Accordion sx={{ backgroundColor: "#F7F8FF" }}>
+                      <AccordionSummary
+                        aria-controls="panel1a-content"
+                        id="panel1a-header"
                       >
-                        <Grid item xs={3} sm={3}>
-                          <Box
-                            border={1}
-                            borderRadius={2}
-                            style={{
-                              background:
-                                bet.selectedItem.toLowerCase() === "green" ||
-                                [1, 3, 7, 9].includes(Number(bet.selectedItem))
-                                  ? "RGB(64,173,114)"
-                                  : bet.selectedItem.toLowerCase() === "red" ||
-                                    [2, 4, 6, 8].includes(
-                                      Number(bet.selectedItem)
-                                    )
-                                  ? "RGB(253,86,92)"
-                                  : bet.selectedItem.toLowerCase() === "violet"
-                                  ? "RGB(182,89,254)"
-                                  : Number(bet.selectedItem) === 0
-                                  ? "linear-gradient(to right, rgb(253,86,92) 50%, rgb(182,89,254) 50%)"
-                                  : Number(bet.selectedItem) === 5
-                                  ? "linear-gradient(to right, rgb(64,173,114) 50%, rgb(182,89,254) 50%)"
-                                  : "rgb(71,129,255)",
-                              color: "white",
-                              height: "40px",
-                              width: "80px",
-                              display: "flex",
-                              border: "none",
-                              justifyContent: "center",
-                              alignItems: "center",
-                            }}
+                        <Grid
+                          container
+                          style={{
+                            backgroundColor: "#ffffff",
+                            color:"black",
+                            marginTop: "10px",
+                            padding: "18px",
+                            width: "350px",
+                          }}
+                        >
+                          <Grid item xs={3} sm={3}>
+                            <Box
+                              border={1}
+                              borderRadius={2}
+                              style={{
+                                background:
+                                  bet.selectedItem.toLowerCase() === "green" ||
+                                  [1, 3, 7, 9].includes(
+                                    Number(bet.selectedItem)
+                                  )
+                                    ? "RGB(64,173,114)"
+                                    : bet.selectedItem.toLowerCase() ===
+                                        "red" ||
+                                      [2, 4, 6, 8].includes(
+                                        Number(bet.selectedItem)
+                                      )
+                                    ? "RGB(253,86,92)"
+                                    : bet.selectedItem.toLowerCase() ===
+                                      "violet"
+                                    ? "RGB(182,89,254)"
+                                    : Number(bet.selectedItem) === 0
+                                    ? "linear-gradient(to right, rgb(253,86,92) 50%, rgb(182,89,254) 50%)"
+                                    : Number(bet.selectedItem) === 5
+                                    ? "linear-gradient(to right, rgb(64,173,114) 50%, rgb(182,89,254) 50%)"
+                                    : "rgb(71,129,255)",
+                                color: "white",
+                                height: "40px",
+                                width: "80px",
+                                display: "flex",
+                                border: "none",
+                                justifyContent: "center",
+                                alignItems: "center",
+                              }}
+                            >
+                              <Typography
+                                variant="body1"
+                                sx={{ fontSize: "14px" }}
+                              >
+                                {isNaN(bet.selectedItem.split(" ")[0])
+                                  ? bet.selectedItem.split(" ")[0].toUpperCase()
+                                  : bet.selectedItem}
+                              </Typography>
+                            </Box>
+                          </Grid>
+                          <Grid
+                            item
+                            xs={7}
+                            sm={7}
+                            style={{ textAlign: "center" }}
                           >
                             <Typography
                               variant="body1"
-                              sx={{ fontSize: "14px" }}
+                              style={{
+                                fontSize: "12px",
+                                fontWeight: "bold",
+                                color: "black",
+                              }}
                             >
-                              {isNaN(bet.selectedItem.split(" ")[0])
-                                ? bet.selectedItem.split(" ")[0].toUpperCase()
-                                : bet.selectedItem}
+                              {bet.periodId}
                             </Typography>
-                          </Box>
-                        </Grid>
-                        <Grid
-                          item
-                          xs={7}
-                          sm={7}
-                          style={{ textAlign: "center" }}
-                        >
-                          <Typography
-                            variant="body1"
-                            style={{
-                              fontSize: "12px",
-                              fontWeight: "bold",
-                              color: "white",
-                            }}
-                          >
-                            {bet.periodId}
-                          </Typography>
-                          <Typography
-                            variant="body1"
-                            style={{ fontSize: "12px", color: "white" }}
-                          >
-                            {bet.timestamp
-                              ? `${new Date(bet.timestamp).toLocaleDateString(
-                                  "en-GB"
-                                )} 
+                            <Typography
+                              variant="body1"
+                              style={{ fontSize: "12px", color: "black" }}
+                            >
+                              {bet.timestamp
+                                ? `${new Date(bet.timestamp).toLocaleDateString(
+                                    "en-GB"
+                                  )} 
                  ${new Date(bet.timestamp).toLocaleTimeString("en-GB")}`
-                              : "N/A"}
-                          </Typography>
-                        </Grid>
-                        <Grid item xs={2} sm={2}>
-                          <Box
-                            border={1}
-                            borderRadius={1}
-                            borderColor={bet.winLoss > 0 ? "green" : "red"}
-                            sx={{
-                              height: "20px",
-                              width: "65px",
-                              display: "flex",
-                              justifyContent: "center",
-                              alignItems: "center",
-                            }}
-                          >
+                                : "N/A"}
+                            </Typography>
+                          </Grid>
+                          <Grid item xs={2} sm={2}>
+                            <Box
+                              border={1}
+                              borderRadius={1}
+                              borderColor={bet.winLoss > 0 ? "green" : "red"}
+                              sx={{
+                                height: "20px",
+                                width: "65px",
+                                display: "flex",
+                                justifyContent: "center",
+                                alignItems: "center",
+                              }}
+                            >
+                              <Typography
+                                variant="body1"
+                                style={{
+                                  color: bet.winLoss > 0 ? "green" : "red",
+                                }}
+                              >
+                                {bet.status}
+                              </Typography>
+                            </Box>
                             <Typography
                               variant="body1"
                               style={{
                                 color: bet.winLoss > 0 ? "green" : "red",
                               }}
                             >
-                              {bet.status}
+                              {bet.winLoss > 0
+                                ? `+₹${bet.winLoss}`
+                                : `₹${bet.winLoss}`}
                             </Typography>
-                          </Box>
-                          <Typography
-                            variant="body1"
-                            style={{ color: bet.winLoss > 0 ? "green" : "red" }}
-                          >
-                            {bet.winLoss > 0
-                              ? `+₹${bet.winLoss}`
-                              : `₹${bet.winLoss}`}
-                          </Typography>
+                          </Grid>
                         </Grid>
-                      </Grid>
-                    </AccordionSummary>
-                    <AccordionDetails>
-                      <TableContainer>
-                        <Table>
-                          <TableBody>
-                            <TableRow>
-                              <TableCell
-                                style={{ fontWeight: "bold", color: "white" }}
-                              >
-                                Bet Amount
-                              </TableCell>
-                              <TableCell
-                                style={{ fontWeight: "bold", color: "white" }}
-                              >
-                                {bet.betAmount}
-                              </TableCell>
-                            </TableRow>
-                            <TableRow>
-                              <TableCell
-                                style={{ fontWeight: "bold", color: "white" }}
-                              >
-                                Multiplier
-                              </TableCell>
-                              <TableCell
-                                style={{ fontWeight: "bold", color: "white" }}
-                              >
-                                {bet.multiplier}
-                              </TableCell>
-                            </TableRow>
-                            <TableRow>
-                              <TableCell
-                                style={{ fontWeight: "bold", color: "white" }}
-                              >
-                                Total Bet
-                              </TableCell>
-                              <TableCell
-                                style={{ fontWeight: "bold", color: "green" }}
-                              >
-                                {bet.totalBet}
-                              </TableCell>
-                            </TableRow>
-                            <TableRow>
-                              <TableCell
-                                style={{ fontWeight: "bold", color: "white" }}
-                              >
-                                Tax
-                              </TableCell>
-                              <TableCell
-                                style={{ fontWeight: "bold", color: "white" }}
-                              >
-                                {bet.tax}
-                              </TableCell>
-                            </TableRow>
-                            <TableRow>
-                              <TableCell
-                                style={{ fontWeight: "bold", color: "white" }}
-                              >
-                                Fee
-                              </TableCell>
-                              <TableCell
-                                style={{
-                                  fontWeight: "bold",
-                                  color: "red",
-                                  color: "white",
-                                }}
-                              >
-                                {bet.fee}
-                              </TableCell>
-                            </TableRow>
-                            <TableRow>
-                              <TableCell
-                                style={{ fontWeight: "bold", color: "white" }}
-                              >
-                                Selected Timer
-                              </TableCell>
-                              <TableCell
-                                style={{ fontWeight: "bold", color: "white" }}
-                              >
-                                {bet.selectedTimer}
-                              </TableCell>
-                            </TableRow>
-                            <TableRow>
-                              <TableCell
-                                style={{ fontWeight: "bold", color: "white" }}
-                              >
-                                Result
-                              </TableCell>
-                              <TableCell
-                                style={{ fontWeight: "bold", color: "white" }}
-                              >
-                                {bet.result}
-                              </TableCell>
-                            </TableRow>
-                            <TableRow>
-                              <TableCell
-                                style={{ fontWeight: "bold", color: "white" }}
-                              >
-                                Winloss
-                              </TableCell>
-                              <TableCell
-                                style={{
-                                  fontWeight: "bold",
-                                  color: bet.status === "win" ? "green" : "red",
-                                }}
-                              >
-                                {bet.winLoss}
-                              </TableCell>
-                            </TableRow>
-                          </TableBody>
-                        </Table>
-                      </TableContainer>
-                    </AccordionDetails>
-                  </Accordion>
-                ))}
-            </Grid>
-          </TabPanel>
-        </Grid>
-        <>
-          {/* ...rest of the code... */}
+                      </AccordionSummary>
+                      <AccordionDetails>
+                        <TableContainer>
+                          <Table>
+                            <TableBody>
+                              <TableRow>
+                                <TableCell
+                                  style={{ fontWeight: "bold", color: "black" }}
+                                >
+                                  Bet Amount
+                                </TableCell>
+                                <TableCell
+                                  style={{ fontWeight: "bold", color: "black" }}
+                                >
+                                  {bet.betAmount}
+                                </TableCell>
+                              </TableRow>
+                              <TableRow>
+                                <TableCell
+                                  style={{ fontWeight: "bold", color: "black" }}
+                                >
+                                  Multiplier
+                                </TableCell>
+                                <TableCell
+                                  style={{ fontWeight: "bold", color: "black" }}
+                                >
+                                  {bet.multiplier}
+                                </TableCell>
+                              </TableRow>
+                              <TableRow>
+                                <TableCell
+                                  style={{ fontWeight: "bold", color: "black" }}
+                                >
+                                  Total Bet
+                                </TableCell>
+                                <TableCell
+                                  style={{ fontWeight: "bold", color: "green" }}
+                                >
+                                  {bet.totalBet}
+                                </TableCell>
+                              </TableRow>
+                              <TableRow>
+                                <TableCell
+                                  style={{ fontWeight: "bold", color: "black" }}
+                                >
+                                  Tax
+                                </TableCell>
+                                <TableCell
+                                  style={{ fontWeight: "bold", color: "black" }}
+                                >
+                                  {bet.tax}
+                                </TableCell>
+                              </TableRow>
+                              <TableRow>
+                                <TableCell
+                                  style={{ fontWeight: "bold", color: "black" }}
+                                >
+                                  Fee
+                                </TableCell>
+                                <TableCell
+                                  style={{
+                                    fontWeight: "bold",
+                                    color: "red",
+                                    color: "black",
+                                  }}
+                                >
+                                  {bet.fee}
+                                </TableCell>
+                              </TableRow>
+                              <TableRow>
+                                <TableCell
+                                  style={{ fontWeight: "bold", color:"black" }}
+                                >
+                                  Selected Timer
+                                </TableCell>
+                                <TableCell
+                                  style={{ fontWeight: "bold", color: "black"}}
+                                >
+                                  {bet.selectedTimer}
+                                </TableCell>
+                              </TableRow>
+                              <TableRow>
+                                <TableCell
+                                  style={{ fontWeight: "bold", color:"black" }}
+                                >
+                                  Result
+                                </TableCell>
+                                <TableCell
+                                  style={{ fontWeight: "bold", color:"black" }}
+                                >
+                                  {bet.result}
+                                </TableCell>
+                              </TableRow>
+                              <TableRow>
+                                <TableCell
+                                  style={{ fontWeight: "bold", color: "black"}}
+                                >
+                                  Winloss
+                                </TableCell>
+                                <TableCell
+                                  style={{
+                                    fontWeight: "bold",
+                                    color:
+                                      bet.status === "win" ? "green" : "red",
+                                  }}
+                                >
+                                  {bet.winLoss}
+                                </TableCell>
+                              </TableRow>
+                            </TableBody>
+                          </Table>
+                        </TableContainer>
+                      </AccordionDetails>
+                    </Accordion>
+                  ))}
+              </Grid>
+            </TabPanel>
+          </Grid>
+          <>
+            {/* ...rest of the code... */}
 
-          <div
-            style={{
-              display: open ? "block" : "none",
-              position: "absolute", // changed from fixed to absolute
-              zIndex: 1,
-              left:isSmall ? 20 : 10,
-              top: "120px",
-              width: isSmall ? '90%' : "95%",
-              height: isSmall ? '98%':"95%",
-              overflow: "auto",
-              border:"none"
-            }}
-          >
             <div
               style={{
-                backgroundColor: "transparent",
-                margin: "15% auto",
-                padding: 20,
-                width: "75%",
-                height: "60%",
-                backgroundImage: `url(${
-                  gameResult === "Succeed"
-                    ? "assets/images/missningBg-6f17b242.png"
-                    : "assets/images/missningLBg-73e02111.png"
-                })`,
-                backgroundSize: "100% 100%",
-                backgroundRepeat: "no-repeat",
-                backgroundPosition: "center",
-                padding: "20px",
-                display: "flex",
-                flexDirection: "column",
-                justifyContent: "center",
-                alignItems: "center",
+                display: open ? "block" : "none",
+                position: "absolute", // changed from fixed to absolute
+                zIndex: 1,
+                left: isSmall ? 20 : 10,
+                top: "120px",
+                width: isSmall ? "90%" : "95%",
+                height: isSmall ? "98%" : "95%",
+                overflow: "auto",
+                border: "none",
               }}
             >
-              <Typography
-                variant="h4"
+              <div
                 style={{
-                  textAlign: "center",
-                  fontWeight: "bold",
-                  position: "absolute",
-                  marginTop: "-100px",
-                  color: "white",
+                  backgroundColor: "transparent",
+                  margin: "15% auto",
+                  padding: 20,
+                  width: "75%",
+                  height: "60%",
+                  backgroundImage: `url(${
+                    gameResult === "Succeed"
+                      ? "../../assets/images/missningBg-6f17b242.png"
+                      : "../../assets/images/missningLBg-73e02111.png"
+                  })`,
+                  backgroundSize: "100% 100%",
+                  backgroundRepeat: "no-repeat",
+                  backgroundPosition: "center",
+                  padding: "20px",
+                  display: "flex",
+                  flexDirection: "column",
+                  justifyContent: "center",
+                  alignItems: "center",
                 }}
               >
-                {gameResult === "Succeed" ? "Congratulations" : "Sorry"}
-              </Typography>
-              <br />
-              <Typography
-                variant="h6"
-                style={{
-                  textAlign: "center",
-                  position: "absolute",
-                  marginTop: "-30px",
-                  color: "white",
-                }}
-              >
-                Lottery results {getColorAndSize(popupresult)}
-              </Typography>
-              <Typography
-                sx={{
-                  marginTop: "150px",
-                  marginLeft: "50px",
-                  marginRight: "50px",
-                  fontWeight: "bold",
-                }}
-                variant="h6"
-                color="text.secondary"
-              >
-                {dialogContent}
-                <br />
-                <span
-                  style={{ color: gameResult === "Succeed" ? "green" : "red" }}
+                <Typography
+                  variant="h4"
+                  style={{
+                    textAlign: "center",
+                    fontWeight: "bold",
+                    position: "absolute",
+                    marginTop: "-100px",
+                    color: "white",
+                  }}
                 >
-                  ₹{winloss}
-                </span>
+                  {gameResult === "Succeed" ? "Congratulations" : "Sorry"}
+                </Typography>
                 <br />
-                <span style={{ fontSize: "10px" }}>
-                  Period: Win {popupTimer} {popupperiodid}
-                </span>
-              </Typography>
+                <Typography
+                  variant="h6"
+                  style={{
+                    textAlign: "center",
+                    position: "absolute",
+                    marginTop: "-30px",
+                    color: "white",
+                  }}
+                >
+                  Lottery results {getColorAndSize(popupresult)}
+                </Typography>
+                <Typography
+                  sx={{
+                    marginTop: "150px",
+                    marginLeft: "50px",
+                    marginRight: "50px",
+                    fontWeight: "bold",
+                  }}
+                  variant="h6"
+                  color="text.secondary"
+                >
+                  {dialogContent}
+                  <br />
+                  <span
+                    style={{
+                      color: gameResult === "Succeed" ? "green" : "red",
+                    }}
+                  >
+                    ₹{winloss}
+                  </span>
+                  <br />
+                  <span style={{ fontSize: "10px" }}>
+                    Period: Win {popupTimer} {popupperiodid}
+                  </span>
+                </Typography>
 
-              <Button
-                sx={{
-                  marginTop: isSmall ? '350px' :"370px",
-                  marginLeft: "50px",
-                  marginRight: "50px",
-                  position: "absolute",
-                }}
-                onClick={() => setOpen(false)}
-              >
-                Close
-              </Button>
+                <Button
+                  sx={{
+                    marginTop: isSmall ? "350px" : "370px",
+                    marginLeft: "50px",
+                    marginRight: "50px",
+                    position: "absolute",
+                  }}
+                  onClick={() => setOpen(false)}
+                >
+                  Close
+                </Button>
+              </div>
             </div>
-          </div>
-        </>
+          </>
+        </div>
       </Mobile>
     </div>
   );

@@ -105,9 +105,9 @@ const [invitationLink, setInvitationLink] = useState('');
                 position: 'sticky',
                 top: 0,
                 zIndex: 1000,
-                backgroundColor: 'rgb(55,72,146)',
+                backgroundColor: '#FFFFFF',
                 padding: '8px 16px',
-                color: 'white'
+                color: 'black'
                 
               }}
             >
@@ -128,7 +128,7 @@ const [invitationLink, setInvitationLink] = useState('');
 
             <div id="divToDownload"
        style={{
-        backgroundImage: 'url(assets/images/poster-e8284649.png)',
+        backgroundImage: 'url(assets/poster-ce19704f.png)',
         backgroundSize: '100% 100%', // Stretch the image to fit the div
         backgroundRepeat: 'no-repeat',
         minHeight: '40vh',
@@ -136,7 +136,7 @@ const [invitationLink, setInvitationLink] = useState('');
         marginLeft: '25px',
         marginRight: '25px',
         marginTop: '20px',
-        backgroundColor:"rgb(55,72,146)"
+
       }}
      
       
@@ -186,12 +186,12 @@ const [invitationLink, setInvitationLink] = useState('');
         marginTop: '20px',
         marginBottom:"150px"}}>
      <Grid item xs={12}>
-     <Button variant="contained" fullWidth onClick={handleDownload} style={{ backgroundColor: 'rgb(55,72,146)' }}>
+     <Button variant="contained" fullWidth onClick={handleDownload} style={{ backgroundColor: '#ED8A1F',color:"white" }}>
   Invitation Link
 </Button>
 </Grid>
       <Grid item xs={12}>
-  <Button variant="outlined" fullWidth onClick={handleCopyLink}>
+  <Button variant="outlined" fullWidth onClick={handleCopyLink} style={{color:'#ED8A1F',borderColor:"#ED8A1F"}}>
     Copy Invitation Link
   </Button>
 </Grid>

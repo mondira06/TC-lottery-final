@@ -21,7 +21,7 @@ const RowVisualization = ({ data }) => {
               position: "relative",
             }}
           >
-            <div style={{ width: "50px", fontSize: "8px",color:"white",fontWeight:"bold" }}>
+            <div style={{ width: "50px", fontSize: "8px",color:"black",fontWeight:"bold" }}>
               {row.periodId.toString().slice(0, -2)}
             </div>
             {Array.from({ length: 10 }).map((_, circleIndex) => {
@@ -39,7 +39,7 @@ const RowVisualization = ({ data }) => {
                     justifyContent: "center",
                     position: "relative",
                     margin: "0 5px",
-                    color:'white',
+                    color:'black',
                     background: isColored
                       ? Array.isArray(row.colorOutcome) &&
                         row.colorOutcome.length === 2
@@ -72,14 +72,16 @@ const RowVisualization = ({ data }) => {
                   } 40 ${
                     Number(data[rowIndex + 1].numberOutcome.trim()) * 30 + 15
                   } 60`}
-                  stroke="white"
+                  stroke="red"
                   fill="transparent"
                 />
               </svg>
             )}
           </div>
         ))}
-        <Button variant="contained" color="primary" onClick={handleLoadMore}>
+        <Button variant="contained" sx={{
+          backgroundColor:"rgb(224,177,81)"
+        }} onClick={handleLoadMore}>
           Load More
         </Button>
       </div>

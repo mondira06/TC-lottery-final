@@ -65,6 +65,7 @@ const SubordinateDataMain = ({ children }) => {
           flexDirection="column"
           height="calc(var(--vh, 1vh) * 100)"
           position="relative"
+          backgroundColor="#F7F8FF"
         >
           <Box flexGrow={1}>
             <Grid
@@ -75,9 +76,9 @@ const SubordinateDataMain = ({ children }) => {
                 position: "sticky",
                 top: 0,
                 zIndex: 1000,
-                backgroundColor: "rgb(42,50,112)",
+                backgroundColor: "#FFFFFF",
                 padding: "8px 16px",
-                color: "white",
+                color: "black",
               }}
             >
               <Grid item xs={6} textAlign="left">
@@ -103,7 +104,7 @@ const SubordinateDataMain = ({ children }) => {
     style={{
       width: '100%',
       border: '1px solid white',
-      backgroundColor: 'transparent',
+      backgroundColor: '#FFFFFF',
       color: 'white',
       outline: 'none',
       padding: '10px',
@@ -115,7 +116,8 @@ const SubordinateDataMain = ({ children }) => {
                 <Button
                   variant="contained"
                   sx={{ height: "40px" }}
-                  color="primary"
+                  style={{color:"#FFFFFF",
+                  backgroundColor:"#ED8A1F"}}
                   onClick={() => setSearchTerm("")}
                   fullWidth
                 >
@@ -126,13 +128,13 @@ const SubordinateDataMain = ({ children }) => {
   <input
     value={searchDate}
     onChange={(event) => setSearchDate(event.target.value)}
-    label="Search Date"
+    placeholder="Search Date"
     type="date"
     style={{
       width: '100%',
       border: '1px solid white',
-      backgroundColor: 'transparent',
-      color: 'white',
+      backgroundColor: '#FFFFFF',
+     
       outline: 'none',
       padding: '10px',
       boxSizing: 'border-box'
@@ -146,8 +148,8 @@ const SubordinateDataMain = ({ children }) => {
     style={{
       width: '100%',
       border: '1px solid white',
-      backgroundColor: 'transparent',
-      color: 'white',
+      backgroundColor: '#FFFFFF',
+
       outline: 'none',
       padding: '10px',
       boxSizing: 'border-box'
@@ -177,7 +179,8 @@ const SubordinateDataMain = ({ children }) => {
           sx={{
             borderRadius: "15px",
             padding: "10px",
-            backgroundColor: "RGB(255,255,255)",
+            backgroundColor: "#ED8A1F",
+            color:"black"
           }}
         >
           <CardHeader
@@ -190,7 +193,7 @@ const SubordinateDataMain = ({ children }) => {
                   <Tooltip title="Copy User ID">
                     <IconButton>
                       <FileCopyIcon
-                        style={{ color: "white", fontSize: "15px" }}
+                        style={{ color: "black", fontSize: "15px" }}
                       />
                     </IconButton>
                   </Tooltip>
@@ -199,8 +202,8 @@ const SubordinateDataMain = ({ children }) => {
             }
             titleTypographyProps={{ align: "left" }}
             style={{
-              backgroundColor: "RGB(54,142,255)",
-              color: "white",
+              backgroundColor: "#ED8A1F",
+              color: "black",
               height: "10px",
               lineHeight: "40px",
             }}
@@ -211,7 +214,7 @@ const SubordinateDataMain = ({ children }) => {
                 item
                 xs={3}
                 style={{
-                  backgroundColor: "RGB(241,243,255)",
+                  backgroundColor: "#ED8A1F",
                   marginTop: "10px",
                   padding: "10px",
                 }}
@@ -223,7 +226,7 @@ const SubordinateDataMain = ({ children }) => {
                 xs={9}
                 style={{
                   textAlign: "right",
-                  backgroundColor: "RGB(241,243,255)",
+                  backgroundColor: "#ED8A1F",
                   marginTop: "10px",
                   padding: "10px",
                 }}
@@ -236,7 +239,7 @@ const SubordinateDataMain = ({ children }) => {
                 item
                 xs={3}
                 style={{
-                  backgroundColor: "RGB(241,243,255)",
+                  backgroundColor: "#ED8A1F",
                   marginTop: "10px",
                   padding: "10px",
                 }}
@@ -248,7 +251,7 @@ const SubordinateDataMain = ({ children }) => {
                 xs={9}
                 style={{
                   textAlign: "right",
-                  backgroundColor: "RGB(241,243,255)",
+                  backgroundColor: "#ED8A1F",
                   marginTop: "10px",
                   color: "red",
                   padding: "10px",
@@ -262,7 +265,7 @@ const SubordinateDataMain = ({ children }) => {
                 item
                 xs={4}
                 style={{
-                  backgroundColor: "RGB(241,243,255)",
+                  backgroundColor: "#ED8A1F",
                   marginTop: "10px",
                   padding: "10px",
                 }}
@@ -276,7 +279,7 @@ const SubordinateDataMain = ({ children }) => {
                 xs={8}
                 style={{
                   textAlign: "right",
-                  backgroundColor: "RGB(241,243,255)",
+                  backgroundColor: "#ED8A1F",
                   marginTop: "10px",
                   color: "red",
                   padding: "10px",
@@ -290,7 +293,7 @@ const SubordinateDataMain = ({ children }) => {
                 item
                 xs={4}
                 style={{
-                  backgroundColor: "RGB(241,243,255)",
+                  backgroundColor: "#ED8A1F",
                   marginTop: "10px",
                   padding: "10px",
                 }}
@@ -304,7 +307,7 @@ const SubordinateDataMain = ({ children }) => {
                 xs={8}
                 style={{
                   textAlign: "right",
-                  backgroundColor: "RGB(241,243,255)",
+                  backgroundColor: "#ED8A1F",
                   marginTop: "10px",
                   color: "red",
                   padding: "10px",
@@ -318,7 +321,7 @@ const SubordinateDataMain = ({ children }) => {
                 item
                 xs={3}
                 style={{
-                  backgroundColor: "RGB(241,243,255)",
+                  backgroundColor: "#ED8A1F",
                   marginTop: "10px",
                   padding: "10px",
                 }}
@@ -330,7 +333,7 @@ const SubordinateDataMain = ({ children }) => {
                 xs={9}
                 style={{
                   textAlign: "right",
-                  backgroundColor: "RGB(241,243,255)",
+                  backgroundColor: "#ED8A1F",
                   marginTop: "10px",
                   padding: "10px",
                 }}
