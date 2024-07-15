@@ -94,7 +94,11 @@ const Home = ({ children }) => {
       id: 3,
       bgImage: '/assets/5D_bg-23f2c875.png',
       iconImage: '/assets/lotterycategory_20231215033448bjlv.png',
+
+      title: '5D Lottery',
+
       title: 'Aviator',
+
       description: 'Big/Small/Odd/Even',
       descriptionTop: 'Guess Number',
       winningAmount: '₹15.68',
@@ -458,7 +462,11 @@ useEffect(() => {
               position: 'absolute',
               top: '25%',
               fontSize:"25px",
+
+              left: index===0?'16%':index===3?'16%':"21%",
+
               left: index===0?'16%':index===3?'18%':index===2?"16%":"21%",
+
               transform: 'translate(-50%, -50%)'
             }}
           >
@@ -469,7 +477,11 @@ useEffect(() => {
               position: 'absolute',
               top: '47%',
               fontSize:"13px",
+
+              left: index===0?'15%':index===3?'15%':'16%',
+
               left: index===0?'16%':index===3?'17%':'16%',
+
               transform: 'translate(-50%, -50%)',
               color: 'white'
             }}
@@ -482,7 +494,11 @@ useEffect(() => {
               position: 'absolute',
               top: '60%',
               fontSize:"13px",
+
+              left: index===0?'22%':index===3?'22%':'20%',
+
               left: index===0?'23%':index===3?'24%':'20%',
+
               transform: 'translate(-50%, -50%)',
               color: 'white'
             }}
