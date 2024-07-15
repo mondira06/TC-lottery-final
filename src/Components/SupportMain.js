@@ -75,7 +75,7 @@ const ActivityMain = ({ children }) => {
           height="calc(var(--vh, 1vh) * 100)"
           position="relative"
         >
-          <Box flexGrow={1} sx={{ backgroundColor: 'rgb(34,39,91)' }}>
+          <Box flexGrow={1} sx={{ backgroundColor: '#f7f8ff' }}>
             <Grid
               container
               alignItems="center"
@@ -84,9 +84,9 @@ const ActivityMain = ({ children }) => {
                 position: 'sticky',
                 top: 0,
                 zIndex: 1000,
-                backgroundColor: 'Rgb(55,72,146)',
+                backgroundColor: 'white',
                 padding: '8px 16px',
-                color: 'white'
+                color: 'black'
               }}
             >
               <Grid item xs={6} textAlign="left">
@@ -96,7 +96,7 @@ const ActivityMain = ({ children }) => {
                 <IconButton color="inherit" onClick={() => navigate('/messages')}>
                   <SmsIcon />
                 </IconButton>
-                <IconButton style={{ color: "white" }} onClick={handleDownload}>
+                <IconButton style={{ color: "black" }} onClick={handleDownload}>
                   <DownloadIcon />
                 </IconButton>
               </Grid>
@@ -117,13 +117,13 @@ const ActivityMain = ({ children }) => {
   <List>
     {tickets.map((ticket) => (
       <ListItem key={ticket._id} sx={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', mb: 1 }}>
-        <Paper elevation={3} sx={{ p: 2, backgroundColor: 'rgb(55,72,146)', color: 'white', borderRadius: 3 }}>
+        <Paper elevation={3} sx={{ p: 2, backgroundColor: 'rgb(55,72,146)', color: 'black', borderRadius: 3 }}>
           <Typography variant="body1" color="inherit">
             {ticket.message}
           </Typography>
         </Paper>
         {ticket.replies.map((reply, replyIndex) => (
-          <Paper key={replyIndex} elevation={3} sx={{ p: 2, backgroundColor: 'rgb(34, 153, 84)', color: 'white', borderRadius: 3, alignSelf: 'flex-end', mt: 1 }}>
+          <Paper key={replyIndex} elevation={3} sx={{ p: 2, backgroundColor: 'rgb(34, 153, 84)', color: 'black', borderRadius: 3, alignSelf: 'flex-end', mt: 1 }}>
             <Typography variant="body2" color="inherit">
               {reply.message}
             </Typography>
@@ -141,12 +141,12 @@ const ActivityMain = ({ children }) => {
                   placeholder="Type your message here..."
                   variant="outlined"
                   fullWidth
-                  sx={{ mb: 2, backgroundColor: 'rgba(255, 255, 255, 0.1)', color: 'white', borderRadius: 1 }}
+                  sx={{ mb: 2, backgroundColor: 'rgba(255, 255, 255, 0.1)', color: 'black', borderRadius: 1 }}
                   InputProps={{
-                    style: { color: 'white' },
+                    style: { color: 'black' },
                   }}
                 />
-                <Button type="submit" variant="contained" color="primary">
+                <Button type="submit" variant="contained" sx={{ background: "#eb7a02", color: "#ffffff"}} >
                   Send Ticket
                 </Button>
               </form>

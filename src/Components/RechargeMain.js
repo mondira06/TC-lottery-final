@@ -44,26 +44,14 @@ const PromotionMain = ({ children }) => {
   const [amount, setAmount] = useState("");
   const [walletAmount, setWalletAmount] = useState(0);
   const [imageUrl, setImageUrl] = useState("");
-  const initialState = {
-    500: false,
-    5000: false,
-    10000: false,
-    20000: false,
-    50000: false,
-    100000: false,
-  };
-  const [clickedButtons, setClickedButtons] = useState(initialState);
 
   const handleButtonClick = (value) => {
-    setClickedButtons({ ...clickedButtons, [value]: true });
+    setAmount(value);
   };
 
   const handleInputChange = (event) => {
     setAmount(event.target.value);
   };
-
-  const buttonValues1 = [500, 5000, 10000];
-  const buttonValues2 = [20000, 50000, 100000];
 
   const [walletData, setWalletData] = useState(0);
   const [openDepositDialog, setOpenDepositDialog] = useState(false);
@@ -256,7 +244,7 @@ const PromotionMain = ({ children }) => {
               }}
             >
               <Grid item xs={6} textAlign="left">
-                <span style={{ fontSize: "1.2rem" }}>Deposit</span>
+                <span style={{ fontWeight: "bold" }}>Deposit</span>
               </Grid>
               <Grid item xs={6} textAlign="right">
                 <IconButton color="inherit">
@@ -293,7 +281,7 @@ const PromotionMain = ({ children }) => {
                 <Grid item xs={9}>
                   <Typography
                     fontSize="20px"
-                    sx={{ color: "#ffffff" }}
+                    sx={{ color: "#8f5205" }}
                     align="left"
                   >
                     Balance
@@ -393,7 +381,7 @@ const PromotionMain = ({ children }) => {
                 borderRadius: "10px",
               }}
             >
-              <Grid container item alignItems="center" sx={{ padding: "10px" }}>
+              <Grid container item alignItems="center">
                 <Grid item xs={4}>
                   <img
                     src="assets/images/download (5).png"
@@ -402,47 +390,43 @@ const PromotionMain = ({ children }) => {
                   />
                 </Grid>
                 <Grid item xs={8}>
-                  <Typography variant="h6" align="left" sx={{ color: "black" }}>
+                  <Typography variant="h6" align="left" sx={{ color: "white" }}>
                     Deposit Amount
                   </Typography>
                 </Grid>
               </Grid>
-              <Grid container spacing={1} sx={{ padding: "0 10px" }}>
-                {buttonValues1.map((value) => (
-                  <Grid item xs={4} key={value} sx={{ padding: "0 5px" }}>
+              <Grid container item spacing={2}>
+                {[500, 5000, 10000].map((value) => (
+                  <Grid item xs={4} key={value}>
                     <Button
-                      onClick={() => handleButtonClick(value)}
                       variant="contained"
-                      fullWidth
+                      onClick={() => handleButtonClick(value)}
                       style={{
-                        background: clickedButtons[value]
-                          ? "linear-gradient(to right,#ff9902, #e77401)"
-                          : "white",
-                        color: clickedButtons[value] ? "white" : "black",
-                        borderRadius: "5px",
-                        padding: "5px",
+                        width: "100%",
+                        background:
+                          "linear-gradient(to right,#ff9902, #e77401)",
+                        color: "#FFFFFF",
                       }}
                     >
-                      {value}
+                      ₹{value.toLocaleString()}
                     </Button>
                   </Grid>
                 ))}
-                {buttonValues2.map((value) => (
+              </Grid>
+              <Grid container item spacing={2}>
+                {[20000, 50000, 100000].map((value) => (
                   <Grid item xs={4} key={value} sx={{ padding: "0 5px" }}>
                     <Button
-                      onClick={() => handleButtonClick(value)}
                       variant="contained"
-                      fullWidth
+                      onClick={() => handleButtonClick(value)}
                       style={{
-                        background: clickedButtons[value]
-                          ? "linear-gradient(to right,#ff9902, #e77401)"
-                          : "white",
-                        color: clickedButtons[value] ? "white" : "black",
-                        borderRadius: "5px",
-                        padding: "5px",
+                        width: "100%",
+                        background:
+                          "linear-gradient(to right,#ff9902, #e77401)",
+                        color: "#ffffff",
                       }}
                     >
-                      {value}
+                      ₹{value.toLocaleString()}
                     </Button>
                   </Grid>
                 ))}
@@ -493,7 +477,6 @@ const PromotionMain = ({ children }) => {
                 </Grid>
               </Grid>
             </Grid>
-
             <div>
               {" "}
               {paymentUrl && <a href={paymentUrl}>Proceed to Payment</a>}

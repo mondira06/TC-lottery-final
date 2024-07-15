@@ -1,11 +1,9 @@
 import React, { useState } from "react";
 import { Grid, Divider, Pagination } from "@mui/material";
-
 const CustomTable = ({ data }) => {
   console.log("data", data);
   const pageSize = 10;
   const [page, setPage] = useState(1); // Pagination component is 1-based
-
   const columns = [
     { id: "period", label: "Period" },
     { id: "trxBlockAddress", label: "Block" },
@@ -13,13 +11,10 @@ const CustomTable = ({ data }) => {
     { id: "hash", label: "Hash" },
     { id: "big_small", label: "Result" },
   ];
-
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
   };
-
   const paginatedData = data.slice((page - 1) * pageSize, page * pageSize);
-
   return (
     <Grid container>
       {columns.map((column) => (
@@ -28,14 +23,14 @@ const CustomTable = ({ data }) => {
           xs={2.4}
           key={column.id}
           sx={{
-            backgroundColor: "RGB(71,129,255)",
-            color: "white",
-            padding: "8px ",
-            fontWeight: "bold",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            fontSize: "0.8rem",
+            backgroundColor: '#ED8A1F',
+            color: 'white',
+            padding: '8px',
+            fontWeight: 'bold',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            width: '100%',
           }}
         >
           {column.label}
@@ -55,8 +50,8 @@ const CustomTable = ({ data }) => {
               justifyContent: "center",
               fontSize: "10px",
               fontWeight: "bold",
-              color: "white",
-              backgroundColor: "#2b3270",
+              color: "black",
+              backgroundColor: "#FFFFFF",
             }}
           >
             {row.periodId.slice(0, 3) + "**" + row.periodId.slice(-4)}
@@ -72,8 +67,8 @@ const CustomTable = ({ data }) => {
               justifyContent: "center",
               fontSize: "10px",
               fontWeight: "bold",
-              color: "white",
-              backgroundColor: "#2b3270",
+              color: "black",
+              backgroundColor: "#FFFFFF",
             }}
           >
             {row.trxBlockAddress}
@@ -89,8 +84,8 @@ const CustomTable = ({ data }) => {
               justifyContent: "center",
               fontSize: "10px",
               fontWeight: "bold",
-              color: "white",
-              backgroundColor: "#2b3270",
+              color: "black",
+              backgroundColor: "#FFFFFF",
             }}
           >
             {row.blockTime}
@@ -106,8 +101,8 @@ const CustomTable = ({ data }) => {
               justifyContent: "center",
               fontSize: "10px",
               fontWeight: "bold",
-              color: "white",
-              backgroundColor: "#2b3270",
+              color: "black",
+              backgroundColor: "#FFFFFF",
             }}
           >
             {"** " + row.hash.slice(-4)}{" "}
@@ -120,7 +115,7 @@ const CustomTable = ({ data }) => {
               borderBottom: "1px solid #ccc",
               display: "flex",
               alignItems: "center",
-              backgroundColor: "#2b3270",
+              backgroundColor: "#FFFFFF",
               justifyContent: "center",
             }}
           >
@@ -153,7 +148,7 @@ const CustomTable = ({ data }) => {
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
-                color: "white",
+                color: "black",
                 fontWeight: "bold",
                 fontSize: "12px",
               }}
@@ -175,9 +170,9 @@ const CustomTable = ({ data }) => {
               fontSize: "15px",
               color:
                 row.sizeOutcome.charAt(0).toUpperCase() === "B"
-                  ? "#dd9138"
-                  : "#5088d3",
-              backgroundColor: "#2b3270",
+                  ? "#DD9138"
+                  : "#5088D3",
+              backgroundColor: "#FFFFFF",
             }}
           >
             {row.sizeOutcome.charAt(0).toUpperCase()}
@@ -193,19 +188,33 @@ const CustomTable = ({ data }) => {
           count={Math.ceil(data.length / pageSize)}
           page={page}
           onChange={handleChangePage}
-          sx={{
-            "& .MuiPaginationItem-root": {
-              color: "white",
-            },
-            "& .MuiPaginationItem-page.Mui-selected": {
-              backgroundColor: "white",
-              color: "black",
-            },
-          }}
+          sx={{"& .MuiPaginationItem-root": {
+            color: "grey",
+          },
+          "& .MuiPaginationItem-page.Mui-selected": {
+            color: "grey",
+          },
+          "& .MuiPaginationItem-ellipsis": {
+            color: "#D9AC4F",
+            backgroundColor: "#ED8A1F",
+          },
+          "& .MuiPaginationItem-previousNext": {
+            backgroundColor: "#ED8A1F",
+            color: "#FFFFFF",
+            padding: "3px",
+            width: "auto", // Ensure it doesn't stretch
+            height: "auto", // Ensure it doesn't stretch
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+          },
+          "& .MuiPaginationItem-icon": {
+            width: "70px", // Adjust the size to make it square
+            height: "40px", // Adjust the size to make it square
+          },}}
         />
       </Grid>
     </Grid>
   );
 };
-
 export default CustomTable;

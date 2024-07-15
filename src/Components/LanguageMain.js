@@ -54,9 +54,9 @@ const LanguageMain= ({ children }) => {
                 position: 'sticky',
                 top: 0,
                 zIndex: 1000,
-                backgroundColor: 'RGB(54,142,255)',
+                backgroundColor: 'white',
                 padding: '8px 16px',
-                color: 'white'
+                color: 'black'
                 
               }}
             >
