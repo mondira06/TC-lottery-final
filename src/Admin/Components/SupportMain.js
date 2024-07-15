@@ -82,6 +82,7 @@ const App = () => {
                       <TextField
                         label="Reply"
                         fullWidth
+                        required
                         margin="normal"
                         value={reply}
                         onChange={(e) => setReply(e.target.value)}

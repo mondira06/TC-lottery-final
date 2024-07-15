@@ -535,7 +535,6 @@ function SettingsMain() {
               fullWidth
               variant="contained"
               sx={{
-                mt: 2,
                 backgroundColor: "#F78D02",
                 color: "white",
                 "&:hover": {

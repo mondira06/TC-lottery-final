@@ -123,7 +123,7 @@ const ActivityMain = ({ children }) => {
           </Typography>
         </Paper>
         {ticket.replies.map((reply, replyIndex) => (
-          <Paper key={replyIndex} elevation={3} sx={{ p: 2, backgroundColor: 'rgb(34, 153, 84)', color: 'black', borderRadius: 3, alignSelf: 'flex-end', mt: 1 }}>
+          <Paper key={replyIndex} elevation={3} sx={{ p: 2, backgroundColor: '#eb7a01', color: 'white', borderRadius: 3, alignSelf: 'flex-end', mt: 1 }}>
             <Typography variant="body2" color="inherit">
               {reply.message}
             </Typography>
