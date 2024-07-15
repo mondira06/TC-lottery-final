@@ -1456,83 +1456,6 @@ const Head = () => {
 
           <Grid mt={2}>
           <Tabs
-              value={value}
-              onChange={handleChange}
-              indicatorColor="transparent"
-              style={{
-                marginLeft: "20px",
-                marginBottom: "10px",
-                paddingTop: "20px",
-              }}
-            >
-              <Tab
-                label="Game History"
-                style={
-                  value === 0
-                    ? {
-                        backgroundColor: "#ED8A1F",
-                        color:  "#F6F6F6",  
-                        borderRadius: "20px",
-                      }
-                    : { color: "#A8A5A1" }
-                }
-              />
-              <Tab
-                label="Chart"
-                style={
-                  value === 1
-                    ? {
-                        backgroundColor: "#ED8A1F",
-                        color: "#F6F6F6",
-                        borderRadius: "20px",
-                      }
-                    : { color: "#A8A5A1" }
-                }
-              />
-              <Tab
-                label="My History"
-                style={
-                  value === 2
-                    ? {
-                        backgroundColor: "#ED8A1F",
-                        color: "#F6F6F6",
-                        borderRadius: "20px",
-                      }
-                    : { color: "#A8A5A1" }
-                }
-              />
-            </Tabs>
-
-          open={openDialog}
-          aria-labelledby="alert-dialog-title"
-          aria-describedby="alert-dialog-description"
-          PaperProps={{
-            style: {
-              width: "350px", // Set this to the desired size of your square
-              height: "250px", // Set this to the same value as width
-              backgroundColor: "rgba(0, 0, 0, 0.5)", // This sets the opacity of the dialog box background
-              overflow: "hidden",
-              borderRadius:"40px" // This removes the scrollbars
-            },
-          }}
-        >
-          <DialogContent>
-            <DialogContentText
-              id="alert-dialog-description"
-              style={{
-                textAlign: "center",
-                fontSize: "120px",
-                fontWeight: "bold",
-                color: "rgb(233,119,1)",
-              }}
-            >
-              {remainingTime ? remainingTime.split(":")[1] : ""}
-            </DialogContentText>
-          </DialogContent>
-        </Dialog>
-
-          <Grid mt={2}>
-          <Tabs
             value={value}
             onChange={handleChange}
             indicatorColor="transparent"
@@ -1580,15 +1503,13 @@ const Head = () => {
               }
             />
           </Tabs>
-
-
-            <TabPanel value={value} index={0}>
-              <CustomTable data={rows} />
-            </TabPanel>
-            <TabPanel value={value} index={1}>
-              <RowVisualization data={rows} />
-            </TabPanel>
-            <TabPanel value={value} index={2}>
+          <TabPanel value={value} index={0}>
+            <CustomTable data={rows} />
+          </TabPanel>
+          <TabPanel value={value} index={1}>
+            <RowVisualization data={rows} />
+          </TabPanel>
+          <TabPanel value={value} index={2}>
               <Grid container style={{ marginLeft: "-15px" }}>
                 {bets
                   .slice()
