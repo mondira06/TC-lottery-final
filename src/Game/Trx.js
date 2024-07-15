@@ -618,7 +618,7 @@ const LotteryAppt = () => {
             position: "sticky",
             top: 0,
             zIndex: 1000,
-            backgroundColor: "rgb(232,117,3)",
+            background: "linear-gradient(to right,#ff9903, #e77404)",
             padding: "8px 16px",
             color: "white",
           }}
@@ -1429,6 +1429,37 @@ const LotteryAppt = () => {
               </Grid>
             </Grid>
             <Grid item xs={12} mt={2}>
+              <Grid
+                container
+                alignItems="center"
+                justifyContent="space-between"
+              >
+                <Typography variant="h6">Add your money</Typography>
+                <Grid justifyContent="flex-end">
+                  <TextField
+                    label="Add Custom Amount"
+                    variant="outlined"
+                    value={customBetAmount}
+                    onChange={handleCustomBetChange}
+                    style={{
+                      borderRadius: 15,
+                      height: 50,
+                    }}
+                    InputProps={{
+                      style: {
+                        color: "black",
+                        borderRadius: 15,
+                        height: 50,
+                      },
+                    }}
+                    InputLabelProps={{
+                      style: { color: "#1876D2" },
+                    }}
+                  />
+                </Grid>
+              </Grid>
+            </Grid>
+            <Grid item xs={12} mt={2}>
               <Grid container>
                 <Grid
                   item
@@ -1438,32 +1469,7 @@ const LotteryAppt = () => {
                   align="center"
                   alignItems="center"
                 >
-                   <Typography variant="h6" style={{color:"#1E2637"}}>Add your money</Typography>
-                  <Grid justifyContent="flex-end">
-                    <TextField
-                      label="Add Custom Amount"
-                      variant="outlined"
-                      value={customBetAmount}
-                      onChange={handleCustomBetChange}
-                      style={{
-                        borderRadius: 15,
-                        height: 50,
-                        
-                        color:"#1E2637"
-                      }}
-                      InputProps={{
-                        style: {
-                          color: "black",
-                          borderRadius: 15,
-                          height: 50,
-                        },
-                      }}
-                      InputLabelProps={{
-                        style: { color: "black" },
-                      }}
-                    />
-                    </Grid>
-                  <Typography variant="h6" style={{color:"#1E2637"}}>Quantity</Typography>
+                  <Typography variant="h6">Quantity</Typography>
                   <div
                     className="button1"
                     onClick={() =>
@@ -1693,7 +1699,7 @@ const LotteryAppt = () => {
                     : 0
                 )
                 .map((bet, index) => (
-                  <Accordion sx={{ backgroundColor: "rgb(232,117,3)" }}>
+                  <Accordion sx={{ background: "linear-gradient(to right,#ff9903, #e77404)" }}>
                     <AccordionSummary
                       aria-controls="panel1a-content"
                       id="panel1a-header"
@@ -1701,7 +1707,7 @@ const LotteryAppt = () => {
                       <Grid
                         container
                         style={{
-                          backgroundColor: "rgb(232,117,3)",
+                          backgroundColor: "#ffffff",
                           marginTop: "10px",
                           padding: "18px",
                           width: "350px",
@@ -1758,19 +1764,19 @@ const LotteryAppt = () => {
                             style={{
                               fontSize: "12px",
                               fontWeight: "bold",
-                              color: "white",
+                              color: "black",
                             }}
                           >
                             {bet.periodId}
                           </Typography>
                           <Typography
                             variant="body1"
-                            style={{ fontSize: "12px", color: "white" }}
+                            style={{ fontSize: "12px", color: "black" }}
                           >
                             {bet.timestamp
                               ? `${new Date(bet.timestamp).toLocaleDateString(
                                   "en-GB"
-                                )} 
+                                )}
                  ${new Date(bet.timestamp).toLocaleTimeString("en-GB")}`
                               : "N/A"}
                           </Typography>

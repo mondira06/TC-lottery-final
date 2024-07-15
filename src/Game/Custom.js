@@ -1,11 +1,9 @@
 import React, { useState } from "react";
 import { Grid, Divider, Pagination } from "@mui/material";
-
 const CustomTable = ({ data }) => {
   console.log("data", data);
   const pageSize = 10;
   const [page, setPage] = useState(1); // Pagination component is 1-based
-
   const columns = [
     { id: "period", label: "Period" },
     { id: "trxBlockAddress", label: "Block" },
@@ -13,13 +11,10 @@ const CustomTable = ({ data }) => {
     { id: "hash", label: "Hash" },
     { id: "big_small", label: "Result" },
   ];
-
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
   };
-
   const paginatedData = data.slice((page - 1) * pageSize, page * pageSize);
-
   return (
     <Grid container>
       {columns.map((column) => (
@@ -56,7 +51,7 @@ const CustomTable = ({ data }) => {
               fontSize: "10px",
               fontWeight: "bold",
               color: "black",
-              backgroundColor: "#ffffff",
+              backgroundColor: "#FFFFFF",
             }}
           >
             {row.periodId.slice(0, 3) + "**" + row.periodId.slice(-4)}
@@ -73,7 +68,7 @@ const CustomTable = ({ data }) => {
               fontSize: "10px",
               fontWeight: "bold",
               color: "black",
-              backgroundColor: "#ffffff",
+              backgroundColor: "#FFFFFF",
             }}
           >
             {row.trxBlockAddress}
@@ -90,7 +85,7 @@ const CustomTable = ({ data }) => {
               fontSize: "10px",
               fontWeight: "bold",
               color: "black",
-              backgroundColor: "#ffffff",
+              backgroundColor: "#FFFFFF",
             }}
           >
             {row.blockTime}
@@ -107,7 +102,7 @@ const CustomTable = ({ data }) => {
               fontSize: "10px",
               fontWeight: "bold",
               color: "black",
-              backgroundColor: "#ffffff",
+              backgroundColor: "#FFFFFF",
             }}
           >
             {"** " + row.hash.slice(-4)}{" "}
@@ -120,7 +115,7 @@ const CustomTable = ({ data }) => {
               borderBottom: "1px solid #ccc",
               display: "flex",
               alignItems: "center",
-              backgroundColor: "#ffffff",
+              backgroundColor: "#FFFFFF",
               justifyContent: "center",
             }}
           >
@@ -175,9 +170,9 @@ const CustomTable = ({ data }) => {
               fontSize: "15px",
               color:
                 row.sizeOutcome.charAt(0).toUpperCase() === "B"
-                  ? "#dd9138"
-                  : "#5088d3",
-              backgroundColor: "#ffffff",
+                  ? "#DD9138"
+                  : "#5088D3",
+              backgroundColor: "#FFFFFF",
             }}
           >
             {row.sizeOutcome.charAt(0).toUpperCase()}
@@ -205,7 +200,7 @@ const CustomTable = ({ data }) => {
           },
           "& .MuiPaginationItem-previousNext": {
             backgroundColor: "#ED8A1F",
-            color: "#ffffff",
+            color: "#FFFFFF",
             padding: "3px",
             width: "auto", // Ensure it doesn't stretch
             height: "auto", // Ensure it doesn't stretch
@@ -222,5 +217,4 @@ const CustomTable = ({ data }) => {
     </Grid>
   );
 };
-
 export default CustomTable;
