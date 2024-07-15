@@ -127,10 +127,10 @@ useEffect(() => {
 
   <Grid container item xs={12}  key={request._id}>
     <Card style={{ width: 'calc(100% - 20px)', marginBottom: '10px', boxShadow: '0px 4px 8px rgba(0, 0, 0, 0.1)',  marginLeft: '15px', marginRight: '10px', marginTop:"20px" }}>
-      <CardContent style={{ backgroundColor: 'rgb(51,51,50)' }}>
+      <CardContent style={{ backgroundColor: '#ffffff' }}>
         <Grid container >
           <Grid item xs={6} align="left">
-            <Button variant="contained" sx={{background:"linear-gradient(to right,#f9e39e, #c49440)",width:"80px",height:"25px",fontSize:"12px", color: "#8f5205"}} >Withdraw</Button>
+            <Button variant="contained" sx={{background:"linear-gradient(to right,#ff9902, #e77401)",width:"80px",height:"25px",fontSize:"12px", color: "#ffffff"}} >Withdraw</Button>
           </Grid>
           <Grid item xs={6}>
           <Typography 
@@ -154,20 +154,20 @@ useEffect(() => {
   <Divider style={{ margin: '10px 0' }} />
 </Grid>
 <Grid item xs={6}>
-            <Typography variant="subtitle1" align="left" sx={{color:"#fff"}}>Balance</Typography>
+            <Typography variant="subtitle1" align="left" sx={{color:"black"}}>Balance</Typography>
           </Grid>
           <Grid item xs={6}>
             <Typography variant="body1" align="right" sx={{color:"#9195a3",fontWeight:"bold"}}>{request.balance}</Typography>
           </Grid>
           <Grid item xs={6}>
-            <Typography variant="subtitle1" align="left" sx={{color:"#fff"}}>Type</Typography>
+            <Typography variant="subtitle1" align="left" sx={{color:"black"}}>Type</Typography>
           </Grid>
           <Grid item xs={6}>
             <Typography variant="body1" align="right" sx={{color:"#9195a3",fontWeight:"bold"}}>{request.withdrawMethod
 }</Typography>
           </Grid>
           <Grid item xs={6}>
-            <Typography variant="subtitle1" align="left" sx={{color:"#fff"}}> Time</Typography>
+            <Typography variant="subtitle1" align="left" sx={{color:"black"}}> Time</Typography>
           </Grid>
           <Grid item xs={6}>
   <Typography variant="body1" align="right" sx={{color:"#9195a3",fontWeight:"bold"}}>
@@ -177,7 +177,7 @@ useEffect(() => {
   </Typography>
 </Grid>
           <Grid item xs={6}>
-            <Typography variant="subtitle1" align="left" sx={{color:"#fff"}}>Order Number</Typography>
+            <Typography variant="subtitle1" align="left" sx={{color:"black"}}>Order Number</Typography>
           </Grid>
           <Grid item xs={6}>
             <Typography variant="body1" align="right" sx={{color:"#9195a3",fontWeight:"bold"}}>{request._id}</Typography>
