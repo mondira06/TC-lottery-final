@@ -58,19 +58,19 @@ const images = [
   {
     id: 1,
     src: "../../games/assets/time-5d4e96a3.png",
-    altSrc: "games/assets/time_a-07f92409.png",
+    altSrc: "games/assets/time_a-afd768a99.png",
     subtitle: "1Min",
   },
   {
     id: 2,
     src: "../../games/assets/time-5d4e96a3.png",
-    altSrc: "games/assets/time_a-07f92409.png",
+    altSrc: "games/assets/time_a-afd768a99.png",
     subtitle: "3Min",
   },
   {
     id: 3,
     src: "../../games/assets/time-5d4e96a3.png",
-    altSrc: "games/assets/time_a-07f92409.png",
+    altSrc: "games/assets/time_a-afd768a99.png",
     subtitle: "5Min",
   },
   {
