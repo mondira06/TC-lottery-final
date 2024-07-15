@@ -390,7 +390,7 @@ const PromotionMain = ({ children }) => {
                   />
                 </Grid>
                 <Grid item xs={8}>
-                  <Typography variant="h6" align="left" sx={{ color: "white" }}>
+                  <Typography variant="h6" align="left" sx={{ color: "black" }}>
                     Deposit Amount
                   </Typography>
                 </Grid>
