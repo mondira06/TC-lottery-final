@@ -622,7 +622,7 @@ const LotteryAppt = () => {
             position: "sticky",
             top: 0,
             zIndex: 1000,
-            backgroundColor: "rgb(232,117,3)",
+            background: "linear-gradient(to right,#ff9903, #e77404)",
             padding: "8px 16px",
             color: "white",
           }}
