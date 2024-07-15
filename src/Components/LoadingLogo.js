@@ -43,10 +43,11 @@ const LoadingLogo = () => {
             }}
           />
           <img 
-            src="/assets/images/banner3.png"
+            src="assets/h5setting_20231215032755xgv9.png"
             alt="logo" 
             style={{
               position: 'absolute',
+           
               top: '50%',
               left: '50%',
               transform: 'translate(-50%, -50%)',
