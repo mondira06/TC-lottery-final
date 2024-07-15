@@ -55,25 +55,25 @@ const images = [
   {
     id: 1,
     src: "games/assets/time-5d4e96a3.png",
-    altSrc: "games/assets/time_a-afd768a99.png",
+    altSrc: "games/assets/time_a-07f92409.png",
     subtitle: "1Min",
   },
   {
     id: 2,
     src: "games/assets/time-5d4e96a3.png",
-    altSrc: "games/assets/time_a-afd768a99.png",
+    altSrc: "games/assets/time_a-07f92409.png",
     subtitle: "3Min",
   },
   {
     id: 3,
     src: "games/assets/time-5d4e96a3.png",
-    altSrc: "games/assets/time_a-afd768a99.png",
+    altSrc: "games/assets/time_a-07f92409.png",
     subtitle: "5Min",
   },
   {
     id: 4,
     src: "games/assets/time-5d4e96a3.png",
-    altSrc: "games/assets/time_a-afd768a99.png",
+    altSrc: "games/assets/time_a-07f92409.png",
     subtitle: "10Min",
   },
 ];
@@ -1674,7 +1674,7 @@ const LotteryAppt = () => {
                   ? {
                       backgroundImage:
                         "linear-gradient(to right,#ff9903, #e77404)",
-                      color: "white",
+                      color: "black",
                       borderRadius: "20px",
                     }
                   : { color: "grey" }
@@ -1697,7 +1697,7 @@ const LotteryAppt = () => {
                     : 0
                 )
                 .map((bet, index) => (
-                  <Accordion sx={{ background: "linear-gradient(to right,#ff9903, #e77404)" }}>
+                  <Accordion sx={{ background: "#ffffff" }}>
                     <AccordionSummary
                       aria-controls="panel1a-content"
                       id="panel1a-header"
@@ -1732,7 +1732,7 @@ const LotteryAppt = () => {
                                   : Number(bet.selectedItem) === 5
                                   ? "linear-gradient(to right, rgb(64,173,114) 50%, rgb(182,89,254) 50%)"
                                   : "rgb(71,129,255)",
-                              color: "white",
+                              color: "black",
                               height: "40px",
                               width: "80px",
                               display: "flex",
@@ -1818,55 +1818,55 @@ const LotteryAppt = () => {
                           <TableBody>
                             <TableRow>
                               <TableCell
-                                style={{ fontWeight: "bold", color: "white" }}
+                                style={{ fontWeight: "bold", color: "black" }}
                               >
                                 Bet Amount
                               </TableCell>
                               <TableCell
-                                style={{ fontWeight: "bold", color: "white" }}
+                                style={{ fontWeight: "bold", color: "black" }}
                               >
                                 {bet.betAmount}
                               </TableCell>
                             </TableRow>
                             <TableRow>
                               <TableCell
-                                style={{ fontWeight: "bold", color: "white" }}
+                                style={{ fontWeight: "bold", color: "black" }}
                               >
                                 Multiplier
                               </TableCell>
                               <TableCell
-                                style={{ fontWeight: "bold", color: "white" }}
+                                style={{ fontWeight: "bold", color: "black" }}
                               >
                                 {multiplier}
                               </TableCell>
                             </TableRow>
                             <TableRow>
                               <TableCell
-                                style={{ fontWeight: "bold", color: "white" }}
+                                style={{ fontWeight: "bold", color: "black" }}
                               >
                                 Total Bet
                               </TableCell>
                               <TableCell
-                                style={{ fontWeight: "bold", color: "green" }}
+                                style={{ fontWeight: "bold", color: "black" }}
                               >
                                 {bet.totalBet}
                               </TableCell>
                             </TableRow>
                             <TableRow>
                               <TableCell
-                                style={{ fontWeight: "bold", color: "white" }}
+                                style={{ fontWeight: "bold", color: "black" }}
                               >
                                 Tax
                               </TableCell>
                               <TableCell
-                                style={{ fontWeight: "bold", color: "white" }}
+                                style={{ fontWeight: "bold", color: "black" }}
                               >
                                 {bet.tax}
                               </TableCell>
                             </TableRow>
                             <TableRow>
                               <TableCell
-                                style={{ fontWeight: "bold", color: "white" }}
+                                style={{ fontWeight: "bold", color: "black" }}
                               >
                                 Fee
                               </TableCell>
@@ -1874,7 +1874,7 @@ const LotteryAppt = () => {
                                 style={{
                                   fontWeight: "bold",
                                   color: "red",
-                                  color: "white",
+                                  color: "black",
                                 }}
                               >
                                 {bet.fee}
@@ -1882,31 +1882,31 @@ const LotteryAppt = () => {
                             </TableRow>
                             <TableRow>
                               <TableCell
-                                style={{ fontWeight: "bold", color: "white" }}
+                                style={{ fontWeight: "bold", color: "black" }}
                               >
                                 Selected Timer
                               </TableCell>
                               <TableCell
-                                style={{ fontWeight: "bold", color: "white" }}
+                                style={{ fontWeight: "bold", color: "black" }}
                               >
                                 {bet.selectedTimer}
                               </TableCell>
                             </TableRow>
                             <TableRow>
                               <TableCell
-                                style={{ fontWeight: "bold", color: "white" }}
+                                style={{ fontWeight: "bold", color: "black" }}
                               >
                                 Result
                               </TableCell>
                               <TableCell
-                                style={{ fontWeight: "bold", color: "white" }}
+                                style={{ fontWeight: "bold", color: "black" }}
                               >
                                 {bet.result}
                               </TableCell>
                             </TableRow>
                             <TableRow>
                               <TableCell
-                                style={{ fontWeight: "bold", color: "white" }}
+                                style={{ fontWeight: "bold", color: "black" }}
                               >
                                 Winloss
                               </TableCell>

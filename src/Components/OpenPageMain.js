@@ -19,7 +19,7 @@ const OpenPageMain = () => {
       }}
     >
       <img
-        src="assets/images/Bottom (3).png"
+        src="assets/images/bottom (3).png"
         alt="Main"
         style={{
           width: '100%',

@@ -58,25 +58,25 @@ const images = [
   {
     id: 1,
     src: "../../games/assets/time-5d4e96a3.png",
-    altSrc: "../../games/assets/time_a-afd768a99.png",
+    altSrc: "games/assets/time_a-07f92409.png",
     subtitle: "1Min",
   },
   {
     id: 2,
     src: "../../games/assets/time-5d4e96a3.png",
-    altSrc: "../../games/assets/time_a-afd768a99.png",
+    altSrc: "games/assets/time_a-07f92409.png",
     subtitle: "3Min",
   },
   {
     id: 3,
     src: "../../games/assets/time-5d4e96a3.png",
-    altSrc: "../../games/assets/time_a-afd768a99.png",
+    altSrc: "games/assets/time_a-07f92409.png",
     subtitle: "5Min",
   },
   {
     id: 4,
     src: "../../games/assets/time-5d4e96a3.png",
-    altSrc: "../../games/assets/time_a-afd768a99.png",
+    altSrc: "games/assets/time_a-07f92409.png",
     subtitle: "10Min",
   },
 ];
@@ -1639,7 +1639,7 @@ const LotteryAppk = ({ timerKey }) => {
                 backgroundColor: activeId === image.id ? '#EE7F02' : '#FFFFFF',
 
                 background: activeId === image.id ?
-                "linear-gradient(to right,#ff9903, #e77404)" : '#FFFFFF',
+                "linear-gradient(to bottom,#ff9903, #e77404)" : '#FFFFFF',
 
                 borderRadius: '10px',
                 color:activeId === image.id ? "white":'#A1AFC2',
@@ -2589,10 +2589,10 @@ const LotteryAppk = ({ timerKey }) => {
                   transform: "translate(-50%, -50%)",
                   width: "300px",
                   padding: "0",
-                  backgroundColor: "#201D2B",
+                  backgroundColor: "white",
                   boxShadow: "0px 0px 10px rgba(0, 0, 0, 0.1)",
                   borderRadius: "10px",
-                  color: "white",
+                  color: "black",
                   zIndex: 1000,
                 }}
               >
@@ -2615,7 +2615,7 @@ const LotteryAppk = ({ timerKey }) => {
                     maxHeight: "400px",
                     overflowY: "auto",
                     textAlign: "left ",
-                    color: "#F5F6FD",
+                    color: "black",
                   }}
                 >
                   <p>
