@@ -53,8 +53,7 @@ const BottomNavigationArea = () => {
         icon={ <img 
           src={value === '/home' ? '/assets/images/home-r-0e9d3a12.png':'/assets/images/home-3e6a9291.png'} 
 
-          width="30px" 
-          height="30px" 
+       
 
           width="25px" 
           height="25px" 
@@ -73,8 +72,7 @@ const BottomNavigationArea = () => {
     <img 
     src={value === '/activity' ? '/assets/images/activity-r-8eb2eaaa.png':'/assets/images/activity-bb37b07c.png'} 
 
-    width="30px" 
-    height="30px" 
+ 
 
     width="25px" 
     height="25px" 
@@ -116,8 +114,6 @@ const BottomNavigationArea = () => {
         <img 
         src={value === '/wallet' ? '/assets/images/wallet-r-5ca037e5.png':'/assets/images/wallet-dd37d20a.png'} 
 
-        width="30px" 
-        height="30px" 
 
         width="25px" 
         height="25px" 
@@ -136,8 +132,7 @@ const BottomNavigationArea = () => {
     <img 
     src={value === '/account' ? '/assets/images/main-r-d2aeb055.png':'/assets/images/main-53f64122.png'} 
 
-    width="30px" 
-    height="30px" 
+ 
 
     width="25px" 
     height="25px" 

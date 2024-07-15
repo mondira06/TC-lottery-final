@@ -45,25 +45,40 @@ const images = [
   {
     id: 1,
     src: "../../games/assets/time-5d4e96a3.png",
+    altSrc: "../../games/assets/time_a-07f92409.png",
+
     altSrc: "../../games/assets/time_a-afd768a99.png",
+
     subtitle: "1Min",
   },
   {
     id: 2,
     src: "../../games/assets/time-5d4e96a3.png",
+
+    altSrc: "../../games/assets/time_a-07f92409.png",
+
     altSrc: "../../games/assets/time_a-afd768a99.png",
+
     subtitle: "3Min",
   },
   {
     id: 3,
     src: "../../games/assets/time-5d4e96a3.png",
+
+    altSrc: "../../games/assets/time_a-07f92409.png",
+
     altSrc: "../../games/assets/time_a-afd768a99.png",
+
     subtitle: "5Min",
   },
   {
     id: 4,
     src: "../../games/assets/time-5d4e96a3.png",
+
+    altSrc: "../../games/assets/time_a-07f92409.png",
+
     altSrc: "../../games/assets/time_a-afd768a99.png",
+
     subtitle: "10Min",
   },
 ];
@@ -749,8 +764,12 @@ const Head = () => {
             style={{
               cursor: 'pointer',
               border: activeId === image.id ? '1px solid #FE9902' : 'none',
+
+              backgroundColor: activeId === image.id ? '#EE7F02' : '#FFFFFF',
+
               background: activeId === image.id ? 
               "linear-gradient(to right,#ff9903, #e77404)" : '#FFFFFF',
+
               borderRadius: '10px',
               color:activeId === image.id ? "white":'#A1AFC2',
               display: 'flex',
@@ -1406,33 +1425,38 @@ const Head = () => {
           </Drawer>
 
           <Dialog
-          open={openDialog}
-          aria-labelledby="alert-dialog-title"
-          aria-describedby="alert-dialog-description"
-          PaperProps={{
-            style: {
-              width: "350px", // Set this to the desired size of your square
-              height: "250px", // Set this to the same value as width
-              backgroundColor: "rgba(0, 0, 0, 0.5)", // This sets the opacity of the dialog box background
-              overflow: "hidden",
-              borderRadius:"40px" // This removes the scrollbars
-            },
-          }}
-        >
-          <DialogContent>
-            <DialogContentText
-              id="alert-dialog-description"
-              style={{
-                textAlign: "center",
-                fontSize: "120px",
-                fontWeight: "bold",
-                color: "rgb(233,119,1)",
-              }}
-            >
-              {remainingTime ? remainingTime.split(":")[1] : ""}
-            </DialogContentText>
-          </DialogContent>
-        </Dialog>
+
+            open={openDialog}
+            aria-labelledby="alert-dialog-title"
+            aria-describedby="alert-dialog-description"
+            PaperProps={{
+              style: {
+                width: "350px", // Set this to the desired size of your square
+                height: "250px", // Set this to the same value as width
+                backgroundColor: "rgba(0, 0, 0, 0.5)", // This sets the opacity of the dialog box background
+                overflow: "hidden",
+                borderRadius: "40px", // This removes the scrollbars
+              },
+            }}
+          >
+            <DialogContent>
+              <DialogContentText
+                id="alert-dialog-description"
+                style={{
+                  textAlign: "center",
+                  fontSize: "120px",
+                  fontWeight: "bold",
+                  color: " #FF9902",
+                }}
+              >
+                {remainingTime ? remainingTime.split(":")[1] : ""}
+              </DialogContentText>
+            </DialogContent>
+          </Dialog>
+
+         
+        
+      
 
           <Grid mt={2}>
           <Tabs
@@ -1483,6 +1507,7 @@ const Head = () => {
               }
             />
           </Tabs>
+
 
             <TabPanel value={value} index={0}>
               <CustomTable data={rows} />
