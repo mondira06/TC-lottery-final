@@ -117,7 +117,7 @@ const ActivityMain = ({ children }) => {
   <List>
     {tickets.map((ticket) => (
       <ListItem key={ticket._id} sx={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', mb: 1 }}>
-        <Paper elevation={3} sx={{ p: 2, backgroundColor: 'rgb(55,72,146)', color: 'black', borderRadius: 3 }}>
+        <Paper elevation={3} sx={{ p: 2, backgroundColor: '#ffffff', color: 'black', borderRadius: 3 }}>
           <Typography variant="body1" color="inherit">
             {ticket.message}
           </Typography>

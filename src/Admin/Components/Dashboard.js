@@ -118,11 +118,15 @@ const Dashboard = () => {
                 padding: "25px",
                 textAlign: "left",
                 backgroundColor: "#ffffff", // Change background color here
-               
+
+                color: "#F78D02",
               }}
             >
+           
+      
               <Typography variant="h6" sx={{color: "black"}} >{item.heading}</Typography>
               <Typography variant="h6"  sx={{color: "#F78D02"}}>{item.value}</Typography>
+
             </Paper>
           </Grid>
         ))}
