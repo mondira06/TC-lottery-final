@@ -16,7 +16,11 @@ import MuiAlert from "@mui/material/Alert";
 import {
   Tabs,
   Tab,
- 
+  Divider,
+  Pagination,
+  Card,
+  CardHeader,
+  CardContent,
 } from "@mui/material";
 import Accordion from "@mui/material/Accordion";
 import AccordionSummary from "@mui/material/AccordionSummary";
@@ -1429,37 +1433,6 @@ const LotteryAppt = () => {
               </Grid>
             </Grid>
             <Grid item xs={12} mt={2}>
-              <Grid
-                container
-                alignItems="center"
-                justifyContent="space-between"
-              >
-                <Typography variant="h6">Add your money</Typography>
-                <Grid justifyContent="flex-end">
-                  <TextField
-                    label="Add Custom Amount"
-                    variant="outlined"
-                    value={customBetAmount}
-                    onChange={handleCustomBetChange}
-                    style={{
-                      borderRadius: 15,
-                      height: 50,
-                    }}
-                    InputProps={{
-                      style: {
-                        color: "black",
-                        borderRadius: 15,
-                        height: 50,
-                      },
-                    }}
-                    InputLabelProps={{
-                      style: { color: "#1876D2" },
-                    }}
-                  />
-                </Grid>
-              </Grid>
-            </Grid>
-            <Grid item xs={12} mt={2}>
               <Grid container>
                 <Grid
                   item
@@ -1469,7 +1442,32 @@ const LotteryAppt = () => {
                   align="center"
                   alignItems="center"
                 >
-                  <Typography variant="h6">Quantity</Typography>
+                   <Typography variant="h6" style={{color:"#1E2637"}}>Add your money</Typography>
+                  <Grid justifyContent="flex-end">
+                    <TextField
+                      label="Add Custom Amount"
+                      variant="outlined"
+                      value={customBetAmount}
+                      onChange={handleCustomBetChange}
+                      style={{
+                        borderRadius: 15,
+                        height: 50,
+                       
+                        color:"#1E2637"
+                      }}
+                      InputProps={{
+                        style: {
+                          color: "black",
+                          borderRadius: 15,
+                          height: 50,
+                        },
+                      }}
+                      InputLabelProps={{
+                        style: { color: "black" },
+                      }}
+                    />
+                    </Grid>
+                  <Typography variant="h6" style={{color:"#1E2637"}}>Quantity</Typography>
                   <div
                     className="button1"
                     onClick={() =>
@@ -1876,7 +1874,7 @@ const LotteryAppt = () => {
                                 style={{
                                   fontWeight: "bold",
                                   color: "red",
-                               
+                                  color: "white",
                                 }}
                               >
                                 {bet.fee}
@@ -1949,7 +1947,7 @@ const LotteryAppt = () => {
               style={{
                 backgroundColor: "transparent",
                 margin: "15% auto",
-              
+                padding: 20,
                 width: "80%",
                 height: "50%",
                 backgroundImage: `url(${
