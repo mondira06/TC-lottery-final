@@ -61,7 +61,7 @@ const App = () => {
           <MenuItem value="open">Open</MenuItem>
           <MenuItem value="closed">Closed</MenuItem>
         </TextField>
-        <Grid container spacing={3}>
+        <Grid container spacing={3} sx={{marginTop:"5px"}}>
           {tickets.map(ticket => (
             <Grid item xs={12} key={ticket._id}>
               <Card>
