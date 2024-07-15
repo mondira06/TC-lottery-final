@@ -2589,10 +2589,10 @@ const LotteryAppk = ({ timerKey }) => {
                   transform: "translate(-50%, -50%)",
                   width: "300px",
                   padding: "0",
-                  backgroundColor: "#201D2B",
+                  backgroundColor: "white",
                   boxShadow: "0px 0px 10px rgba(0, 0, 0, 0.1)",
                   borderRadius: "10px",
-                  color: "white",
+                  color: "black",
                   zIndex: 1000,
                 }}
               >
@@ -2615,7 +2615,7 @@ const LotteryAppk = ({ timerKey }) => {
                     maxHeight: "400px",
                     overflowY: "auto",
                     textAlign: "left ",
-                    color: "#F5F6FD",
+                    color: "#black",
                   }}
                 >
                   <p>
