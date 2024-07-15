@@ -50,9 +50,9 @@ const   SettingsMain= ({ children }) => {
                 position: 'sticky',
                 top: 0,
                 zIndex: 1000,
-                backgroundColor: 'rgb(42,50,112)',
+                background: 'white',
                 padding: '8px 16px',
-                color: 'white'
+                color: 'black'
                 
               }}
             >

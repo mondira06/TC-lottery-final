@@ -76,15 +76,15 @@ const ImageSubtitleGrid = ({ imageSrc, subtitle1, subtitle2, fontSize }) => (
 );
 
 const images = [
-  { url: "assets/images/download (21).png", caption: "Settings" },
-  { url: "assets/images/download (22).png", caption: "Feedback" },
-  { url: "assets/images/download (23).png", caption: "Notifications" },
+  { url: "assets/images/settingCenter-61690292.png", caption: "Settings" },
+  { url: "assets/images/download (9).png", caption: "Feedback" },
+  { url: "assets/images/download (10).png", caption: "Notifications" },
   {
-    url: "assets/images/serviceCenter-ed250156.png",
+    url: "assets/images/serviceCenter-3789e366.png",
     caption: "24/7 Customer service",
   },
-  { url: "assets/images/download (24).png", caption: "Beginners,s Guide" },
-  { url: "assets/images/download (25).png", caption: "About Us" },
+  { url: "assets/images/download (11).png", caption: "Beginners,s Guide" },
+  { url: "assets/images/about-eb7d02f7.png", caption: "About Us" },
 ];
 
 const AccountMain = ({ children }) => {
@@ -130,24 +130,24 @@ const AccountMain = ({ children }) => {
   const options = [
     {
       label: "Notifications",
-      icon: "assets/images/download22.png",
+      icon: "assets/images/message.png",
       subLabel: null,
       onClick: () => navigate("/messages"),
     },
     {
       label: "Gifts",
-      icon: "assets/images/download (19).png",
+      icon: "assets/images/download (7).png",
       subLabel: null,
       onClick: () => navigate("/coupen-user"),
     },
     {
       label: "Game Statistics",
-      icon: "assets/images/download (20).png",
+      icon: "assets/images/download (8).png",
       subLabel: null,
     },
     {
       label: "Language",
-      icon: "assets/images/languageIcon-4c117d4d.png",
+      icon: "assets/images/languageIcon-634b6df2.png",
       subLabel: "English",
       onClick: () => navigate("/language"),
     },

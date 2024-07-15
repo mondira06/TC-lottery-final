@@ -95,7 +95,17 @@ useEffect(() => {
               <Grid item xs={6} textAlign="left">
                 <span style={{ fontWeight: "bold" }}>Withdraw History</span>
               </Grid>
+              <Grid item xs={6} textAlign="right">
+                <IconButton color="inherit">
+                  <SmsIcon />
+                </IconButton>
+                <IconButton color="inherit">
+                  <DownloadIcon />
+                </IconButton>
+              </Grid>
             </Grid>
+
+
 
             <input
               type="date"
