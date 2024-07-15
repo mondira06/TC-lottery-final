@@ -22,7 +22,7 @@ const RowVisualization = ({ data }) => {
                         position: "relative",
                     }}
                 >
-                    <div style={{ width: "50px", fontSize: "8px", color: "white", fontWeight: "bold" }}>
+                    <div style={{ width: "50px", fontSize: "8px", color: "black", fontWeight: "bold" }}>
                         {row.periodId.toString().slice(0, -2)}
                     </div>
                     {Array.from({ length: 10 }).map((_, circleIndex) => {
@@ -35,20 +35,20 @@ const RowVisualization = ({ data }) => {
                               width: "20px",
                               height: "20px",
                               borderRadius: "50%",
-                              border: "1px solid white",
+                              border: "1px solid grey",
                               display: "flex",
                               alignItems: "center",
                               justifyContent: "center",
                               position: "relative",
                               margin: "0 5px",
-                              color:'white',
+                              color:'grey',
                                     background: isColored
                       ? Array.isArray(row.colorOutcome) &&
                         row.colorOutcome.length === 2
                         ? `linear-gradient(to right, ${row.colorOutcome[0]} 50%, ${row.colorOutcome[1]} 50%)`
                         : row.colorOutcome
                       : "transparent",
-                    colorOutcome: isColored ? "white" : "black",
+                    colorOutcome: isColored ? "black" : "black",
                                 }}
                             >
                                 {circleIndex}
@@ -74,14 +74,14 @@ const RowVisualization = ({ data }) => {
                                 } 40 ${
                                     Number(data[rowIndex + 1].numberOutcome.trim()) * 30 + 15
                                 } 60`}
-                                stroke="white"
+                                stroke="grey"
                                 fill="transparent"
                             />
                         </svg>
                     )}
                 </div>
             ))}
-            <Button variant="contained" color="primary" onClick={handleLoadMore}>
+            <Button variant="contained" style={{background: "linear-gradient(to right,#ff9903, #e77404)"}} onClick={handleLoadMore}>
                 Load More
             </Button>
         </div>
